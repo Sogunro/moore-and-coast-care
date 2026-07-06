@@ -8,7 +8,7 @@ import { CTABanner } from "@/components/CTABanner";
 export const metadata: Metadata = {
   title: "Testimonials",
   description:
-    "What families across Whitby and North Yorkshire say about the compassionate home care they receive from Moor & Coast Care.",
+    "What families across Whitby and North Yorkshire say about the compassionate home care they receive from Moore & Coast Care.",
 };
 
 export default function TestimonialsPage() {

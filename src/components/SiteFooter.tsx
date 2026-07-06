@@ -8,7 +8,7 @@ export function SiteFooter() {
       <div className="mx-auto grid max-w-6xl gap-12 px-5 py-16 sm:px-8 md:grid-cols-3">
         <div>
           <p className="font-display text-2xl font-semibold text-warm-white">
-            Moor <span className="text-gold">&amp;</span> Coast Care
+            Moore <span className="text-gold">&amp;</span> Coast Care
           </p>
           <p className="mt-4 max-w-xs text-sm leading-relaxed">
             Compassionate home care helping people across Whitby & North

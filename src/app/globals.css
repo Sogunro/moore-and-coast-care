@@ -1,53 +1,68 @@
 @import "tailwindcss";
 
 /*
-  Design tokens — Moor & Coast Care
+  Design tokens — Moore & Coast Care
   Palette and typography per the brand brief. All colours, fonts and the
   spacing rhythm are declared here once and consumed via Tailwind utilities.
 */
 @theme {
-  /* Brand palette */
-  --color-navy: #17324d;
-  --color-navy-800: #1f4266;
-  --color-warm-white: #faf9f6;
-  --color-sand: #ede6dd;
-  --color-sand-200: #f4efe8;
-  --color-sage: #87968a;
-  --color-sage-600: #6f8073;
-  --color-gold: #b88b4a;
-  --color-gold-600: #a3773a;
-  --color-ink: #2a3138;
-  --color-ink-muted: #5c6772;
+  /* Brand palette — sampled directly from the Moore & Coast Care logo.
+     Blue #1D4CA6 (primary) · Green #00B48D (accent) · Charcoal #282E3C (text).
+     Token names kept generic so components read cleanly:
+       navy  = brand blue (primary/dark surfaces)
+       gold  = brand green (accent)
+       ink   = brand charcoal (body text) */
+  --color-navy: #1d4ca6;
+  --color-navy-800: #17407f;
+  --color-warm-white: #f8fafc;
+  --color-sand: #e7edf5;
+  --color-sand-200: #eef3f9;
+  --color-sage: #00b48d;
+  --color-sage-600: #009475;
+  --color-gold: #00b48d;
+  --color-gold-600: #009475;
+  --color-ink: #282e3c;
+  --color-ink-muted: #5b6474;
 
   /* Typography — Cormorant Garamond (display) + Manrope (body).
      Loaded via next/font and exposed as CSS variables in layout.tsx. */
   --font-display: var(--font-cormorant), Georgia, "Times New Roman", serif;
   --font-body: var(--font-manrope), system-ui, -apple-system, sans-serif;
 
-  /* Elevation */
-  --shadow-soft: 0 1px 2px rgba(23, 50, 77, 0.04),
-    0 8px 24px rgba(23, 50, 77, 0.06);
-  --shadow-lift: 0 12px 40px rgba(23, 50, 77, 0.12);
+  /* Elevation — tinted with the brand blue */
+  --shadow-soft: 0 1px 2px rgba(29, 76, 166, 0.05),
+    0 8px 24px rgba(29, 76, 166, 0.07);
+  --shadow-lift: 0 12px 40px rgba(29, 76, 166, 0.14);
 }
 
 /* Base */
-html {
-  scroll-behavior: smooth;
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    background-color: var(--color-warm-white);
+    color: var(--color-ink);
+    font-family: var(--font-body);
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+  }
 }
 
-body {
-  background-color: var(--color-warm-white);
-  color: var(--color-ink);
-  font-family: var(--font-body);
-  -webkit-font-smoothing: antialiased;
-  text-rendering: optimizeLegibility;
-}
-
-h1, h2, h3, h4 {
-  font-family: var(--font-display);
-  color: var(--color-navy);
-  letter-spacing: -0.01em;
-  text-wrap: balance;
+/* Base heading styles live in @layer base so Tailwind's utilities layer wins.
+   Without the layer, these unlayered rules would override text-* utilities
+   (e.g. the white hero heading over a photo) regardless of specificity. */
+@layer base {
+  h1,
+  h2,
+  h3,
+  h4 {
+    font-family: var(--font-display);
+    color: var(--color-navy);
+    letter-spacing: -0.01em;
+    text-wrap: balance;
+  }
 }
 
 /* Respect users who prefer reduced motion — disables all reveal animation. */

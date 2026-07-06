@@ -5,8 +5,8 @@
  */
 
 export const business = {
-  name: "Moor & Coast Care",
-  legalName: "Moor & Coast Care Limited",
+  name: "Moore & Coast Care",
+  legalName: "Moore & Coast Care Limited",
   tagline: "Exceptional home care across Whitby & North Yorkshire",
   intro:
     "Compassionate, professional care that helps people live safely and independently in the place they love most — their own home.",

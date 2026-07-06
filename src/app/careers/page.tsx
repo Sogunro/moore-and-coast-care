@@ -64,7 +64,7 @@ export default function CareersPage() {
           </h2>
           <p className="mx-auto mt-3 max-w-xl text-warm-white/80">
             Send us a message or give us a call — we&apos;d be glad to tell you
-            more about life at Moor &amp; Coast Care.
+            more about life at Moore &amp; Coast Care.
           </p>
           <div className="mt-8 flex flex-col items-center justify-center gap-3 sm:flex-row">
             <ButtonLink href="/contact" variant="primary" size="lg">

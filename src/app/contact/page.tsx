@@ -7,7 +7,7 @@ import { ContactForm } from "@/components/ContactForm";
 export const metadata: Metadata = {
   title: "Contact",
   description:
-    "Speak to the friendly Moor & Coast Care team in Whitby. Request a free, no-obligation care consultation by phone, email or the enquiry form.",
+    "Speak to the friendly Moore & Coast Care team in Whitby. Request a free, no-obligation care consultation by phone, email or the enquiry form.",
 };
 
 export default function ContactPage() {

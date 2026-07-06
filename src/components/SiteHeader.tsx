@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
@@ -31,11 +32,15 @@ export function SiteHeader() {
       }`}
     >
       <div className="mx-auto flex max-w-6xl items-center justify-between gap-4 px-5 py-4 sm:px-8">
-        <Link href="/" className="flex items-center gap-3" aria-label={`${business.name} home`}>
-          <Logo />
-          <span className="font-display text-xl font-semibold text-navy sm:text-2xl">
-            Moor <span className="text-gold">&amp;</span> Coast Care
-          </span>
+        <Link href="/" className="flex items-center" aria-label={`${business.name} home`}>
+          <Image
+            src="/images/logo.png"
+            alt={business.legalName}
+            width={505}
+            height={215}
+            priority
+            className="h-11 w-auto sm:h-14"
+          />
         </Link>
 
         <nav className="hidden items-center gap-8 lg:flex" aria-label="Primary">
@@ -103,31 +108,6 @@ export function SiteHeader() {
         </div>
       )}
     </header>
-  );
-}
-
-function Logo() {
-  // Simple inline mark — sage circle with a gold coastal arc.
-  return (
-    <span
-      aria-hidden
-      className="grid h-10 w-10 place-items-center rounded-full bg-navy"
-    >
-      <svg width="22" height="22" viewBox="0 0 24 24" fill="none">
-        <path
-          d="M3 15c2.5 0 2.5 2 5 2s2.5-2 5-2 2.5 2 5 2"
-          stroke="#B88B4A"
-          strokeWidth="1.8"
-          strokeLinecap="round"
-        />
-        <path
-          d="M7 11c0-3 2.2-5 5-5s5 2 5 5"
-          stroke="#87968A"
-          strokeWidth="1.8"
-          strokeLinecap="round"
-        />
-      </svg>
-    </span>
   );
 }
 

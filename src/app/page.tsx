@@ -140,7 +140,7 @@ function TeamSection() {
         <div className="reveal relative aspect-[3/2] overflow-hidden rounded-3xl shadow-[var(--shadow-lift)]">
           <Image
             src="/images/team.png"
-            alt="The friendly Moor & Coast Care team outside their Whitby office"
+            alt="The friendly Moore & Coast Care team outside their Whitby office"
             fill
             sizes="(max-width: 1024px) 100vw, 50vw"
             className="object-cover"

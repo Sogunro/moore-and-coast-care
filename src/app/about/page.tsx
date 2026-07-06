@@ -8,7 +8,7 @@ import { CTABanner } from "@/components/CTABanner";
 export const metadata: Metadata = {
   title: "About Us",
   description:
-    "Moor & Coast Care is a local, CQC-registered home care provider delivering compassionate, person-centred support across Whitby and North Yorkshire.",
+    "Moore & Coast Care is a local, CQC-registered home care provider delivering compassionate, person-centred support across Whitby and North Yorkshire.",
 };
 
 export default function AboutPage() {
@@ -35,7 +35,7 @@ export default function AboutPage() {
             <SectionHeader eyebrow="Our promise" title="Dignity in every detail" align="left" />
             <div className="mt-5 space-y-4 text-lg leading-relaxed text-ink-muted">
               <p>
-                At Moor &amp; Coast Care we are committed to fostering an
+                At Moore &amp; Coast Care we are committed to fostering an
                 environment where individuals can flourish — knowing they are
                 cared for by professionals dedicated to their happiness, health
                 and holistic well-being.
