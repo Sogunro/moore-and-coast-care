@@ -42,6 +42,26 @@ export const trustSignals = [
   "Local Whitby Team",
 ] as const;
 
+/** Hero background images — gently crossfaded in the homepage carousel. */
+export const heroSlides = [
+  {
+    src: "/images/hero.png",
+    alt: "A carer sharing a warm moment with an elderly client at home",
+  },
+  {
+    src: "/images/hero-2.png",
+    alt: "A carer laughing with an elderly woman over a cup of tea",
+  },
+  {
+    src: "/images/hero-3.png",
+    alt: "A carer helping an elderly man in his hallway",
+  },
+  {
+    src: "/images/hero-4.png",
+    alt: "A carer walking arm-in-arm with an elderly woman along the Whitby seafront",
+  },
+] as const;
+
 export type Service = {
   slug: string;
   title: string;

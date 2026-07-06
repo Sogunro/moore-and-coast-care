@@ -1,11 +1,13 @@
 import Image from "next/image";
 import {
   business,
+  heroSlides,
   services,
   testimonials,
   whyChooseUs,
 } from "@/lib/site";
 import { ButtonLink } from "@/components/Button";
+import { HeroCarousel } from "@/components/HeroCarousel";
 import { Section, SectionHeader } from "@/components/Section";
 import { TrustBar } from "@/components/TrustBar";
 import { ServiceCard } from "@/components/ServiceCard";
@@ -32,18 +34,8 @@ export default function HomePage() {
 function Hero() {
   return (
     <section className="relative isolate overflow-hidden">
-      {/* Full-bleed photography with a navy gradient for legible text over image. */}
-      <div className="absolute inset-0 -z-10">
-        <Image
-          src="/images/hero.png"
-          alt="A carer sharing a warm moment with an elderly client at home"
-          fill
-          priority
-          sizes="100vw"
-          className="object-cover"
-        />
-        <div className="absolute inset-0 bg-gradient-to-r from-navy/85 via-navy/60 to-navy/20" />
-      </div>
+      {/* Full-bleed photography that gently crossfades between hero images. */}
+      <HeroCarousel slides={[...heroSlides]} />
 
       <div className="mx-auto flex min-h-[88vh] max-w-6xl flex-col justify-center px-5 py-24 sm:px-8">
         <div className="max-w-2xl">
