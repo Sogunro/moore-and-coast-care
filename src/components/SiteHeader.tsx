@@ -98,9 +98,8 @@ export function SiteHeader() {
         </nav>
 
         <div className="hidden shrink-0 lg:block">
-          <ButtonLink href="/contact" variant="primary" size="md">
-            Arrange a free assessment
-            <Arrow />
+          <ButtonLink href={business.phoneHref} variant="primary" size="md">
+            Call {business.phone}
           </ButtonLink>
         </div>
 
@@ -143,21 +142,20 @@ export function SiteHeader() {
               );
             })}
             <ButtonLink
-              href="/contact"
+              href={business.phoneHref}
               variant="primary"
               size="lg"
               className="mt-6 w-full"
             >
-              Arrange a free assessment
-              <Arrow />
+              Call {business.phone}
             </ButtonLink>
             <ButtonLink
-              href={business.phoneHref}
+              href="/contact"
               variant="outline"
               size="lg"
               className="mb-8 mt-3 w-full"
             >
-              Call {business.phone}
+              Contact us
             </ButtonLink>
           </nav>
         </div>
@@ -166,19 +164,6 @@ export function SiteHeader() {
   );
 }
 
-function Arrow() {
-  return (
-    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" aria-hidden>
-      <path
-        d="M5 12h14m-6-6 6 6-6 6"
-        stroke="currentColor"
-        strokeWidth="2"
-        strokeLinecap="round"
-        strokeLinejoin="round"
-      />
-    </svg>
-  );
-}
 
 /** Non-colour marker for the active row in the mobile menu. */
 function Dot() {

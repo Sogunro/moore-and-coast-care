@@ -1,6 +1,5 @@
 import Link from "next/link";
 import { services } from "@/lib/site";
-import { ButtonLink } from "./Button";
 
 /**
  * The homepage services section: a sticky text column on the left, the full
@@ -26,10 +25,6 @@ export function ServicesSplit() {
             adults of every age across Whitby and North Yorkshire. Every plan
             starts with a conversation, never a template.
           </p>
-          <ButtonLink href="/contact" variant="primary" size="lg" className="mt-8">
-            Arrange a free assessment
-            <Arrow />
-          </ButtonLink>
         </div>
 
         {/* Right — all ten, two columns on desktop, one on mobile. */}

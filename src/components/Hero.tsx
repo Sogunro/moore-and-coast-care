@@ -63,9 +63,8 @@ export function Hero() {
           </p>
 
           <div className="mt-9 flex flex-col gap-3 sm:flex-row">
-            <ButtonLink href="/contact" variant="primary" size="lg">
-              Arrange a free assessment
-              <Arrow />
+            <ButtonLink href={business.phoneHref} variant="primary" size="lg">
+              Call {business.phone}
             </ButtonLink>
             {/* onImage, not outline: the brand-blue outline would disappear
                 against the darkened photograph. */}
@@ -90,16 +89,3 @@ export function Hero() {
   );
 }
 
-function Arrow() {
-  return (
-    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" aria-hidden>
-      <path
-        d="M5 12h14m-6-6 6 6-6 6"
-        stroke="currentColor"
-        strokeWidth="2"
-        strokeLinecap="round"
-        strokeLinejoin="round"
-      />
-    </svg>
-  );
-}
