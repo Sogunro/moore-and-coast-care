@@ -33,14 +33,30 @@ export const nav = [
 ] as const;
 
 /** Trust signals — shown prominently near the top of the homepage. */
-export const trustSignals = [
-  "CQC Registered",
-  "Fully Trained Carers",
-  "DBS Checked",
-  "Medication Trained",
-  "Person-Centred Care",
-  "Local Whitby Team",
-] as const;
+/**
+ * Each signal carries its own icon rather than a repeated checkmark, which
+ * made six distinct assurances read as one generic list of claims.
+ *
+ * The two regulatory items (CQC, DBS) use security shapes — shield and ID —
+ * while the rest use human ones. That small split gives the strip a little
+ * visual storytelling instead of a flat row.
+ */
+export type TrustIcon =
+  | "shield"
+  | "people"
+  | "id"
+  | "medication"
+  | "heart"
+  | "pin";
+
+export const trustSignals: { label: string; icon: TrustIcon }[] = [
+  { label: "CQC Registered", icon: "shield" },
+  { label: "Fully Trained Carers", icon: "people" },
+  { label: "DBS Checked", icon: "id" },
+  { label: "Medication Trained", icon: "medication" },
+  { label: "Person-Centred Care", icon: "heart" },
+  { label: "Local Whitby Team", icon: "pin" },
+];
 
 /**
  * The homepage hero photograph — one image, not a carousel.

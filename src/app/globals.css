@@ -30,7 +30,9 @@
      contrast. teal-700 is the same hue darkened until it clears 4.5:1 — use it
      for any small text or thin stroke; keep --color-teal for large flat fills. */
   --color-teal-700: #098062;
-  --color-teal-50: #eefaf6;
+  /* Sits on --color-surface (#f5fafd), not on white, so it needs enough
+     saturation to read as a tinted circle rather than disappear into it. */
+  --color-teal-50: #d8f3ea;
 
   /* ---- Surfaces ---------------------------------------------------------
      Pure white first. The pale blue is the *only* secondary surface — it

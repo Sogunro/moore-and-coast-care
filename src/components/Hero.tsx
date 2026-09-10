@@ -73,9 +73,11 @@ export function Hero() {
           </div>
 
           {/* The handwritten signature — used twice on the whole site, so it
-              reads as a human mark rather than as a typeface. */}
+              reads as a human mark rather than as a typeface. Centred within
+              the text column so it sits under the middle of the block rather
+              than hanging off its left edge. */}
           <p
-            className="mt-10 font-[family-name:var(--font-hand)] text-[26px] leading-none text-white/85 sm:text-[30px]"
+            className="mt-10 text-center font-[family-name:var(--font-hand)] text-[26px] leading-none text-white/85 sm:text-[30px]"
             aria-hidden
           >
             More life together
