@@ -22,7 +22,7 @@ export default function AboutPage() {
 
       <Section>
         <div className="grid gap-12 lg:grid-cols-2 lg:items-center">
-          <div className="reveal relative aspect-[3/2] overflow-hidden rounded-3xl shadow-[var(--shadow-lift)]">
+          <div className="reveal relative aspect-[3/2] overflow-hidden rounded-[var(--radius-card)] shadow-[var(--shadow-lift)]">
             <Image
               src="/images/whitby.png"
               alt="Whitby harbour and the North Yorkshire coast at golden hour"
@@ -33,7 +33,7 @@ export default function AboutPage() {
           </div>
           <div className="reveal">
             <SectionHeader eyebrow="Our promise" title="Dignity in every detail" align="left" />
-            <div className="mt-5 space-y-4 text-lg leading-relaxed text-ink-muted">
+            <div className="mt-5 space-y-4 text-lg leading-relaxed text-ink-body">
               <p>
                 At Moore &amp; Coast Care we are committed to fostering an
                 environment where individuals can flourish — knowing they are
@@ -50,7 +50,7 @@ export default function AboutPage() {
         </div>
       </Section>
 
-      <div className="bg-sand-200">
+      <div className="bg-surface">
         <Section>
           <SectionHeader
             eyebrow="Our values"
@@ -60,10 +60,10 @@ export default function AboutPage() {
             {whyChooseUs.map((item) => (
               <div
                 key={item.title}
-                className="reveal rounded-2xl bg-white p-6 shadow-[var(--shadow-soft)]"
+                className="reveal rounded-[var(--radius-card)] bg-white p-6 shadow-[var(--shadow-soft)]"
               >
                 <h3 className="text-lg font-semibold">{item.title}</h3>
-                <p className="mt-2 text-sm leading-relaxed text-ink-muted">
+                <p className="mt-2 text-sm leading-relaxed text-ink-body">
                   {item.body}
                 </p>
               </div>

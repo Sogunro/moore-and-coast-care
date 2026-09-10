@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Cormorant_Garamond, Manrope } from "next/font/google";
+import { Caveat, DM_Serif_Display, Manrope } from "next/font/google";
 import { business } from "@/lib/site";
 import { SiteHeader } from "@/components/SiteHeader";
 import { SiteFooter } from "@/components/SiteFooter";
@@ -7,10 +7,12 @@ import { Reveal } from "@/components/Reveal";
 import "./globals.css";
 
 // Self-hosted at build time by next/font — no runtime request to Google.
-const cormorant = Cormorant_Garamond({
+// DM Serif Display ships a single weight (400) by design; the headline voice
+// comes from its size and its contrast against Manrope, not from bolding it.
+const dmSerif = DM_Serif_Display({
   subsets: ["latin"],
-  weight: ["500", "600", "700"],
-  variable: "--font-cormorant",
+  weight: ["400"],
+  variable: "--font-dm-serif",
   display: "swap",
 });
 
@@ -18,6 +20,15 @@ const manrope = Manrope({
   subsets: ["latin"],
   weight: ["400", "500", "600", "700"],
   variable: "--font-manrope",
+  display: "swap",
+});
+
+// The handwritten signature ("More life together"). Used at most twice on the
+// whole site — a human mark, not a typeface we design with.
+const caveat = Caveat({
+  subsets: ["latin"],
+  weight: ["600"],
+  variable: "--font-caveat",
   display: "swap",
 });
 
@@ -43,12 +54,12 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en-GB" className={`${cormorant.variable} ${manrope.variable}`}>
+    <html lang="en-GB" className={`${dmSerif.variable} ${manrope.variable} ${caveat.variable}`}>
       <body>
         {/* Skip link for keyboard and screen-reader users */}
         <a
           href="#main"
-          className="sr-only focus:not-sr-only focus:absolute focus:left-4 focus:top-4 focus:z-50 focus:rounded-md focus:bg-navy focus:px-4 focus:py-2 focus:text-warm-white"
+          className="sr-only focus:not-sr-only focus:absolute focus:left-4 focus:top-4 focus:z-50 focus:rounded-md focus:bg-brand focus:px-4 focus:py-2 focus:text-white"
         >
           Skip to content
         </a>

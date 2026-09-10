@@ -5,20 +5,25 @@ type Variant = "primary" | "outline" | "ghost";
 type Size = "md" | "lg";
 
 const base =
-  "inline-flex items-center justify-center gap-2 rounded-full font-semibold tracking-wide transition-all duration-200 focus-visible:outline-2 focus-visible:outline-gold focus-visible:outline-offset-2";
+  "inline-flex items-center justify-center gap-2 rounded-[var(--radius-pill)] font-semibold " +
+  "transition-[background-color,border-color,color,box-shadow,transform] duration-200 " +
+  "ease-[var(--ease-out)] active:scale-[0.97] disabled:pointer-events-none disabled:opacity-60";
 
 const variants: Record<Variant, string> = {
-  // Gold accent = the single primary action (10% accent, per 60-30-10).
-  primary:
-    "bg-gold text-white shadow-[var(--shadow-soft)] hover:bg-gold-600 hover:-translate-y-0.5",
+  // Brand blue is the single primary action colour — the 5% accent that makes
+  // the logo feel valuable rather than decorative.
+  primary: "bg-brand text-white shadow-[var(--shadow-soft)] hover:bg-brand-600",
+  // 1.5px border, per the brief — a 1px outline goes weedy next to a 54px pill.
   outline:
-    "border border-navy/25 text-navy hover:border-navy hover:bg-navy hover:text-warm-white",
-  ghost: "text-navy hover:text-gold-600",
+    "border-[1.5px] border-brand bg-white text-brand hover:bg-brand-50",
+  ghost: "text-brand hover:text-brand-600",
 };
 
+// Fixed heights so a primary and an outline button always line up on a row,
+// regardless of their label length or border width.
 const sizes: Record<Size, string> = {
-  md: "px-6 py-2.5 text-sm",
-  lg: "px-8 py-3.5 text-base",
+  md: "h-[52px] px-6 text-[15px]",
+  lg: "h-[54px] px-7 text-[15px]",
 };
 
 type BaseProps = { variant?: Variant; size?: Size };

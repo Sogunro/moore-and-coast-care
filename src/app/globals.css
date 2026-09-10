@@ -1,74 +1,210 @@
 @import "tailwindcss";
 
 /*
-  Design tokens — Moore & Coast Care
-  Palette and typography per the brand brief. All colours, fonts and the
-  spacing rhythm are declared here once and consumed via Tailwind utilities.
+  Design tokens — Moor & Coast Care
+  ---------------------------------
+  White-first, editorial. Blue and teal punctuate the page; they never fill it.
+  Colour ratio target: 70% white · 15% photography · 10% ink · 5% brand accent.
+
+  Every colour, size and radius used anywhere in the site is declared here once.
+  Components consume them as Tailwind utilities — no magic numbers in JSX.
 */
 @theme {
-  /* Brand palette — sampled directly from the Moore & Coast Care logo.
-     Blue #1D4CA6 (primary) · Green #00B48D (accent) · Charcoal #282E3C (text).
-     Token names kept generic so components read cleanly:
-       navy  = brand blue (primary/dark surfaces)
-       gold  = brand green (accent)
-       ink   = brand charcoal (body text) */
-  --color-navy: #1d4ca6;
-  --color-navy-800: #17407f;
-  --color-warm-white: #f8fafc;
-  --color-sand: #e7edf5;
-  --color-sand-200: #eef3f9;
-  --color-sage: #00b48d;
-  --color-sage-600: #009475;
-  --color-gold: #00b48d;
-  --color-gold-600: #009475;
-  --color-ink: #282e3c;
-  --color-ink-muted: #5b6474;
+  /* ---- Brand ------------------------------------------------------------
+     Sampled from the Moor & Coast logo artwork (Moor-LOGO.png), not eyeballed
+     from a mock. Blue #2E529E is the heart outline; teal #0FB58D is the leaf,
+     with #0C9778 as its shadowed overlap.
+     Blue  = trust / confidence → primary actions.
+     Teal  = care / warmth / growth → accents only, never headings. */
+  --color-brand: #2e529e;
+  --color-brand-600: #26437f;
+  --color-brand-700: #1d3462;
+  /* Tinted for large flat fills and hairlines where full-strength is too loud. */
+  --color-brand-50: #f2f6fc;
+  --color-brand-100: #dfe8f6;
 
-  /* Typography — Cormorant Garamond (display) + Manrope (body).
-     Loaded via next/font and exposed as CSS variables in layout.tsx. */
-  --font-display: var(--font-cormorant), Georgia, "Times New Roman", serif;
+  --color-teal: #0fb58d;
+  --color-teal-600: #0c9778;
+  /* The logo teal is a bright mid-green: correct for a large logo shape, but
+     only 2.6:1 on white, so it fails both text (4.5:1) and icon-stroke (3:1)
+     contrast. teal-700 is the same hue darkened until it clears 4.5:1 — use it
+     for any small text or thin stroke; keep --color-teal for large flat fills. */
+  --color-teal-700: #098062;
+  --color-teal-50: #eefaf6;
+
+  /* ---- Surfaces ---------------------------------------------------------
+     Pure white first. The pale blue is the *only* secondary surface — it
+     separates sections without introducing a third neutral. */
+  --color-canvas: #ffffff;
+  --color-surface: #f5fafd;
+  --color-line: #e5edf2;
+  --color-line-soft: #eef2f5;
+
+  /* ---- Text -------------------------------------------------------------
+     Ink is a blue-black so it sits in the same family as the brand rather
+     than reading as a separate grey. */
+  --color-ink: #172b3a;
+  --color-ink-body: #364754;
+  --color-ink-muted: #52616d;
+
+  /* ---- Typography -------------------------------------------------------
+     DM Serif Display carries headlines only. Manrope does all the work:
+     navigation, body, buttons, cards, labels, forms, numbers, footer.
+     Caveat is the handwritten signature — used at most twice on the site. */
+  --font-display: var(--font-dm-serif), Georgia, "Times New Roman", serif;
   --font-body: var(--font-manrope), system-ui, -apple-system, sans-serif;
+  --font-hand: var(--font-caveat), "Segoe Script", cursive;
 
-  /* Elevation — tinted with the brand blue */
-  --shadow-soft: 0 1px 2px rgba(29, 76, 166, 0.05),
-    0 8px 24px rgba(29, 76, 166, 0.07);
-  --shadow-lift: 0 12px 40px rgba(29, 76, 166, 0.14);
+  /* ---- Radius -----------------------------------------------------------
+     Deliberately only three values. Buttons are pills; images and cards share
+     one radius; large content sections have no visible container at all. */
+  --radius-card: 20px;
+  --radius-image: 20px;
+  --radius-pill: 999px;
+
+  /* ---- Elevation --------------------------------------------------------
+     Real shadows: offset plus soft blur, tinted with the brand blue so they
+     read as part of the palette rather than as grey haze. */
+  --shadow-soft: 0 6px 20px rgba(23, 43, 58, 0.08);
+  --shadow-lift: 0 14px 40px rgba(46, 82, 158, 0.14);
+
+  /* ---- Motion -----------------------------------------------------------
+     Built-in CSS easings are too weak. These are the only curves used. */
+  --ease-out: cubic-bezier(0.23, 1, 0.32, 1);
+  --ease-in-out: cubic-bezier(0.77, 0, 0.175, 1);
 }
 
-/* Base */
 @layer base {
   html {
     scroll-behavior: smooth;
+    /* Sticky header height — anchors land below it, not behind it. */
+    scroll-padding-top: 88px;
   }
 
   body {
-    background-color: var(--color-warm-white);
-    color: var(--color-ink);
+    background-color: var(--color-canvas);
+    color: var(--color-ink-body);
     font-family: var(--font-body);
     -webkit-font-smoothing: antialiased;
     text-rendering: optimizeLegibility;
   }
-}
 
-/* Base heading styles live in @layer base so Tailwind's utilities layer wins.
-   Without the layer, these unlayered rules would override text-* utilities
-   (e.g. the white hero heading over a photo) regardless of specificity. */
-@layer base {
+  /* Headings sit in @layer base so Tailwind's utilities layer always wins —
+     without the layer these would override text-* utilities regardless of
+     specificity (e.g. a white heading over a photograph). */
   h1,
   h2,
   h3,
   h4 {
     font-family: var(--font-display);
-    color: var(--color-navy);
-    letter-spacing: -0.01em;
+    font-weight: 400;
+    color: var(--color-ink);
     text-wrap: balance;
+  }
+
+  /* DM Serif Display is already tightly spaced; heavy negative tracking makes
+     the "ff" in "feels" collide at display sizes. -0.5px is the safe ceiling. */
+  h1 {
+    letter-spacing: -0.5px;
+    line-height: 0.98;
+  }
+
+  h2,
+  h3 {
+    letter-spacing: -0.25px;
+  }
+
+  /* Any aligned numeric data — phone numbers, stats, prices. */
+  :where(table, .tabular) {
+    font-variant-numeric: tabular-nums;
   }
 }
 
-/* Respect users who prefer reduced motion — disables all reveal animation. */
+/* ---- The details nobody specifies --------------------------------------
+   Themed from the palette rather than left at browser default. */
+::selection {
+  background-color: var(--color-brand-100);
+  color: var(--color-ink);
+}
+
+:root {
+  accent-color: var(--color-brand);
+  caret-color: var(--color-brand);
+}
+
+/* Firefox */
+* {
+  scrollbar-color: var(--color-line) transparent;
+}
+
+/* WebKit */
+::-webkit-scrollbar {
+  width: 12px;
+  height: 12px;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+::-webkit-scrollbar-thumb {
+  background-color: var(--color-line);
+  border: 3px solid var(--color-canvas);
+  border-radius: var(--radius-pill);
+}
+::-webkit-scrollbar-thumb:hover {
+  background-color: #d3dfe8;
+}
+
+/* Visible keyboard focus on every interactive element. */
+:where(a, button, input, textarea, select, [tabindex]):focus-visible {
+  outline: 2px solid var(--color-brand);
+  outline-offset: 3px;
+  border-radius: 6px;
+}
+
+/* Links inside prose keep a readable underline gap. */
+:where(p, li) a {
+  text-underline-offset: 3px;
+}
+
+/* ---- Hero drift ---------------------------------------------------------
+   A single hero image, very slowly scaled. Replaces the old four-slide
+   crossfade: no rotation to compete with the headline, one image so the crop
+   is optimised for one composition, and one request instead of four. */
+.hero-drift {
+  animation: hero-drift 24s var(--ease-in-out) infinite alternate;
+  will-change: transform;
+}
+
+@keyframes hero-drift {
+  from {
+    transform: scale(1) translate3d(0, 0, 0);
+  }
+  to {
+    transform: scale(1.06) translate3d(0, -1.2%, 0);
+  }
+}
+
+/* ---- Scroll reveal ------------------------------------------------------
+   Opt in with the `reveal` class; driven by an IntersectionObserver. */
+.reveal {
+  opacity: 0;
+  transform: translateY(16px);
+  transition: opacity 700ms var(--ease-out), transform 700ms var(--ease-out);
+  will-change: opacity, transform;
+}
+.reveal.is-visible {
+  opacity: 1;
+  transform: none;
+}
+
+/* Respect users who prefer reduced motion — hold the hero still and disable
+   every reveal and transition. */
 @media (prefers-reduced-motion: reduce) {
   html {
     scroll-behavior: auto;
+  }
+  .hero-drift {
+    animation: none;
   }
   *,
   *::before,
@@ -77,23 +213,4 @@
     animation-iteration-count: 1 !important;
     transition-duration: 0.001ms !important;
   }
-}
-
-/* Gentle scroll-reveal — opt in with the `reveal` class + IntersectionObserver. */
-.reveal {
-  opacity: 0;
-  transform: translateY(16px);
-  transition: opacity 700ms ease-out, transform 700ms ease-out;
-  will-change: opacity, transform;
-}
-.reveal.is-visible {
-  opacity: 1;
-  transform: none;
-}
-
-/* Accessible focus ring for keyboard users */
-:where(a, button, input, textarea, select):focus-visible {
-  outline: 2px solid var(--color-gold);
-  outline-offset: 2px;
-  border-radius: 4px;
 }

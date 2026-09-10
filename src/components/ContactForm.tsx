@@ -6,9 +6,9 @@ import { Button } from "./Button";
 type Status = "idle" | "submitting" | "success" | "error";
 
 const fieldClass =
-  "w-full rounded-xl border border-sand bg-white px-4 py-3 text-ink placeholder:text-ink-muted/60 transition-colors focus:border-gold focus:outline-none";
+  "w-full rounded-xl border border-line bg-white px-4 py-3 text-ink placeholder:text-ink-body/60 transition-colors focus:border-brand focus:outline-none";
 
-const labelClass = "mb-1.5 block text-sm font-semibold text-navy";
+const labelClass = "mb-1.5 block text-sm font-semibold text-brand";
 
 export function ContactForm() {
   const [status, setStatus] = useState<Status>("idle");
@@ -102,7 +102,7 @@ export function ContactForm() {
         <p
           role="status"
           className={`text-sm font-medium ${
-            status === "success" ? "text-sage-600" : "text-[#b4442f]"
+            status === "success" ? "text-teal-700" : "text-[#b4442f]"
           }`}
         >
           {message}

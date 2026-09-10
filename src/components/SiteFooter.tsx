@@ -4,11 +4,11 @@ import { business, nav } from "@/lib/site";
 export function SiteFooter() {
   const { address } = business;
   return (
-    <footer className="mt-24 bg-navy text-warm-white/80">
+    <footer className="mt-24 bg-brand text-white/80">
       <div className="mx-auto grid max-w-6xl gap-12 px-5 py-16 sm:px-8 md:grid-cols-3">
         <div>
-          <p className="font-display text-2xl font-semibold text-warm-white">
-            Moore <span className="text-gold">&amp;</span> Coast Care
+          <p className="font-display text-2xl font-semibold text-white">
+            Moore <span className="text-teal">&amp;</span> Coast Care
           </p>
           <p className="mt-4 max-w-xs text-sm leading-relaxed">
             Compassionate home care helping people across Whitby & North
@@ -17,7 +17,7 @@ export function SiteFooter() {
         </div>
 
         <div>
-          <h2 className="font-body text-sm font-semibold uppercase tracking-widest text-gold">
+          <h2 className="font-body text-sm font-semibold uppercase tracking-widest text-teal">
             Explore
           </h2>
           <ul className="mt-4 space-y-2.5 text-sm">
@@ -25,7 +25,7 @@ export function SiteFooter() {
               <li key={item.href}>
                 <Link
                   href={item.href}
-                  className="transition-colors hover:text-warm-white"
+                  className="transition-colors hover:text-white"
                 >
                   {item.label}
                 </Link>
@@ -35,14 +35,14 @@ export function SiteFooter() {
         </div>
 
         <div>
-          <h2 className="font-body text-sm font-semibold uppercase tracking-widest text-gold">
+          <h2 className="font-body text-sm font-semibold uppercase tracking-widest text-teal">
             Get in touch
           </h2>
           <address className="mt-4 space-y-2.5 text-sm not-italic leading-relaxed">
             <p>
               <a
                 href={business.phoneHref}
-                className="transition-colors hover:text-warm-white"
+                className="transition-colors hover:text-white"
               >
                 {business.phone}
               </a>
@@ -50,7 +50,7 @@ export function SiteFooter() {
             <p>
               <a
                 href={`mailto:${business.email}`}
-                className="transition-colors hover:text-warm-white"
+                className="transition-colors hover:text-white"
               >
                 {business.email}
               </a>
@@ -67,7 +67,7 @@ export function SiteFooter() {
       </div>
 
       <div className="border-t border-white/10">
-        <div className="mx-auto flex max-w-6xl flex-col items-center justify-between gap-2 px-5 py-6 text-xs text-warm-white/60 sm:flex-row sm:px-8">
+        <div className="mx-auto flex max-w-6xl flex-col items-center justify-between gap-2 px-5 py-6 text-xs text-white/60 sm:flex-row sm:px-8">
           <p>
             &copy; {business.legalName}. All rights reserved.
           </p>

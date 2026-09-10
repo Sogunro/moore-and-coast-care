@@ -27,7 +27,7 @@ export default function TestimonialsPage() {
           ))}
         </div>
 
-        <p className="reveal mx-auto mt-14 max-w-2xl text-center text-sm text-ink-muted">
+        <p className="reveal mx-auto mt-14 max-w-2xl text-center text-sm text-ink-body">
           Testimonials are shared with the kind permission of our clients and
           their families. Names are withheld to protect their privacy.
         </p>

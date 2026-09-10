@@ -23,9 +23,9 @@ export default function ContactPage() {
       <Section>
         <div className="grid gap-14 lg:grid-cols-[1.1fr_0.9fr]">
           {/* Enquiry form */}
-          <div className="reveal rounded-3xl bg-white p-8 shadow-[var(--shadow-soft)] sm:p-10">
+          <div className="reveal rounded-[var(--radius-card)] bg-white p-8 shadow-[var(--shadow-soft)] sm:p-10">
             <h2 className="text-2xl font-semibold">Request a free consultation</h2>
-            <p className="mt-2 text-ink-muted">
+            <p className="mt-2 text-ink-body">
               Fill in the form and we&apos;ll get back to you very soon.
             </p>
             <div className="mt-8">
@@ -38,7 +38,7 @@ export default function ContactPage() {
             <ContactRow label="Call us" icon="phone">
               <a
                 href={business.phoneHref}
-                className="text-lg font-semibold text-navy hover:text-gold-600"
+                className="text-lg font-semibold text-brand hover:text-teal-700"
               >
                 {business.phone}
               </a>
@@ -47,14 +47,14 @@ export default function ContactPage() {
             <ContactRow label="Email us" icon="mail">
               <a
                 href={`mailto:${business.email}`}
-                className="text-lg font-semibold text-navy hover:text-gold-600 break-all"
+                className="text-lg font-semibold text-brand hover:text-teal-700 break-all"
               >
                 {business.email}
               </a>
             </ContactRow>
 
             <ContactRow label="Visit us" icon="pin">
-              <address className="not-italic leading-relaxed text-ink-muted">
+              <address className="not-italic leading-relaxed text-ink-body">
                 {address.line1}
                 <br />
                 {address.line2}
@@ -81,12 +81,12 @@ function ContactRow({
   children: React.ReactNode;
 }) {
   return (
-    <div className="flex gap-4 rounded-2xl border border-sand bg-warm-white p-6">
-      <span className="grid h-11 w-11 shrink-0 place-items-center rounded-full bg-navy text-gold">
+    <div className="flex gap-4 rounded-[var(--radius-card)] border border-line bg-white p-6">
+      <span className="grid h-11 w-11 shrink-0 place-items-center rounded-full bg-brand text-teal">
         <ContactIcon name={icon} />
       </span>
       <div>
-        <p className="text-xs font-semibold uppercase tracking-widest text-gold-600">
+        <p className="text-xs font-semibold uppercase tracking-widest text-teal-700">
           {label}
         </p>
         <div className="mt-1.5">{children}</div>
