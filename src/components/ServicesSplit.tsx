@@ -27,11 +27,13 @@ export function ServicesSplit() {
             starts with a conversation, never a template.
           </p>
 
-          {/* Placeholder image — the shape is the point here, not the photo.
-              Swap for a purpose-shot square once one exists. */}
+          {/* A 16:9 source in a square frame keeps only its middle, so the
+              crop is pulled right to hold both people rather than centring on
+              the man alone. */}
           <BlobImage
-            src="/images/supported-living.png"
-            alt="A support worker and a young adult cooking together in a kitchen"
+            src="/images/services-cooking.png"
+            alt="A man preparing vegetables in his own kitchen, laughing with his support worker beside him"
+            focus="85% 50%"
             className="mt-10 hidden max-w-[400px] lg:block"
           />
         </div>

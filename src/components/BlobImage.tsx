@@ -23,11 +23,15 @@ import Image from "next/image";
 export function BlobImage({
   src,
   alt,
+  /** Horizontal focal point, e.g. "85% 50%". A 16:9 source in a square frame
+      loses most of its width, so where the crop sits decides who stays in. */
+  focus = "50% 50%",
   priority = false,
   className = "",
 }: {
   src: string;
   alt: string;
+  focus?: string;
   priority?: boolean;
   className?: string;
 }) {
@@ -68,6 +72,7 @@ export function BlobImage({
           fill
           priority={priority}
           sizes="(max-width: 1024px) 90vw, 420px"
+          style={{ objectPosition: focus }}
           className="object-cover"
         />
       </div>
