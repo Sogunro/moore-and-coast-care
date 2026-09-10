@@ -22,19 +22,26 @@ export function ClosingCTA({
 }) {
   return (
     <section className="relative z-10 mx-auto -mb-20 max-w-[960px] px-5 pt-16 sm:px-8 sm:pt-20">
-      {/* Not flat white: a pale tinted panel with a teal top edge and a soft
-          brand-blue glow behind it. A large white rectangle on white was the
-          emptiest thing on the page — the tint gives it an edge to sit on
-          without adding a border. */}
+      {/* The panel is a tinted gradient, not white. An earlier version used
+          --color-surface, which measures 1.05 against white — effectively
+          invisible, which is what made this the blankest part of the page.
+          #e8f1f8 to #dfeaf4 reads clearly as a panel while keeping ink on it
+          at 12:1 and the brand blue at 6.5:1. */}
       <div className="relative">
         <div
           aria-hidden
-          className="pointer-events-none absolute -inset-3 rounded-[28px] bg-brand/[0.06] blur-xl"
+          className="pointer-events-none absolute -inset-4 rounded-[30px] bg-brand/[0.10] blur-2xl"
         />
-        <div className="reveal relative overflow-hidden rounded-[var(--radius-card)] border border-line bg-surface px-6 py-10 text-center shadow-[var(--shadow-lift)] sm:px-12 sm:py-12">
+        <div className="reveal relative overflow-hidden rounded-[var(--radius-card)] border border-brand-100 bg-gradient-to-b from-[#e8f1f8] to-[#dfeaf4] px-6 py-10 text-center shadow-[var(--shadow-lift)] sm:px-12 sm:py-12">
           <span
             aria-hidden
-            className="absolute inset-x-0 top-0 h-1 bg-gradient-to-r from-brand via-teal to-brand"
+            className="absolute inset-x-0 top-0 h-1.5 bg-gradient-to-r from-brand via-teal to-brand"
+          />
+          {/* A soft teal bloom in one corner, so the panel is not a flat
+              rectangle of a single tone. */}
+          <span
+            aria-hidden
+            className="pointer-events-none absolute -right-12 -top-12 h-40 w-40 rounded-full bg-teal/15 blur-2xl"
           />
           <h2 className="text-[28px] leading-tight sm:text-[34px]">{title}</h2>
           <p className="mx-auto mt-4 max-w-lg text-[16px] leading-[1.6] text-ink-body sm:text-[18px]">
