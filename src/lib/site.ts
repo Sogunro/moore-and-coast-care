@@ -34,28 +34,24 @@ export const nav = [
 
 /** Trust signals — shown prominently near the top of the homepage. */
 /**
- * Each signal carries its own icon rather than a repeated checkmark, which
+ * Each signal carries its own emoji rather than a repeated checkmark, which
  * made six distinct assurances read as one generic list of claims.
  *
- * The two regulatory items (CQC, DBS) use security shapes — shield and ID —
- * while the rest use human ones. That small split gives the strip a little
- * visual storytelling instead of a flat row.
+ * Emoji are used here for their full-colour, pictorial weight — a flat
+ * single-colour line set read as blank at this size. The trade-off, accepted
+ * deliberately: each platform draws its own emoji (Apple, Windows and Android
+ * all differ), so this strip will not look identical on every device.
+ *
+ * Written as escapes rather than literal characters so the file stays
+ * ASCII-safe through tooling that mangles multi-byte source.
  */
-export type TrustIcon =
-  | "shield"
-  | "people"
-  | "id"
-  | "medication"
-  | "heart"
-  | "pin";
-
-export const trustSignals: { label: string; icon: TrustIcon }[] = [
-  { label: "CQC Registered", icon: "shield" },
-  { label: "Fully Trained Carers", icon: "people" },
-  { label: "DBS Checked", icon: "id" },
-  { label: "Medication Trained", icon: "medication" },
-  { label: "Person-Centred Care", icon: "heart" },
-  { label: "Local Whitby Team", icon: "pin" },
+export const trustSignals: { label: string; emoji: string }[] = [
+  { label: "CQC Registered", emoji: "\u{1F6E1}\u{FE0F}" },
+  { label: "Fully Trained Carers", emoji: "\u{1F465}" },
+  { label: "DBS Checked", emoji: "\u{1FAAA}" },
+  { label: "Medication Trained", emoji: "\u{1F48A}" },
+  { label: "Person-Centred Care", emoji: "\u{2764}\u{FE0F}" },
+  { label: "Local Whitby Team", emoji: "\u{1F4CD}" },
 ];
 
 /**
