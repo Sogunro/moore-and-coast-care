@@ -10,6 +10,11 @@ export const business = {
   tagline: "Exceptional home care across Whitby & North Yorkshire",
   intro:
     "Compassionate, professional care that helps people live safely and independently in the place they love most — their own home.",
+  /* The hero line. Deliberately factual: what, where and who, before any
+     feeling, because a visitor should know what this company does at a
+     glance rather than after a sentence of warmth. */
+  heroLead:
+    "Personal care, dementia support and live-in care for adults of every age — in their own home.",
   phone: "07867 790487",
   phoneHref: "tel:+447867790487",
   email: "info@moorandcoastcare.co.uk",
@@ -55,19 +60,42 @@ export const trustSignals: { label: string; emoji: string }[] = [
 ];
 
 /**
- * The homepage hero photograph — one image, not a carousel.
- * Replace with the portrait 4:5 version when it is generated; the current file
- * is the wide inspiration shot and will crop tightly on desktop.
+ * Homepage hero slides.
+ *
+ * Three images, rotating — and the rotation has a job. A single photograph of
+ * an elderly man with a walking stick told visitors this was a service for
+ * old people, which is not what the company does. Three people of three
+ * different generations says "adults of every age" faster than any sentence
+ * could, and that is the one thing a visitor must grasp at a glance.
+ *
+ * Order matters: the working-age woman leads, because she does the most work
+ * against the assumption. The older gentleman comes last, present but not
+ * defining.
+ *
+ * Each slide carries its own focal point. The two newer photographs are
+ * portrait (0.83) and the bench shot is very wide (2.25), so a single crop
+ * rule cannot serve all three in a full-bleed frame.
  */
-export const heroImage = {
-  src: "/images/hero-main.png",
-  alt: "A support worker and an older man laughing together on a park bench in the sunshine",
-  /* Both subjects sit between roughly 45% and 88% of this wide source image,
-     so the crop is pulled well right of centre; at 50% the support worker is
-     sliced off by the frame edge. A portrait 4:5 original, composed for a
-     tall frame, would not need this at all. */
-  focus: "80% 50%",
-} as const;
+export const heroSlides = [
+  {
+    src: "/images/hero-kitchen.png",
+    alt: "A woman working at her laptop at home, laughing with her support worker over a cup of tea",
+    /* Portrait source in a wide frame shows only ~47% of its height, so the
+       band is pulled up to hold both faces rather than centring on the table. */
+    focus: "50% 35%",
+  },
+  {
+    src: "/images/hero-park.png",
+    alt: "A young man and his support worker walking through a sunlit park, laughing together",
+    focus: "50% 35%",
+  },
+  {
+    src: "/images/hero-main.png",
+    alt: "An older man and his support worker laughing together on a park bench in the sunshine",
+    /* Wide source: both subjects sit right of centre, so the crop follows them. */
+    focus: "62% 50%",
+  },
+] as const;
 
 export type Service = {
   slug: string;

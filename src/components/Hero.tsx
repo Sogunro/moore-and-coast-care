@@ -1,6 +1,6 @@
-import Image from "next/image";
-import { business, heroImage } from "@/lib/site";
+import { business } from "@/lib/site";
 import { ButtonLink } from "./Button";
+import { HeroSlides } from "./HeroSlides";
 
 /**
  * Full-bleed hero: the photograph fills the entire screen, the headline sits
@@ -24,25 +24,25 @@ export function Hero() {
     <section className="relative isolate min-h-[560px] w-full sm:min-h-[640px] lg:min-h-[calc(100vh-88px)]">
       {/* Photograph — fills the section, sits behind everything. */}
       <div className="absolute inset-0 -z-10 overflow-hidden bg-surface">
-        <Image
-          src={heroImage.src}
-          alt={heroImage.alt}
-          fill
-          priority
-          sizes="100vw"
-          /* Focal point is set in CSS (.hero-focus) rather than inline,
-             because how far right the crop must sit depends on viewport
-             width: a phone keeps far less of this wide image than a desktop. */
-          className="hero-drift hero-focus object-cover"
-        />
+        <HeroSlides />
 
-        {/* Scrim: dark where the text is, clear where the faces are.
-            On narrow screens the text sits over the middle of the image, so
-            the gradient runs further across before clearing. */}
+        {/* Scrim.
+
+            Two layers rather than one strong horizontal ramp. The single ramp
+            was tuned for a photograph with empty grass on the left; the newer
+            slides put a person there, and it buried their face — the opposite
+            of what these images are for.
+
+            Layer one is a short, steep ramp that fades out by 45%, giving the
+            text a footing without reaching the subjects. Layer two is a very
+            light overall wash that lifts contrast everywhere without reading
+            as darkness. Together they keep white text at 7:1+ while the faces
+            stay recognisably lit. */}
         <div
-          className="absolute inset-0 bg-gradient-to-r from-[#172b3a]/90 via-[#172b3a]/70 to-transparent sm:via-[#172b3a]/55 lg:from-[#172b3a]/85 lg:via-[#172b3a]/45 lg:to-transparent"
+          className="absolute inset-0 bg-gradient-to-r from-[#172b3a]/85 via-[#172b3a]/35 via-45% to-transparent lg:from-[#172b3a]/80 lg:via-[#172b3a]/25 lg:via-40%"
           aria-hidden
         />
+        <div className="absolute inset-0 bg-[#172b3a]/15" aria-hidden />
       </div>
 
       {/* Content — padded to line up with the 1240px grid used site-wide. */}
@@ -56,8 +56,15 @@ export function Hero() {
             <span className="text-[#9ec2f0]">feels like life.</span>
           </h1>
 
-          <p className="mt-6 max-w-[480px] text-[17px] leading-[1.55] text-white/90 sm:text-[20px]">
-            {business.intro}
+          {/* Leads with what and where. The previous line opened on feeling
+              ("Compassionate, professional care that helps people...") and a
+              visitor had to read 22 words before learning this is home care in
+              Whitby. The goal is that they know at a glance. */}
+          <p className="mt-6 max-w-[500px] text-[17px] leading-[1.55] text-white/90 sm:text-[20px]">
+            <span className="font-semibold text-white">
+              Home care across Whitby &amp; North Yorkshire.
+            </span>{" "}
+            {business.heroLead}
           </p>
 
           <div className="mt-9 flex flex-col gap-3 sm:flex-row">
