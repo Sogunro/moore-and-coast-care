@@ -101,8 +101,12 @@ export function SiteHeader() {
         </nav>
 
         <div className="hidden shrink-0 lg:block">
-          <ButtonLink href={business.phoneHref} variant="primary" size="md">
-            Call {business.phone}
+          {/* Feedback is a button rather than a nav item, matching the live
+              site. It points at the testimonials page for now; if it should
+              open a form instead, only this href changes. */}
+          <ButtonLink href="/testimonials" variant="primary" size="md">
+            <MailIcon />
+            Feedback
           </ButtonLink>
         </div>
 
@@ -153,12 +157,12 @@ export function SiteHeader() {
               Call {business.phone}
             </ButtonLink>
             <ButtonLink
-              href="/contact"
+              href="/testimonials"
               variant="outline"
               size="lg"
               className="mb-8 mt-3 w-full"
             >
-              Contact us
+              Feedback
             </ButtonLink>
           </nav>
         </div>
@@ -171,6 +175,29 @@ export function SiteHeader() {
 /** Non-colour marker for the active row in the mobile menu. */
 function Dot() {
   return <span className="h-1.5 w-1.5 rounded-full bg-brand" aria-hidden />;
+}
+
+function MailIcon() {
+  return (
+    <svg width="15" height="15" viewBox="0 0 24 24" fill="none" aria-hidden>
+      <rect
+        x="3"
+        y="5.5"
+        width="18"
+        height="13"
+        rx="2"
+        stroke="currentColor"
+        strokeWidth="1.8"
+      />
+      <path
+        d="m4 7 8 6 8-6"
+        stroke="currentColor"
+        strokeWidth="1.8"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+    </svg>
+  );
 }
 
 function MenuIcon({ open }: { open: boolean }) {

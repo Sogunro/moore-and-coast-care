@@ -43,8 +43,7 @@ export const nav = [
   { label: "About Us", href: "/about" },
   { label: "Care Services", href: "/services" },
   { label: "Our Carers", href: "/our-carers" },
-  { label: "Feedback", href: "/testimonials" },
-  { label: "Contact", href: "/contact" },
+  { label: "How We Work", href: "/how-we-work" },
 ] as const;
 
 /** Trust signals — shown prominently near the top of the homepage. */
@@ -228,6 +227,85 @@ export const about = {
       "As a trusted partner in care, we continuously seek to innovate and adapt our services to match the evolving needs of our clients and the wider community. We collaborate with healthcare professionals, organisations, and community resources to create a comprehensive support system that promotes overall well-being and a sense of belonging.",
       "At Moor & Coast Care, we are dedicated to creating an environment where individuals can thrive, confident that they are in the hands of caring professionals committed to their happiness, health, and holistic well-being.",
     ],
+  },
+} as const;
+
+/** How We Work page — the company's own wording. */
+export const howWeWork = {
+  /* The one place on the site where numbering carries real information:
+     these genuinely happen in order. */
+  steps: [
+    {
+      title: "Outline your needs",
+      body:
+        "Our specialist domiciliary care team receives your enquiry. We review and discuss your requirements, explain the services on offer, and give you an outline of anticipated costs.",
+    },
+    {
+      title: "Assessed home visit",
+      body:
+        "We arrange for an assessor to visit you at home and carry out a care and risk assessment. Once that visit is complete, we offer you a fully costed care package.",
+    },
+    {
+      title: "Finalise your care package",
+      body:
+        "We finalise your package with you and your family, and together identify the most suitable carer. You will meet them to say hello before deciding. If further training is needed, we arrange it.",
+    },
+    {
+      title: "Your service begins",
+      body:
+        "Once everyone is satisfied, we are delighted to begin your care service and improve your quality of life.",
+    },
+  ],
+
+  /* What the service covers day to day. Three of these were supplied without
+     a heading; the names here are inferred and should be confirmed. */
+  help: [
+    {
+      title: "Medication reminders",
+      body:
+        "Attentive, reliable assistance to take medication on time, stay hydrated and meet other wellness needs.",
+    },
+    {
+      title: "Staying active",
+      body:
+        "Motivational, friendly support to keep you moving and healthy — from a simple walk to customised exercise.",
+    },
+    {
+      title: "Meals and food shopping",
+      body:
+        "Support with the supermarket run, and with planning and preparing nutritious, enjoyable meals.",
+    },
+    {
+      title: "Transport",
+      body:
+        "Enjoy a ride in your own car or another comfortable one — we will help you get where you are going.",
+    },
+    {
+      title: "Housekeeping",
+      body:
+        "Help with dishwashing, laundry, rubbish removal, seasonal projects and getting organised.",
+    },
+    {
+      title: "Personal care and hygiene",
+      body:
+        "Discreet, professional and respectful assistance with dressing, bathing and toileting.",
+    },
+    {
+      title: "Companionship",
+      body:
+        "More than typical care support. Our staff take part in activities and build genuine relationships — there is always someone to talk to.",
+    },
+    {
+      title: "Check-in visits",
+      body:
+        "A skilled care advisor can be with you in as little as two hours to support you or a loved one.",
+    },
+  ],
+
+  assessment: {
+    title: "A free, no-strings care assessment",
+    body:
+      "A member of our team will visit you at home to carry out a full assessment of your care requirements. It lets us understand you, your personal preferences, and the level and package of support you need.",
   },
 } as const;
 
