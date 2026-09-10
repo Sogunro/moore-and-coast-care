@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { howWeWork } from "@/lib/site";
+import { HelpIcon, type HelpIconName } from "@/components/HelpIcon";
 import { Section, SectionHeader } from "@/components/Section";
 import { PageHero } from "@/components/PageHero";
 import { ClosingCTA } from "@/components/ClosingCTA";
@@ -17,6 +18,11 @@ export default function HowWeWorkPage() {
         eyebrow="How we work"
         title="Outstanding, sensitive and friendly care professionals, ready to support you"
         lead="From your first enquiry to your first visit, here is exactly what happens — and what it costs — before anything is agreed."
+        /* The client is talking and the assessor is listening, which is what
+           step one actually describes. */
+        image="/images/how-we-work-hero.png"
+        imageAlt="A Moor & Coast assessor listening and taking notes while a client explains her needs at home"
+        imageFocus="58% 50%"
       />
 
       <StepsSection />
@@ -94,10 +100,9 @@ function HelpSection() {
               className="reveal rounded-[var(--radius-card)] bg-white p-6 shadow-[var(--shadow-soft)]"
               style={{ transitionDelay: `${Math.min(i * 50, 320)}ms` }}
             >
-              <span
-                aria-hidden
-                className="mb-4 block h-1 w-8 rounded-full bg-teal"
-              />
+              <span className="mb-4 inline-flex h-11 w-11 items-center justify-center rounded-full bg-teal-50 text-teal-700">
+                <HelpIcon name={item.icon as HelpIconName} />
+              </span>
               <h3 className="text-[18px] leading-snug">{item.title}</h3>
               <p className="mt-2.5 text-[14px] leading-[1.6] text-ink-body">
                 {item.body}

@@ -262,41 +262,49 @@ export const howWeWork = {
   help: [
     {
       title: "Medication reminders",
+      icon: "pill",
       body:
         "Attentive, reliable assistance to take medication on time, stay hydrated and meet other wellness needs.",
     },
     {
       title: "Staying active",
+      icon: "walk",
       body:
         "Motivational, friendly support to keep you moving and healthy — from a simple walk to customised exercise.",
     },
     {
       title: "Meals and food shopping",
+      icon: "basket",
       body:
         "Support with the supermarket run, and with planning and preparing nutritious, enjoyable meals.",
     },
     {
       title: "Transport",
+      icon: "car",
       body:
         "Enjoy a ride in your own car or another comfortable one — we will help you get where you are going.",
     },
     {
       title: "Housekeeping",
+      icon: "broom",
       body:
         "Help with dishwashing, laundry, rubbish removal, seasonal projects and getting organised.",
     },
     {
       title: "Personal care and hygiene",
+      icon: "bath",
       body:
         "Discreet, professional and respectful assistance with dressing, bathing and toileting.",
     },
     {
       title: "Companionship",
+      icon: "people",
       body:
         "More than typical care support. Our staff take part in activities and build genuine relationships — there is always someone to talk to.",
     },
     {
       title: "Check-in visits",
+      icon: "calendar",
       body:
         "A skilled care advisor can be with you in as little as two hours to support you or a loved one.",
     },
