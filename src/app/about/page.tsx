@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
-import { about, business, whyChooseUs } from "@/lib/site";
-import { ButtonLink } from "@/components/Button";
+import { about, whyChooseUs } from "@/lib/site";
+import { ClosingCTA } from "@/components/ClosingCTA";
 import { Section, SectionHeader } from "@/components/Section";
 import { PageHero } from "@/components/PageHero";
 import { ValueCards } from "@/components/ValueCards";
@@ -31,7 +31,12 @@ export default function AboutPage() {
       <MissionSection />
       <ValuesSection />
       <WhyUsSection />
-      <ClosingSection />
+      {/* The free care assessment is offered here and nowhere else on the
+          site: it is the company's own wording on this page. */}
+      <ClosingCTA
+        title="Ready to get started?"
+        body="We are ready to help. Give us a call to arrange a free care assessment for you or your loved one."
+      />
     </>
   );
 }
@@ -123,34 +128,5 @@ function WhyUsSection() {
         </ul>
       </Section>
     </div>
-  );
-}
-
-/**
- * The free care assessment is offered here and nowhere else on the site: it is
- * the company's own wording on this page, but it was removed from the header
- * and hero, where it had been invented during the redesign.
- */
-function ClosingSection() {
-  return (
-    <Section>
-      <div className="reveal mx-auto max-w-2xl text-center">
-        <h2 className="text-[32px] leading-tight sm:text-[40px]">
-          Ready to get started?
-        </h2>
-        <p className="mt-5 text-[17px] leading-[1.6] text-ink-body sm:text-[19px]">
-          We are ready to help. Give us a call to arrange a free care
-          assessment for you or your loved one.
-        </p>
-        <div className="mt-9 flex flex-col items-center justify-center gap-3 sm:flex-row">
-          <ButtonLink href={business.phoneHref} variant="primary" size="lg">
-            Call {business.phone}
-          </ButtonLink>
-          <ButtonLink href="/contact" variant="outline" size="lg">
-            Contact us today
-          </ButtonLink>
-        </div>
-      </div>
-    </Section>
   );
 }

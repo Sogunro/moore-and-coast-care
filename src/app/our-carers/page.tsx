@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import Image from "next/image";
-import { business, carers } from "@/lib/site";
-import { ButtonLink } from "@/components/Button";
+import { carers } from "@/lib/site";
+import { ClosingCTA } from "@/components/ClosingCTA";
 import { BlobImage } from "@/components/BlobImage";
 import { Section, SectionHeader } from "@/components/Section";
 import { PageHero } from "@/components/PageHero";
@@ -30,7 +30,10 @@ export default function OurCarersPage() {
       <PromisesSection />
       <ChecksSection />
       <SkillsSection />
-      <ClosingSection />
+      <ClosingCTA
+        title={`Let’s get started`}
+        body="We are ready to help. Call us to arrange a free care assessment for you or a loved one."
+      />
     </>
   );
 }
@@ -169,30 +172,6 @@ function SkillsSection() {
         </ul>
       </Section>
     </div>
-  );
-}
-
-function ClosingSection() {
-  return (
-    <Section>
-      <div className="reveal mx-auto max-w-2xl text-center">
-        <h2 className="text-[32px] leading-tight sm:text-[40px]">
-          Let&apos;s get started
-        </h2>
-        <p className="mt-5 text-[17px] leading-[1.6] text-ink-body sm:text-[19px]">
-          We are ready to help. Call us to arrange a free care assessment for
-          you or a loved one.
-        </p>
-        <div className="mt-9 flex flex-col items-center justify-center gap-3 sm:flex-row">
-          <ButtonLink href={business.phoneHref} variant="primary" size="lg">
-            Call {business.phone}
-          </ButtonLink>
-          <ButtonLink href="/contact" variant="outline" size="lg">
-            Contact us today
-          </ButtonLink>
-        </div>
-      </div>
-    </Section>
   );
 }
 

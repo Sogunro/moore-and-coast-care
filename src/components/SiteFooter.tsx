@@ -4,8 +4,11 @@ import { business, nav } from "@/lib/site";
 export function SiteFooter() {
   const { address } = business;
   return (
-    <footer className="mt-24 bg-brand text-white/80">
-      <div className="mx-auto grid max-w-6xl gap-12 px-5 py-16 sm:px-8 md:grid-cols-3">
+    /* No top margin: pages that end with a ClosingCTA overlap this edge, and
+     the extra top padding below leaves room for that panel to sit over the
+     blue. Pages without one still get generous spacing from the padding. */
+    <footer className="bg-brand text-white/80">
+      <div className="mx-auto grid max-w-[1240px] gap-12 px-5 pb-16 pt-32 sm:px-8 md:grid-cols-3">
         <div>
           <p className="font-display text-2xl font-semibold text-white">
             Moore <span className="text-teal">&amp;</span> Coast Care
