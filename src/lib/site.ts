@@ -42,40 +42,43 @@ export const trustSignals = [
   "Local Whitby Team",
 ] as const;
 
-/** Hero background images — gently crossfaded in the homepage carousel. */
-export const heroSlides = [
-  {
-    src: "/images/hero.png",
-    alt: "A carer sharing a warm moment with an elderly client at home",
-  },
-  {
-    src: "/images/hero-2.png",
-    alt: "A carer laughing with an elderly woman over a cup of tea",
-  },
-  {
-    src: "/images/hero-3.png",
-    alt: "A carer helping an elderly man in his hallway",
-  },
-  {
-    src: "/images/hero-4.png",
-    alt: "A carer walking arm-in-arm with an elderly woman along the Whitby seafront",
-  },
-] as const;
+/**
+ * The homepage hero photograph — one image, not a carousel.
+ * Replace with the portrait 4:5 version when it is generated; the current file
+ * is the wide inspiration shot and will crop tightly on desktop.
+ */
+export const heroImage = {
+  src: "/images/hero-main.png",
+  alt: "A support worker and an older man laughing together on a park bench in the sunshine",
+} as const;
 
 export type Service = {
   slug: string;
   title: string;
   summary: string;
-  image: string;
-  imageAlt: string;
+  /** Optional — only the four services that have commissioned photography. */
+  image?: string;
+  imageAlt?: string;
 };
 
+/**
+ * The complete list of care we provide — all ten, in one flat array.
+ *
+ * Previously this was split into four "services" plus five "specialisms",
+ * which implied a hierarchy that does not exist: the split reflected which
+ * four had photographs, not what we actually offer. Someone searching for
+ * live-in care should find it as readily as personal care, so the homepage
+ * lists all ten and lets the visitor find themselves.
+ *
+ * Each row links to its anchor on /services rather than to its own page —
+ * ten thin pages would compete with each other; one strong page does not.
+ */
 export const services: Service[] = [
   {
     slug: "personal-care",
     title: "Personal Care",
     summary:
-      "Discreet, dignified support with everyday tasks — washing, dressing, mobility and medication — tailored to each person.",
+      "Discreet, dignified help with washing, dressing, mobility and medication.",
     image: "/images/personal-care.png",
     imageAlt:
       "A carer gently supporting an elderly man as he walks through his home",
@@ -84,30 +87,67 @@ export const services: Service[] = [
     slug: "dementia-care",
     title: "Dementia Care",
     summary:
-      "Patient, specialist support that brings routine, reassurance and moments of connection for people living with dementia.",
+      "Patient, specialist support that brings routine, reassurance and connection.",
     image: "/images/dementia-care.png",
     imageAlt:
       "A carer and an older woman looking through a photo album together",
   },
   {
+    slug: "live-in-care",
+    title: "Live-in Care",
+    summary:
+      "A carer who lives with you at home — round-the-clock support without moving.",
+  },
+  {
     slug: "supported-living",
     title: "Supported Living",
     summary:
-      "Enabling adults with disabilities to live independently, build confidence and take part fully in their community.",
+      "Helping adults with disabilities live independently and take part fully.",
     image: "/images/supported-living.png",
-    imageAlt: "A support worker and a younger adult cooking together in a kitchen",
+    imageAlt:
+      "A support worker and a younger adult cooking together in a kitchen",
   },
   {
     slug: "hospital-discharge",
     title: "Hospital Discharge Support",
     summary:
-      "A calm, reassuring return home after a hospital stay, with everything arranged so recovery can happen safely.",
+      "A calm, well-arranged return home so recovery can happen safely.",
     image: "/images/hospital-discharge.png",
     imageAlt: "A carer helping an elderly person settle comfortably at home",
   },
+  {
+    slug: "adults-over-65",
+    title: "Caring for Adults Over 65",
+    summary:
+      "Support that adapts as needs change, helping people stay in their own home.",
+  },
+  {
+    slug: "adults-under-65",
+    title: "Caring for Adults Under 65",
+    summary:
+      "Care built around working life, family and independence, at any age.",
+  },
+  {
+    slug: "physical-disabilities",
+    title: "Physical Disabilities",
+    summary:
+      "Practical, respectful support with mobility, routine and daily living.",
+  },
+  {
+    slug: "sensory-impairments",
+    title: "Sensory Impairments",
+    summary:
+      "Confident support for people living with sight or hearing loss.",
+  },
+  {
+    slug: "learning-disability",
+    title: "Learning Disability Support",
+    summary:
+      "Encouraging choice, confidence and community for the people we support.",
+  },
 ];
 
-/** Additional specialisms listed on the services page. */
+/** Kept for the services page, which still groups the five as specialisms. */
 export const specialisms = [
   "Caring for adults over 65",
   "Caring for adults under 65",

@@ -48,21 +48,21 @@ export default function CareersPage() {
           {reasons.map((r) => (
             <div
               key={r.title}
-              className="reveal rounded-2xl bg-white p-6 shadow-[var(--shadow-soft)]"
+              className="reveal rounded-[var(--radius-card)] bg-white p-6 shadow-[var(--shadow-soft)]"
             >
               <h3 className="text-lg font-semibold">{r.title}</h3>
-              <p className="mt-2 text-sm leading-relaxed text-ink-muted">
+              <p className="mt-2 text-sm leading-relaxed text-ink-body">
                 {r.body}
               </p>
             </div>
           ))}
         </div>
 
-        <div className="reveal mt-16 rounded-3xl bg-navy px-6 py-14 text-center sm:px-16">
-          <h2 className="text-2xl font-semibold text-warm-white sm:text-3xl">
+        <div className="reveal mt-16 rounded-[var(--radius-card)] bg-brand px-6 py-14 text-center sm:px-16">
+          <h2 className="text-2xl font-semibold text-white sm:text-3xl">
             Ready to apply?
           </h2>
-          <p className="mx-auto mt-3 max-w-xl text-warm-white/80">
+          <p className="mx-auto mt-3 max-w-xl text-white/80">
             Send us a message or give us a call — we&apos;d be glad to tell you
             more about life at Moore &amp; Coast Care.
           </p>
@@ -74,7 +74,7 @@ export default function CareersPage() {
               href={`mailto:${business.email}?subject=Careers%20enquiry`}
               variant="outline"
               size="lg"
-              className="border-white/30 text-warm-white hover:bg-warm-white hover:text-navy"
+              className="border-white/30 text-white hover:bg-white hover:text-brand"
             >
               Email {business.email}
             </ButtonLink>

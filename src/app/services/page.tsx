@@ -26,24 +26,32 @@ export default function ServicesPage() {
             <article
               key={service.slug}
               id={service.slug}
-              className="reveal grid scroll-mt-28 gap-10 lg:grid-cols-2 lg:items-center"
+              className={`reveal scroll-mt-28 ${
+                service.image
+                  ? "grid gap-10 lg:grid-cols-2 lg:items-center"
+                  : "max-w-2xl"
+              }`}
             >
-              <div
-                className={`relative aspect-[4/3] overflow-hidden rounded-3xl shadow-[var(--shadow-lift)] ${
-                  index % 2 === 1 ? "lg:order-2" : ""
-                }`}
-              >
-                <Image
-                  src={service.image}
-                  alt={service.imageAlt}
-                  fill
-                  sizes="(max-width: 1024px) 100vw, 50vw"
-                  className="object-cover"
-                />
-              </div>
+              {/* Only some services have commissioned photography; the rest
+                  stand as a text block rather than borrowing a stock image. */}
+              {service.image && (
+                <div
+                  className={`relative aspect-[4/3] overflow-hidden rounded-[var(--radius-image)] shadow-[var(--shadow-lift)] ${
+                    index % 2 === 1 ? "lg:order-2" : ""
+                  }`}
+                >
+                  <Image
+                    src={service.image}
+                    alt={service.imageAlt ?? ""}
+                    fill
+                    sizes="(max-width: 1024px) 100vw, 50vw"
+                    className="object-cover"
+                  />
+                </div>
+              )}
               <div>
                 <h2 className="text-3xl font-semibold">{service.title}</h2>
-                <p className="mt-4 text-lg leading-relaxed text-ink-muted">
+                <p className="mt-4 text-lg leading-relaxed text-ink-body">
                   {service.summary}
                 </p>
               </div>
@@ -52,7 +60,7 @@ export default function ServicesPage() {
         </div>
       </Section>
 
-      <div className="bg-sand-200">
+      <div className="bg-surface">
         <Section>
           <SectionHeader
             eyebrow="Also supporting"
@@ -63,7 +71,7 @@ export default function ServicesPage() {
             {specialisms.map((item) => (
               <li
                 key={item}
-                className="rounded-full border border-sand bg-white px-5 py-2.5 text-sm font-medium text-navy shadow-[var(--shadow-soft)]"
+                className="rounded-full border border-line bg-white px-5 py-2.5 text-sm font-medium text-brand shadow-[var(--shadow-soft)]"
               >
                 {item}
               </li>

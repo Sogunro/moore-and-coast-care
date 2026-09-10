@@ -5,19 +5,19 @@ import { ButtonLink } from "./Button";
 export function CTABanner() {
   return (
     <section className="mx-auto max-w-6xl px-5 sm:px-8">
-      <div className="reveal relative overflow-hidden rounded-3xl bg-navy px-6 py-16 text-center sm:px-16">
+      <div className="reveal relative overflow-hidden rounded-[var(--radius-card)] bg-brand px-6 py-16 text-center sm:px-16">
         <div
           aria-hidden
-          className="pointer-events-none absolute -right-16 -top-16 h-64 w-64 rounded-full bg-gold/10 blur-3xl"
+          className="pointer-events-none absolute -right-16 -top-16 h-64 w-64 rounded-full bg-teal/10 blur-3xl"
         />
         <div
           aria-hidden
-          className="pointer-events-none absolute -bottom-20 -left-10 h-64 w-64 rounded-full bg-sage/15 blur-3xl"
+          className="pointer-events-none absolute -bottom-20 -left-10 h-64 w-64 rounded-full bg-teal/15 blur-3xl"
         />
-        <h2 className="relative text-3xl font-semibold text-warm-white sm:text-4xl">
+        <h2 className="relative text-3xl font-semibold text-white sm:text-4xl">
           Looking for care for yourself or a loved one?
         </h2>
-        <p className="relative mx-auto mt-4 max-w-xl text-lg text-warm-white/80">
+        <p className="relative mx-auto mt-4 max-w-xl text-lg text-white/80">
           Speak to our friendly Whitby team today. There is no obligation — just
           honest, helpful advice.
         </p>
@@ -29,7 +29,7 @@ export function CTABanner() {
             href={business.phoneHref}
             variant="outline"
             size="lg"
-            className="border-white/30 text-warm-white hover:bg-warm-white hover:text-navy"
+            className="border-white/30 text-white hover:bg-white hover:text-brand"
           >
             Call {business.phone}
           </ButtonLink>
