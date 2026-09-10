@@ -28,12 +28,22 @@ export const business = {
   },
 } as const;
 
+/**
+ * Primary navigation.
+ *
+ * "How We Work" is not listed yet — its copy has not been supplied, and a nav
+ * item pointing at an empty or invented page is worse than its absence. Add it
+ * here once that page exists.
+ *
+ * Careers is reachable from the footer rather than the nav: seven items is
+ * already the most a single row holds comfortably.
+ */
 export const nav = [
   { label: "Home", href: "/" },
-  { label: "About", href: "/about" },
+  { label: "About Us", href: "/about" },
   { label: "Care Services", href: "/services" },
-  { label: "Careers", href: "/careers" },
-  { label: "Testimonials", href: "/testimonials" },
+  { label: "Our Carers", href: "/our-carers" },
+  { label: "Feedback", href: "/testimonials" },
   { label: "Contact", href: "/contact" },
 ] as const;
 
@@ -219,6 +229,77 @@ export const about = {
       "At Moor & Coast Care, we are dedicated to creating an environment where individuals can thrive, confident that they are in the hands of caring professionals committed to their happiness, health, and holistic well-being.",
     ],
   },
+} as const;
+
+/** Our Carers page — the company's own wording. */
+export const carers = {
+  intro: {
+    title: "A carer you can believe in",
+    body:
+      "Only the highest calibre of care staff is selected for Moor & Coast Care. Every employee is thoroughly screened and background checked, so we present a team ready to provide exceptional support when you need it.",
+  },
+
+  /* The six reasons, each a short block. */
+  promises: [
+    {
+      title: "Selected and vetted",
+      body:
+        "Only the highest calibre of care staff is selected for Moor & Coast Care, with all employees thoroughly screened and background checked.",
+    },
+    {
+      title: "Trained and experienced",
+      body:
+        "All staff are highly trained and qualified. We offer carers trained across a range of areas, specialising in dementia and other health requirements.",
+    },
+    {
+      title: "Tailored support",
+      body:
+        "We have extensive experience matching the right carer to your lifestyle and interests — someone with the necessary skill and knowledge, who also shares your hobbies and understands your cultural needs.",
+    },
+    {
+      title: "Excellence and honesty",
+      body:
+        "Our focus is on helping people stay healthy and in the comfort of their own home. Our promise is to employ the best care professionals and provide a competitive, superior and safe level of care.",
+    },
+    {
+      title: "Passionate staff",
+      body:
+        "Every employee is carefully screened and assessed, including their reasons for choosing care as a career. Only passionate and driven carers join our team.",
+    },
+  ],
+
+  /* The vetting checks. A plain list: 13 items, no elaboration needed. */
+  checks: [
+    "Skills verification",
+    "Professional reference checks",
+    "Mandatory training",
+    "Criminal record checks",
+    "Competences",
+    "Work aptitude",
+    "Employment eligibility",
+    "Employment history",
+    "Personal reference checks",
+    "Face-to-face interview",
+    "Education history",
+    "Care experience",
+  ],
+
+  /* Conditions the team is experienced with. Deliberately unillustrated:
+     any photograph here would have to depict a specific condition. */
+  skills: [
+    "Elderly and EMI",
+    "Mental health",
+    "Alzheimer's",
+    "Physical disability",
+    "Acquired brain injury",
+    "Spinal injury",
+    "Palliative care",
+    "Parkinson's",
+    "Heart disease and stroke",
+    "Dementia",
+    "End of life care",
+    "Cancer care",
+  ],
 } as const;
 
 /** The six values, in the company's own words. */
