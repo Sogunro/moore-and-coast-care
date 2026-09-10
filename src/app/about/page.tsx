@@ -25,7 +25,7 @@ export default function AboutPage() {
            right to keep both women and the garden in frame. */
         image="/images/about-garden.png"
         imageAlt="A woman pruning shrubs in her own garden, laughing with her support worker who stands nearby with a mug of tea"
-        imageFocus="70% 50%"
+        imageFocus="62% 50%"
       />
 
       <MissionSection />

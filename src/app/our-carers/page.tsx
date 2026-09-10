@@ -23,7 +23,7 @@ export default function OurCarersPage() {
            filling the left third, so the heading sits on the calm side. */
         image="/images/carers-hands.png"
         imageAlt="A carer's hands gently holding an older person's hands"
-        imageFocus="65% 50%"
+        imageFocus="60% 50%"
       />
 
       <IntroSection />
