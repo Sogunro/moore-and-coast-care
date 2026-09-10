@@ -67,7 +67,10 @@ export function SiteHeader() {
             width={752}
             height={332}
             priority
-            className="h-10 w-auto lg:h-14"
+            /* Explicit max-width as well as height: with `w-auto` alone the
+               image can lay out at its full 752px natural width before the
+               file has decoded, which overflows a narrow screen. */
+            className="h-10 w-auto max-w-[180px] object-contain lg:h-14 lg:max-w-[240px]"
           />
         </Link>
 

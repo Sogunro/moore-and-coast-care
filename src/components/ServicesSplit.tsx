@@ -27,14 +27,18 @@ export function ServicesSplit() {
             starts with a conversation, never a template.
           </p>
 
-          {/* A 16:9 source in a square frame keeps only its middle, so the
+          {/* Shown at every width. It was hidden below lg, which left the
+              services section as an unbroken wall of text on a phone — the
+              screen where that is hardest to read.
+
+              A 16:9 source in a square frame keeps only its middle, so the
               crop is pulled right to hold both people rather than centring on
               the man alone. */}
           <BlobImage
             src="/images/services-cooking.png"
             alt="A man preparing vegetables in his own kitchen, laughing with his support worker beside him"
             focus="85% 50%"
-            className="mt-10 hidden max-w-[400px] lg:block"
+            className="mt-10 w-full max-w-[340px] sm:max-w-[400px]"
           />
         </div>
 

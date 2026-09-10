@@ -21,7 +21,7 @@ import { HeroSlides } from "./HeroSlides";
  */
 export function Hero() {
   return (
-    <section className="relative isolate min-h-[560px] w-full sm:min-h-[640px] lg:min-h-[calc(100vh-88px)]">
+    <section className="relative isolate min-h-[600px] w-full sm:min-h-[660px] lg:min-h-[calc(100vh-88px)]">
       {/* Photograph — fills the section, sits behind everything. */}
       <div className="absolute inset-0 -z-10 overflow-hidden bg-surface">
         <HeroSlides />
@@ -33,15 +33,19 @@ export function Hero() {
             rather than rescue it from a face. A short ramp clearing by 40%
             plus a light overall wash does that, and the subjects on the right
             stay fully lit. */}
+        {/* On a phone the text spans the full width, so a horizontal ramp
+            cannot clear it — the scrim runs top-to-bottom there instead,
+            strongest where the words are. From lg it becomes the horizontal
+            ramp again, leaving the subjects on the right fully lit. */}
         <div
-          className="absolute inset-0 bg-gradient-to-r from-[#172b3a]/80 via-[#172b3a]/30 via-40% to-transparent lg:from-[#172b3a]/75 lg:via-[#172b3a]/20 lg:via-35%"
+          className="absolute inset-0 bg-gradient-to-b from-[#172b3a]/85 via-[#172b3a]/55 to-[#172b3a]/35 lg:bg-gradient-to-r lg:from-[#172b3a]/75 lg:via-[#172b3a]/20 lg:via-35% lg:to-transparent"
           aria-hidden
         />
         <div className="absolute inset-0 bg-[#172b3a]/12" aria-hidden />
       </div>
 
       {/* Content — padded to line up with the 1240px grid used site-wide. */}
-      <div className="mx-auto flex min-h-[560px] max-w-[1240px] flex-col justify-center px-5 py-16 sm:min-h-[640px] sm:px-8 lg:min-h-[calc(100vh-88px)] lg:py-24">
+      <div className="mx-auto flex min-h-[600px] max-w-[1240px] flex-col justify-center px-5 py-14 sm:min-h-[660px] sm:px-8 lg:min-h-[calc(100vh-88px)] lg:py-24">
         <div className="max-w-[560px]">
           <h1 className="text-[44px] leading-[0.98] text-white sm:text-[56px] lg:text-[64px] xl:text-[72px]">
             Care that
@@ -62,7 +66,9 @@ export function Hero() {
             {business.heroLead}
           </p>
 
-          <div className="mt-9 flex flex-col gap-3 sm:flex-row">
+          {/* Capped so the buttons do not stretch to 536px on a large phone;
+              a call-to-action that wide reads as a banner, not a button. */}
+          <div className="mt-8 flex max-w-[340px] flex-col gap-3 sm:max-w-none sm:flex-row">
             <ButtonLink href={business.phoneHref} variant="primary" size="lg">
               Call {business.phone}
             </ButtonLink>
@@ -78,7 +84,7 @@ export function Hero() {
               the text column so it sits under the middle of the block rather
               than hanging off its left edge. */}
           <p
-            className="mt-10 text-center font-[family-name:var(--font-hand)] text-[26px] leading-none text-white/85 sm:text-[30px]"
+            className="mt-8 max-w-[340px] text-center font-[family-name:var(--font-hand)] text-[24px] leading-none text-white/85 sm:mt-10 sm:max-w-none sm:text-[30px]"
             aria-hidden
           >
             More life together

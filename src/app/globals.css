@@ -168,6 +168,27 @@
   text-underline-offset: 3px;
 }
 
+/* ---- Hero focal point ---------------------------------------------------
+   The hero images are 16:9 but a phone frame is narrow and tall, so only
+   36-58% of each image's width survives. The subjects sit right of centre in
+   all three, so on small screens the crop follows them; by desktop the whole
+   frame is visible and it returns to centre. */
+.hero-focus {
+  object-position: 72% 50%;
+}
+
+@media (min-width: 640px) {
+  .hero-focus {
+    object-position: 62% 50%;
+  }
+}
+
+@media (min-width: 1024px) {
+  .hero-focus {
+    object-position: 50% 50%;
+  }
+}
+
 /* ---- Hero drift ---------------------------------------------------------
    A single hero image, very slowly scaled. Replaces the old four-slide
    crossfade: no rotation to compete with the headline, one image so the crop
