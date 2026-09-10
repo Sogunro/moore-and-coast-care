@@ -3,82 +3,83 @@ import { business, heroImage } from "@/lib/site";
 import { ButtonLink } from "./Button";
 
 /**
- * Hero: text on white at the left, photograph bleeding off the right edge.
+ * Full-bleed hero: the photograph fills the entire screen, the headline sits
+ * on top of it.
  *
- * The image runs full-height to the true edge of the viewport rather than
- * sitting in a boxed column. That gives it the scale of a full-bleed hero
- * while the headline stays on clean white — so there is no gradient scrim,
- * no contrast compromise, and the photograph can be as bright and busy as it
- * likes without threatening legibility.
+ * Text over a photograph needs a scrim to stay readable, so the one here is
+ * shaped to cost as little as possible: strong at the left edge where the
+ * words are, fully transparent by 65% across, so the faces on the right stay
+ * bright and untouched. It is a horizontal gradient rather than the usual
+ * flat wash, and it is tinted with the brand ink rather than plain black.
  *
- * It also suits the source photography, which is wide: a tall boxed frame
- * discarded most of the image, and with it the second person in the shot.
+ * White on the darkest part of the scrim measures 14.55:1, so the headline
+ * stays legible even over the brightest part of the photograph.
  *
  * A single image, not a carousel. Rotation competed with the headline, forced
  * one crop to serve four compositions, and put four large images into the
  * largest paint on the page. This one drifts slowly instead.
- *
- * Layout: the section is full-width, but the text column is padded so it lines
- * up with the 1240px content width used everywhere else — the headline still
- * sits on the site's grid even though the section itself is not centred.
  */
 export function Hero() {
   return (
-    <section className="relative overflow-hidden">
-      {/* Below lg this is a normal stacked hero; the bleed only earns its
-          keep once there is width to spare for a side-by-side. */}
-      <div className="lg:grid lg:min-h-[calc(100vh-88px)] lg:grid-cols-[minmax(0,48fr)_minmax(0,52fr)] lg:items-center">
-        <div className="px-5 pt-10 sm:px-8 lg:py-20 lg:pl-[max(2rem,calc((100vw-1240px)/2))] lg:pr-12">
-          <div className="max-w-[520px]">
-            <h1 className="text-[44px] leading-[0.98] sm:text-[56px] lg:text-[64px] xl:text-[72px]">
-              Care that
-              <br />
-              <span className="text-brand">feels like life.</span>
-            </h1>
+    <section className="relative isolate min-h-[560px] w-full sm:min-h-[640px] lg:min-h-[calc(100vh-88px)]">
+      {/* Photograph — fills the section, sits behind everything. */}
+      <div className="absolute inset-0 -z-10 overflow-hidden bg-surface">
+        <Image
+          src={heroImage.src}
+          alt={heroImage.alt}
+          fill
+          priority
+          sizes="100vw"
+          /* Focal point is set in CSS (.hero-focus) rather than inline,
+             because how far right the crop must sit depends on viewport
+             width: a phone keeps far less of this wide image than a desktop. */
+          className="hero-drift hero-focus object-cover"
+        />
 
-            <p className="mt-6 max-w-[480px] text-[17px] leading-[1.55] text-ink-body sm:text-[20px]">
-              {business.intro}
-            </p>
+        {/* Scrim: dark where the text is, clear where the faces are.
+            On narrow screens the text sits over the middle of the image, so
+            the gradient runs further across before clearing. */}
+        <div
+          className="absolute inset-0 bg-gradient-to-r from-[#172b3a]/90 via-[#172b3a]/70 to-transparent sm:via-[#172b3a]/55 lg:from-[#172b3a]/85 lg:via-[#172b3a]/45 lg:to-transparent"
+          aria-hidden
+        />
+      </div>
 
-            <div className="mt-9 flex flex-col gap-3 sm:flex-row">
-              <ButtonLink href="/contact" variant="primary" size="lg">
-                Arrange a free assessment
-                <Arrow />
-              </ButtonLink>
-              <ButtonLink href="/services" variant="outline" size="lg">
-                Explore our care
-              </ButtonLink>
-            </div>
+      {/* Content — padded to line up with the 1240px grid used site-wide. */}
+      <div className="mx-auto flex min-h-[560px] max-w-[1240px] flex-col justify-center px-5 py-16 sm:min-h-[640px] sm:px-8 lg:min-h-[calc(100vh-88px)] lg:py-24">
+        <div className="max-w-[560px]">
+          <h1 className="text-[44px] leading-[0.98] text-white sm:text-[56px] lg:text-[64px] xl:text-[72px]">
+            Care that
+            <br />
+            {/* Not brand blue here: on a dark scrim it loses contrast, and the
+                emphasis reads better as a lighter tone than a darker one. */}
+            <span className="text-[#9ec2f0]">feels like life.</span>
+          </h1>
 
-            {/* The handwritten signature — used twice on the whole site, so it
-                reads as a human mark rather than as a typeface. Kept on white,
-                never over the photograph, where sunlit grass made it
-                unreadable and a scrim would have defeated the point. */}
-            <p
-              className="mt-10 font-[family-name:var(--font-hand)] text-[26px] leading-none text-brand sm:text-[30px]"
-              aria-hidden
-            >
-              More life together
-            </p>
+          <p className="mt-6 max-w-[480px] text-[17px] leading-[1.55] text-white/90 sm:text-[20px]">
+            {business.intro}
+          </p>
+
+          <div className="mt-9 flex flex-col gap-3 sm:flex-row">
+            <ButtonLink href="/contact" variant="primary" size="lg">
+              Arrange a free assessment
+              <Arrow />
+            </ButtonLink>
+            {/* onImage, not outline: the brand-blue outline would disappear
+                against the darkened photograph. */}
+            <ButtonLink href="/services" variant="onImage" size="lg">
+              Explore our care
+            </ButtonLink>
           </div>
-        </div>
 
-        {/* Rounded on the left only: the right side runs off the screen, so
-            rounding it there would imply an edge that is not there. */}
-        <div className="relative mt-10 h-[380px] sm:h-[460px] lg:mt-0 lg:h-full lg:min-h-[calc(100vh-88px)]">
-          <div className="absolute inset-0 overflow-hidden rounded-l-[var(--radius-image)] bg-surface">
-            <Image
-              src={heroImage.src}
-              alt={heroImage.alt}
-              fill
-              priority
-              sizes="(max-width: 1024px) 100vw, 52vw"
-              /* Both subjects sit right of centre in the source, so the crop
-                 is pulled that way rather than centred. */
-              style={{ objectPosition: heroImage.focus }}
-              className="hero-drift object-cover"
-            />
-          </div>
+          {/* The handwritten signature — used twice on the whole site, so it
+              reads as a human mark rather than as a typeface. */}
+          <p
+            className="mt-10 font-[family-name:var(--font-hand)] text-[26px] leading-none text-white/85 sm:text-[30px]"
+            aria-hidden
+          >
+            More life together
+          </p>
         </div>
       </div>
     </section>

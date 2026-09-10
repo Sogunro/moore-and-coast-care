@@ -1,7 +1,7 @@
 import Link from "next/link";
 import type { ComponentProps } from "react";
 
-type Variant = "primary" | "outline" | "ghost";
+type Variant = "primary" | "outline" | "onImage" | "ghost";
 type Size = "md" | "lg";
 
 const base =
@@ -16,6 +16,11 @@ const variants: Record<Variant, string> = {
   // 1.5px border, per the brief — a 1px outline goes weedy next to a 54px pill.
   outline:
     "border-[1.5px] border-brand bg-white text-brand hover:bg-brand-50",
+  // For use over photography, where the brand-blue outline would disappear.
+  // A real variant rather than a className override, because overriding the
+  // outline variant left its hover background applied at rest.
+  onImage:
+    "border-[1.5px] border-white/70 bg-white/10 text-white backdrop-blur-sm hover:border-white hover:bg-white hover:text-brand",
   ghost: "text-brand hover:text-brand-600",
 };
 
