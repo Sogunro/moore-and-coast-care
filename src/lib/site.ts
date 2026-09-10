@@ -50,6 +50,9 @@ export const trustSignals = [
 export const heroImage = {
   src: "/images/hero-main.png",
   alt: "A support worker and an older man laughing together on a park bench in the sunshine",
+  /* Both subjects sit right of centre in this wide source image, so the crop
+     is pulled that way. A portrait 4:5 original would not need this. */
+  focus: "62% 45%",
 } as const;
 
 export type Service = {

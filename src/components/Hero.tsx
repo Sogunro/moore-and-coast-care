@@ -43,21 +43,28 @@ export function Hero() {
         {/* Photograph — the drift lives on the inner element so the rounded
             frame stays perfectly still while the image moves inside it. */}
         <div className="relative">
-          <div className="relative aspect-[4/5] overflow-hidden rounded-[var(--radius-image)] bg-surface sm:aspect-[3/2] lg:aspect-[4/5]">
+          <div className="relative aspect-[4/3] overflow-hidden rounded-[var(--radius-image)] bg-surface sm:aspect-[3/2] lg:aspect-[4/3]">
             <Image
               src={heroImage.src}
               alt={heroImage.alt}
               fill
               priority
               sizes="(max-width: 1024px) 100vw, 55vw"
+              /* objectPosition keeps both people in frame: the pair sits
+                 right of centre in the source, so a centred crop loses the
+                 support worker entirely. */
+              style={{ objectPosition: heroImage.focus }}
               className="hero-drift object-cover"
             />
           </div>
 
           {/* The handwritten signature — used twice on the whole site, so it
-              reads as a human mark rather than as a typeface. */}
+              reads as a human mark rather than as a typeface. It sits fully
+              below the photograph on white: over the image it was unreadable
+              against the grass, and a scrim to rescue it would have added
+              exactly the overlay this hero was designed to avoid. */}
           <p
-            className="pointer-events-none absolute -bottom-3 -left-2 font-[family-name:var(--font-hand)] text-[26px] leading-none text-brand sm:-left-6 sm:text-[32px]"
+            className="mt-4 pl-1 font-[family-name:var(--font-hand)] text-[26px] leading-none text-brand sm:text-[30px]"
             aria-hidden
           >
             More life together
