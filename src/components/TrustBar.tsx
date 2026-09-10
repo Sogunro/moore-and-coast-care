@@ -27,19 +27,20 @@ export function TrustBar() {
       <div className="relative overflow-hidden">
         <div
           aria-hidden
-          className="pointer-events-none absolute inset-y-0 left-0 z-10 w-10 bg-gradient-to-r from-[var(--color-surface)] to-transparent xl:hidden"
+          className="pointer-events-none absolute inset-y-0 left-0 z-10 w-10 bg-gradient-to-r from-[var(--color-surface)] to-transparent"
         />
         <div
           aria-hidden
-          className="pointer-events-none absolute inset-y-0 right-0 z-10 w-10 bg-gradient-to-l from-[var(--color-surface)] to-transparent xl:hidden"
+          className="pointer-events-none absolute inset-y-0 right-0 z-10 w-10 bg-gradient-to-l from-[var(--color-surface)] to-transparent"
         />
 
-        {/* On xl the track is centred and static; below it, it scrolls. */}
-        <div className="trust-track flex w-max flex-nowrap items-center xl:mx-auto xl:w-auto xl:justify-center">
+        {/* The track scrolls at every width, so the duplicate is always
+            rendered — it is what makes the loop seamless. */}
+        <div className="trust-track flex w-max flex-nowrap items-center">
           <TrustList />
-          {/* The seamless second copy. Hidden from assistive tech, and not
-              rendered at all once the row fits without scrolling. */}
-          <div aria-hidden className="flex shrink-0 items-center xl:!hidden">
+          {/* The second copy. Hidden from assistive tech so a screen reader
+              hears the six items once, not twelve. */}
+          <div aria-hidden className="flex shrink-0 items-center">
             <TrustList />
           </div>
         </div>

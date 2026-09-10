@@ -256,12 +256,14 @@
   }
 }
 
-/* From xl all six fit, so the row sits still and the duplicate is not
-   rendered — animating it there would be motion with nothing to solve. */
+/* The row scrolls at every width, desktop included. Six items fit on a wide
+   screen without scrolling, but a strip that moves on a phone and sits dead on
+   a laptop reads as two different components; consistency wins here. The
+   duration scales up with width so the apparent speed stays roughly constant
+   rather than racing across a wide screen. */
 @media (min-width: 1280px) {
   .trust-track {
-    animation: none;
-    transform: none;
+    animation-duration: 46s;
   }
 }
 
