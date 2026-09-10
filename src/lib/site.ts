@@ -72,33 +72,24 @@ export const trustSignals: { label: string; emoji: string }[] = [
  * against the assumption. The older gentleman comes last, present but not
  * defining.
  *
- * Each slide carries its own focal point. The two newer photographs are
- * portrait (0.83) and the bench shot is very wide (2.25), so a single crop
- * rule cannot serve all three in a full-bleed frame.
+ * All three are 16:9, composed for this frame: subjects in the right half
+ * with headroom above, and the left third left open for the headline. That
+ * composition is why no slide needs a focal-point override — earlier versions
+ * were portrait or ultra-wide and had to be cropped hard, which cost the
+ * support workers the tops of their heads.
  */
 export const heroSlides = [
   {
     src: "/images/hero-kitchen.png",
     alt: "A woman working at her laptop at home, laughing with her support worker over a cup of tea",
-    /* Portrait source in a wide frame shows only ~35-47% of its height, so the
-       visible band is a horizontal slice and its position is critical: too low
-       and the standing support worker is decapitated, too high and the seated
-       client is cut off. Measured against the actual images — in this one the
-       worker's head starts at ~4% and the client's face ends at ~55%. */
-    focus: "50% 25%",
   },
   {
     src: "/images/hero-park.png",
     alt: "A young man and his support worker walking through a sunlit park, laughing together",
-    /* Both men are standing, so their heads sit higher in frame than the
-       seated client above and the band starts nearer the top. */
-    focus: "50% 8%",
   },
   {
     src: "/images/hero-main.png",
-    alt: "An older man and his support worker laughing together on a park bench in the sunshine",
-    /* Wide source: both subjects sit right of centre, so the crop follows them. */
-    focus: "62% 50%",
+    alt: "An older man and his support worker laughing together on a park bench overlooking the water",
   },
 ] as const;
 

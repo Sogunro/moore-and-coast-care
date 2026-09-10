@@ -28,21 +28,16 @@ export function Hero() {
 
         {/* Scrim.
 
-            Two layers rather than one strong horizontal ramp. The single ramp
-            was tuned for a photograph with empty grass on the left; the newer
-            slides put a person there, and it buried their face — the opposite
-            of what these images are for.
-
-            Layer one is a short, steep ramp that fades out by 45%, giving the
-            text a footing without reaching the subjects. Layer two is a very
-            light overall wash that lifts contrast everywhere without reading
-            as darkness. Together they keep white text at 7:1+ while the faces
-            stay recognisably lit. */}
+            Every slide is composed with its left third left open, so this only
+            has to lift text off background — sky, grass, a sunlit window —
+            rather than rescue it from a face. A short ramp clearing by 40%
+            plus a light overall wash does that, and the subjects on the right
+            stay fully lit. */}
         <div
-          className="absolute inset-0 bg-gradient-to-r from-[#172b3a]/85 via-[#172b3a]/35 via-45% to-transparent lg:from-[#172b3a]/80 lg:via-[#172b3a]/25 lg:via-40%"
+          className="absolute inset-0 bg-gradient-to-r from-[#172b3a]/80 via-[#172b3a]/30 via-40% to-transparent lg:from-[#172b3a]/75 lg:via-[#172b3a]/20 lg:via-35%"
           aria-hidden
         />
-        <div className="absolute inset-0 bg-[#172b3a]/15" aria-hidden />
+        <div className="absolute inset-0 bg-[#172b3a]/12" aria-hidden />
       </div>
 
       {/* Content — padded to line up with the 1240px grid used site-wide. */}

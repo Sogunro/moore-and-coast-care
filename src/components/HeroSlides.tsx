@@ -57,7 +57,6 @@ export function HeroSlides({ intervalMs = 4500 }: { intervalMs?: number }) {
             priority={i === 0}
             loading={i === 0 ? undefined : "lazy"}
             sizes="100vw"
-            style={{ objectPosition: slide.focus }}
             className="hero-drift object-cover"
           />
         </div>

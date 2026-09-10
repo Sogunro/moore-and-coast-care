@@ -168,27 +168,6 @@
   text-underline-offset: 3px;
 }
 
-/* ---- Hero focal point ---------------------------------------------------
-   The hero source is a wide 2.25:1 photograph. A full-bleed desktop frame
-   keeps 79-94% of it, so a near-centre crop holds both subjects. A phone
-   keeps only ~31%, so there the crop must favour the pair, who sit right of
-   centre. Set as a class rather than inline style so it can respond to width. */
-.hero-focus {
-  object-position: 72% 50%;
-}
-
-@media (min-width: 640px) {
-  .hero-focus {
-    object-position: 64% 50%;
-  }
-}
-
-@media (min-width: 1024px) {
-  .hero-focus {
-    object-position: 58% 50%;
-  }
-}
-
 /* ---- Hero drift ---------------------------------------------------------
    A single hero image, very slowly scaled. Replaces the old four-slide
    crossfade: no rotation to compete with the headline, one image so the crop
