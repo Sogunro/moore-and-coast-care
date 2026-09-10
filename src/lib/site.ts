@@ -129,72 +129,72 @@ export const services: Service[] = [
     slug: "personal-care",
     title: "Personal Care",
     summary:
-      "Discreet, dignified help with washing, dressing, mobility and medication.",
+      "Discreet, sensitive support with day-to-day living, helping you maintain your independence at home.",
     image: "/images/personal-care.png",
     imageAlt:
       "A carer gently supporting an elderly man as he walks through his home",
   },
   {
-    slug: "dementia-care",
-    title: "Dementia Care",
+    slug: "adults-over-65",
+    title: "Caring for Adults Over 65",
     summary:
-      "Patient, specialist support that brings routine, reassurance and connection.",
+      "Outstanding care for people over 65, supporting you in maintaining an independent lifestyle.",
+  },
+  {
+    slug: "adults-under-65",
+    title: "Caring for Adults Under 65",
+    summary:
+      "Exceptional care for people under 65, supporting you in maintaining an independent lifestyle.",
+  },
+  {
+    slug: "dementia-care",
+    title: "Dementia",
+    summary:
+      "Every case of dementia is unique. Our specialist-supported carers create personalised plans built around your loved one.",
     image: "/images/dementia-care.png",
     imageAlt:
       "A carer and an older woman looking through a photo album together",
+  },
+  {
+    slug: "physical-disabilities",
+    title: "Physical Disabilities",
+    summary:
+      "Our carers support a range of conditions including physical disabilities, Alzheimer's, multiple sclerosis, strokes and cerebral palsy.",
+  },
+  {
+    slug: "sensory-impairments",
+    title: "Sensory Impairments",
+    summary:
+      "We recognise the particular challenges of sensory impairment, and are committed to offering comprehensive support.",
+  },
+  {
+    slug: "supported-living",
+    title: "Supported Living",
+    summary:
+      "Housing with personal support for people who need help at home but wish to stay independent — daily tasks, personal care and shared living options.",
+    image: "/images/supported-living.png",
+    imageAlt:
+      "A support worker and a younger adult cooking together in a kitchen",
+  },
+  {
+    slug: "learning-disability",
+    title: "Learning Disability",
+    summary:
+      "Personalised support that helps people build independence, confidence and life skills, promoting dignity, inclusion and well-being.",
+  },
+  {
+    slug: "hospital-discharge",
+    title: "Hospital Discharge",
+    summary:
+      "Personalised support for a safe, smooth transition from hospital to home, helping people recover confidently and avoid readmission.",
+    image: "/images/hospital-discharge.png",
+    imageAlt: "A carer helping an elderly person settle comfortably at home",
   },
   {
     slug: "live-in-care",
     title: "Live-in Care",
     summary:
       "A carer who lives with you at home — round-the-clock support without moving.",
-  },
-  {
-    slug: "supported-living",
-    title: "Supported Living",
-    summary:
-      "Helping adults with disabilities live independently and take part fully.",
-    image: "/images/supported-living.png",
-    imageAlt:
-      "A support worker and a younger adult cooking together in a kitchen",
-  },
-  {
-    slug: "hospital-discharge",
-    title: "Hospital Discharge Support",
-    summary:
-      "A calm, well-arranged return home so recovery can happen safely.",
-    image: "/images/hospital-discharge.png",
-    imageAlt: "A carer helping an elderly person settle comfortably at home",
-  },
-  {
-    slug: "adults-over-65",
-    title: "Caring for Adults Over 65",
-    summary:
-      "Support that adapts as needs change, helping people stay in their own home.",
-  },
-  {
-    slug: "adults-under-65",
-    title: "Caring for Adults Under 65",
-    summary:
-      "Care built around working life, family and independence, at any age.",
-  },
-  {
-    slug: "physical-disabilities",
-    title: "Physical Disabilities",
-    summary:
-      "Practical, respectful support with mobility, routine and daily living.",
-  },
-  {
-    slug: "sensory-impairments",
-    title: "Sensory Impairments",
-    summary:
-      "Confident support for people living with sight or hearing loss.",
-  },
-  {
-    slug: "learning-disability",
-    title: "Learning Disability Support",
-    summary:
-      "Encouraging choice, confidence and community for the people we support.",
   },
 ];
 
@@ -230,6 +230,10 @@ export const about = {
     ],
   },
 } as const;
+
+/** Care Services page intro — the company's own wording. */
+export const servicesIntro =
+  "At Moor & Coast Care, our unwavering commitment and passion drive us to deliver exceptional care to every individual we serve. We believe everyone should experience compassion, respect and dignity throughout their care journey.";
 
 /** Our Carers page — the company's own wording. */
 export const carers = {
