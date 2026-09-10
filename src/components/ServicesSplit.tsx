@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { BlobImage } from "./BlobImage";
 import { services } from "@/lib/site";
 
 /**
@@ -25,6 +26,14 @@ export function ServicesSplit() {
             adults of every age across Whitby and North Yorkshire. Every plan
             starts with a conversation, never a template.
           </p>
+
+          {/* Placeholder image — the shape is the point here, not the photo.
+              Swap for a purpose-shot square once one exists. */}
+          <BlobImage
+            src="/images/supported-living.png"
+            alt="A support worker and a young adult cooking together in a kitchen"
+            className="mt-10 hidden max-w-[400px] lg:block"
+          />
         </div>
 
         {/* Right — all ten, two columns on desktop, one on mobile. */}
