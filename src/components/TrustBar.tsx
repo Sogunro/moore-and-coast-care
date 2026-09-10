@@ -3,54 +3,68 @@ import { trustSignals } from "@/lib/site";
 /**
  * Reassurance strip — the six signals a family looks for first.
  *
- * Each item carries its own full-colour emoji, sitting directly on the strip
- * with no container behind it. The white circles that were here read as six
- * buttons rather than six reassurances, and put a hard edge around artwork
- * that already has its own silhouette.
+ * All six sit on a single line, always. Wrapping them into a 2x3 grid broke
+ * the row into stacked pairs and lost the sense of a single continuous list of
+ * assurances, so below the width where six fit (about 1150px) the line scrolls
+ * instead of wrapping.
  *
- * Emoji render from the viewer's own platform font, so this strip will look
- * slightly different on Apple, Windows and Android — the accepted cost of the
- * pictorial weight they carry over a line-drawn set.
+ * This is the one place on the site where continuous motion is right: it is
+ * not decoration, it is what keeps six items readable on one line when the
+ * screen cannot hold them. On a wide desktop there is room for all six, the
+ * animation stops and the row sits still.
  *
- * Motion: the items rise and fade in one after another as the strip scrolls
- * into view, then stop. A permanently scrolling marquee was the alternative
- * and is the wrong choice directly beneath the hero — constant peripheral
- * movement competes for attention on a page people read while anxious.
+ * The list is rendered twice, back to back, and the track is translated by
+ * exactly half its width. At the moment the first copy scrolls out, the second
+ * is in precisely the position the first started from, so the loop has no
+ * visible seam. The duplicate is aria-hidden so a screen reader hears the six
+ * items once.
  */
 export function TrustBar() {
   return (
-    <div className="border-y border-line bg-surface">
-      {/* A grid rather than a wrapping flex row: flex-wrap broke 5 + 1 at
-          common widths, orphaning the last item on its own line. The grid
-          steps 2 -> 3 -> 6 so every row is always full.
+    <div className="border-y border-line bg-surface py-4 lg:py-5">
+      {/* Fades at both edges so items enter and leave rather than being
+          chopped off at a hard border. */}
+      <div className="relative overflow-hidden">
+        <div
+          aria-hidden
+          className="pointer-events-none absolute inset-y-0 left-0 z-10 w-10 bg-gradient-to-r from-[var(--color-surface)] to-transparent xl:hidden"
+        />
+        <div
+          aria-hidden
+          className="pointer-events-none absolute inset-y-0 right-0 z-10 w-10 bg-gradient-to-l from-[var(--color-surface)] to-transparent xl:hidden"
+        />
 
-          Vertical padding is deliberately tight. This strip is a glance, not
-          a section: it should register on the way past the hero without
-          costing the page much height. */}
-      <ul className="mx-auto grid max-w-[1240px] grid-cols-2 items-center gap-x-5 gap-y-4 px-5 py-4 sm:grid-cols-3 sm:px-8 lg:grid-cols-6 lg:gap-x-3 lg:py-5 xl:gap-x-5">
-        {trustSignals.map((signal, i) => (
-          <li
-            key={signal.label}
-            className="reveal flex items-center justify-center gap-2 lg:justify-start"
-            // Staggered so the row assembles left to right rather than
-            // appearing all at once. Capped so the last item is never left
-            // waiting noticeably behind the first.
-            style={{ transitionDelay: `${Math.min(i * 70, 420)}ms` }}
-          >
-            {/* Decorative: the label beside it already carries the meaning, so
-                a screen reader announcing "shield" would only add noise. */}
-            <span className="shrink-0 text-[18px] leading-none" aria-hidden>
-              {signal.emoji}
-            </span>
-            {/* 13px at the six-across breakpoint, where each column has only
-                ~150px for a label as long as "Fully Trained Carers". It steps
-                back up once there is room. */}
-            <span className="text-[13.5px] font-semibold leading-[1.35] text-ink lg:text-[13px] xl:text-[14px]">
-              {signal.label}
-            </span>
-          </li>
-        ))}
-      </ul>
+        {/* On xl the track is centred and static; below it, it scrolls. */}
+        <div className="trust-track flex w-max flex-nowrap items-center xl:mx-auto xl:w-auto xl:justify-center">
+          <TrustList />
+          {/* The seamless second copy. Hidden from assistive tech, and not
+              rendered at all once the row fits without scrolling. */}
+          <div aria-hidden className="flex shrink-0 items-center xl:!hidden">
+            <TrustList />
+          </div>
+        </div>
+      </div>
     </div>
+  );
+}
+
+function TrustList() {
+  return (
+    <ul className="flex shrink-0 items-center">
+      {trustSignals.map((signal) => (
+        <li
+          key={signal.label}
+          className="flex shrink-0 items-center gap-2 px-5 lg:px-6"
+        >
+          {/* Decorative: the label beside it already carries the meaning. */}
+          <span className="shrink-0 text-[18px] leading-none" aria-hidden>
+            {signal.emoji}
+          </span>
+          <span className="whitespace-nowrap text-[14px] font-semibold text-ink xl:text-[15px]">
+            {signal.label}
+          </span>
+        </li>
+      ))}
+    </ul>
   );
 }

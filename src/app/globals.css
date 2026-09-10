@@ -227,6 +227,50 @@
   }
 }
 
+/* ---- Trust strip marquee ------------------------------------------------
+   Six items need roughly 1150px to sit on one line. Below that the track
+   scrolls rather than wrapping into stacked pairs, which broke the row into
+   fragments and lost the sense of one continuous list.
+
+   The list is rendered twice and the track moves by exactly -50%: at the
+   moment the first copy leaves, the second sits where the first began, so the
+   loop is seamless. linear, because constant motion at a changing speed reads
+   as a glitch.
+
+   Slow on purpose. This is a background reassurance, not something to read
+   against the clock. */
+.trust-track {
+  animation: trust-scroll 34s linear infinite;
+}
+
+.trust-track:hover {
+  animation-play-state: paused;
+}
+
+@keyframes trust-scroll {
+  from {
+    transform: translate3d(0, 0, 0);
+  }
+  to {
+    transform: translate3d(-50%, 0, 0);
+  }
+}
+
+/* From xl all six fit, so the row sits still and the duplicate is not
+   rendered — animating it there would be motion with nothing to solve. */
+@media (min-width: 1280px) {
+  .trust-track {
+    animation: none;
+    transform: none;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .trust-track {
+    animation: none;
+  }
+}
+
 /* ---- Scroll reveal ------------------------------------------------------
    Opt in with the `reveal` class; driven by an IntersectionObserver. */
 .reveal {
