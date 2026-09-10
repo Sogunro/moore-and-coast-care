@@ -150,15 +150,22 @@ function SkillsSection() {
           title="Experience across a wide range of needs"
           lead="Our care team's experience includes, but is not limited to:"
         />
+        {/* Sorted shortest label first. The source order is the company's
+            own and is preserved in the data; here the pills are ordered by
+            length so each wrapped row packs to a similar width and the group
+            settles into an even block rather than a ragged one. The list has
+            no inherent sequence, so reordering costs nothing. */}
         <ul className="mx-auto mt-12 flex max-w-3xl flex-wrap justify-center gap-3">
-          {carers.skills.map((skill) => (
-            <li
-              key={skill}
-              className="rounded-[var(--radius-pill)] border border-line bg-white px-5 py-2.5 text-[15px] font-semibold text-ink"
-            >
-              {skill}
-            </li>
-          ))}
+          {[...carers.skills]
+            .sort((a, b) => a.length - b.length)
+            .map((skill) => (
+              <li
+                key={skill}
+                className="rounded-[var(--radius-pill)] border border-line bg-white px-5 py-2.5 text-[15px] font-semibold text-ink"
+              >
+                {skill}
+              </li>
+            ))}
         </ul>
       </Section>
     </div>
