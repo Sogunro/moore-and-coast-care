@@ -38,6 +38,17 @@ export const business = {
  * Careers is reachable from the footer rather than the nav: seven items is
  * already the most a single row holds comfortably.
  */
+/**
+ * Social profiles shown in the top utility bar.
+ * URLs are placeholders until the real handles are supplied — a link to a
+ * non-existent profile is worse than no icon, so entries without an href are
+ * not rendered.
+ */
+export const social: { label: string; href: string; icon: "facebook" | "instagram" }[] = [
+  { label: "Facebook", href: "", icon: "facebook" },
+  { label: "Instagram", href: "", icon: "instagram" },
+];
+
 export const nav = [
   { label: "Home", href: "/" },
   { label: "About Us", href: "/about" },

@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Caveat, DM_Serif_Display, Manrope } from "next/font/google";
 import { business } from "@/lib/site";
+import { TopBar } from "@/components/TopBar";
 import { SiteHeader } from "@/components/SiteHeader";
 import { SiteFooter } from "@/components/SiteFooter";
 import { Reveal } from "@/components/Reveal";
@@ -64,6 +65,7 @@ export default function RootLayout({
           Skip to content
         </a>
         <Reveal />
+        <TopBar />
         <SiteHeader />
         <main id="main">{children}</main>
         <SiteFooter />

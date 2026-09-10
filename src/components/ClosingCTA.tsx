@@ -21,19 +21,33 @@ export function ClosingCTA({
   body: string;
 }) {
   return (
-    <section className="relative z-10 mx-auto -mb-20 max-w-[1240px] px-5 pt-16 sm:px-8 sm:pt-20">
-      <div className="reveal rounded-[var(--radius-card)] bg-white px-6 py-12 text-center shadow-[var(--shadow-lift)] sm:px-12 sm:py-14">
-        <h2 className="text-[30px] leading-tight sm:text-[38px]">{title}</h2>
-        <p className="mx-auto mt-4 max-w-xl text-[17px] leading-[1.6] text-ink-body sm:text-[19px]">
-          {body}
-        </p>
-        <div className="mt-8 flex flex-col items-center justify-center gap-3 sm:flex-row">
-          <ButtonLink href={business.phoneHref} variant="primary" size="lg">
-            Call {business.phone}
-          </ButtonLink>
-          <ButtonLink href="/contact" variant="outline" size="lg">
-            Contact us today
-          </ButtonLink>
+    <section className="relative z-10 mx-auto -mb-20 max-w-[960px] px-5 pt-16 sm:px-8 sm:pt-20">
+      {/* Not flat white: a pale tinted panel with a teal top edge and a soft
+          brand-blue glow behind it. A large white rectangle on white was the
+          emptiest thing on the page — the tint gives it an edge to sit on
+          without adding a border. */}
+      <div className="relative">
+        <div
+          aria-hidden
+          className="pointer-events-none absolute -inset-3 rounded-[28px] bg-brand/[0.06] blur-xl"
+        />
+        <div className="reveal relative overflow-hidden rounded-[var(--radius-card)] border border-line bg-surface px-6 py-10 text-center shadow-[var(--shadow-lift)] sm:px-12 sm:py-12">
+          <span
+            aria-hidden
+            className="absolute inset-x-0 top-0 h-1 bg-gradient-to-r from-brand via-teal to-brand"
+          />
+          <h2 className="text-[28px] leading-tight sm:text-[34px]">{title}</h2>
+          <p className="mx-auto mt-4 max-w-lg text-[16px] leading-[1.6] text-ink-body sm:text-[18px]">
+            {body}
+          </p>
+          <div className="mt-7 flex flex-col items-center justify-center gap-3 sm:flex-row">
+            <ButtonLink href={business.phoneHref} variant="primary" size="lg">
+              Call {business.phone}
+            </ButtonLink>
+            <ButtonLink href="/contact" variant="outline" size="lg">
+              Contact us today
+            </ButtonLink>
+          </div>
         </div>
       </div>
     </section>
