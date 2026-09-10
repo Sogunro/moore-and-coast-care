@@ -1,7 +1,7 @@
 import Link from "next/link";
 import type { ComponentProps } from "react";
 
-type Variant = "primary" | "outline" | "onImage" | "ghost";
+type Variant = "primary" | "outline" | "onImage" | "onBrand" | "ghost";
 type Size = "md" | "lg";
 
 const base =
@@ -21,6 +21,10 @@ const variants: Record<Variant, string> = {
   // outline variant left its hover background applied at rest.
   onImage:
     "border-[1.5px] border-white/70 bg-white/10 text-white backdrop-blur-sm hover:border-white hover:bg-white hover:text-brand",
+  // The primary action on a brand-blue panel, where `primary` would be blue
+  // on blue and `outline` would render as a white blank.
+  onBrand:
+    "bg-white text-brand shadow-[var(--shadow-soft)] hover:bg-brand-50",
   ghost: "text-brand hover:text-brand-600",
 };
 

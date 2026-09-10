@@ -67,14 +67,13 @@ export default function CareersPage() {
             more about life at Moore &amp; Coast Care.
           </p>
           <div className="mt-8 flex flex-col items-center justify-center gap-3 sm:flex-row">
-            <ButtonLink href="/contact" variant="primary" size="lg">
+            <ButtonLink href="/contact" variant="onBrand" size="lg">
               Get in touch
             </ButtonLink>
             <ButtonLink
               href={`mailto:${business.email}?subject=Careers%20enquiry`}
-              variant="outline"
+              variant="onImage"
               size="lg"
-              className="border-white/30 text-white hover:bg-white hover:text-brand"
             >
               Email {business.email}
             </ButtonLink>

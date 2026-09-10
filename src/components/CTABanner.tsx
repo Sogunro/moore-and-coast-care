@@ -22,15 +22,13 @@ export function CTABanner() {
           honest, helpful advice.
         </p>
         <div className="relative mt-9 flex flex-col items-center justify-center gap-3 sm:flex-row">
-          <ButtonLink href="/contact" variant="primary" size="lg">
+          {/* On a brand-blue panel the standard primary (blue on blue) and
+              outline (white background) variants both disappear. White-filled
+              is the primary action here; onImage carries the secondary. */}
+          <ButtonLink href="/contact" variant="onBrand" size="lg">
             Request a free consultation
           </ButtonLink>
-          <ButtonLink
-            href={business.phoneHref}
-            variant="outline"
-            size="lg"
-            className="border-white/30 text-white hover:bg-white hover:text-brand"
-          >
+          <ButtonLink href={business.phoneHref} variant="onImage" size="lg">
             Call {business.phone}
           </ButtonLink>
         </div>
