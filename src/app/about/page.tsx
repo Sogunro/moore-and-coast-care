@@ -18,6 +18,12 @@ export default function AboutPage() {
         eyebrow="About us"
         title="Care that helps people flourish at home"
         lead={about.privacy.body}
+        /* Placeholder: a purpose-shot image should replace this. The mission
+           is about independence and thriving, so the picture wants someone
+           out in the world, not being tended to. */
+        image="/images/hero-park.png"
+        imageAlt="A young man and his support worker walking together through a sunlit park"
+        imageFocus="55% 30%"
       />
 
       <MissionSection />
