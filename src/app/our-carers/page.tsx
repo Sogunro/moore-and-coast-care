@@ -1,6 +1,8 @@
 import type { Metadata } from "next";
+import Image from "next/image";
 import { business, carers } from "@/lib/site";
 import { ButtonLink } from "@/components/Button";
+import { BlobImage } from "@/components/BlobImage";
 import { Section, SectionHeader } from "@/components/Section";
 import { PageHero } from "@/components/PageHero";
 
@@ -17,9 +19,11 @@ export default function OurCarersPage() {
         eyebrow="Our carers"
         title="A compassionate care team"
         lead="The best care team in the industry, ready when you need them."
-        image="/images/carer-hallway.png"
-        imageAlt="A Moor & Coast carer arriving at a client's home, care notes under her arm"
-        imageFocus="50% 35%"
+        /* Composed with the hands right of centre and soft window light
+           filling the left third, so the heading sits on the calm side. */
+        image="/images/carers-hands.png"
+        imageAlt="A carer's hands gently holding an older person's hands"
+        imageFocus="65% 50%"
       />
 
       <IntroSection />
@@ -34,7 +38,13 @@ export default function OurCarersPage() {
 function IntroSection() {
   return (
     <Section>
-      <div className="mx-auto max-w-3xl">
+      <div className="grid items-center gap-12 lg:grid-cols-[minmax(0,400px)_minmax(0,1fr)] lg:gap-16">
+        <BlobImage
+          src="/images/carer-hallway.png"
+          alt="A Moor & Coast carer arriving at a client's home, care notes under her arm"
+          focus="55% 40%"
+          className="mx-auto w-full max-w-[320px] sm:max-w-[380px] lg:mx-0"
+        />
         <div className="reveal">
           <h2 className="text-[32px] leading-[1.1] sm:text-[40px]">
             {carers.intro.title}
@@ -96,7 +106,20 @@ function ChecksSection() {
           </p>
         </div>
 
-        <ul className="grid gap-x-10 sm:grid-cols-2">
+        <div>
+          {/* Two carers reviewing a care plan — the process behind the list,
+              rather than another photograph of a client. */}
+          <div className="reveal relative mb-10 aspect-[16/9] overflow-hidden rounded-[var(--radius-image)]">
+            <Image
+              src="/images/carers-office.png"
+              alt="Two Moor & Coast carers reviewing a care plan together on a tablet"
+              fill
+              sizes="(max-width: 1024px) 100vw, 720px"
+              className="object-cover"
+            />
+          </div>
+
+          <ul className="grid gap-x-10 sm:grid-cols-2">
           {carers.checks.map((check) => (
             <li
               key={check}
@@ -106,7 +129,8 @@ function ChecksSection() {
               {check}
             </li>
           ))}
-        </ul>
+          </ul>
+        </div>
       </div>
     </Section>
   );
