@@ -197,22 +197,85 @@ export const specialisms = [
   "Learning disability support",
 ] as const;
 
+/**
+ * About-page content, supplied by the company. This is their own wording —
+ * edit with care, and do not paraphrase claims about what is offered.
+ */
+export const about = {
+  privacy: {
+    title: "Your privacy is central",
+    body:
+      "Here at Moor & Coast Care, we understand that your situation is private. We take it upon ourselves to champion your privacy and independence with quality care staff who offer an excellent, compassionate service.",
+  },
+
+  /* The opening line is pulled out as a lead; the rest follows as body copy. */
+  mission: {
+    lead:
+      "It is our unwavering commitment and passion to provide truly exceptional care to every individual we serve.",
+    paragraphs: [
+      "We believe that every person deserves to experience compassion, respect, and dignity throughout their care journey. Our mission is to create a nurturing environment that fosters independence, promotes well-being, and enhances the overall quality of life for our clients.",
+      "Driven by our core values of empathy, integrity, and excellence, we aspire to be an industry leader in delivering great care, raising standards across the sector and leading our peers by example. Our dedicated team of compassionate caregivers is trained and motivated to go above and beyond to address the unique needs of each individual. Through a robust and detail-oriented care planning process, open communication, and attentive support, we aim to empower our clients to live life to the fullest, regardless of their age or abilities.",
+      "As a trusted partner in care, we continuously seek to innovate and adapt our services to match the evolving needs of our clients and the wider community. We collaborate with healthcare professionals, organisations, and community resources to create a comprehensive support system that promotes overall well-being and a sense of belonging.",
+      "At Moor & Coast Care, we are dedicated to creating an environment where individuals can thrive, confident that they are in the hands of caring professionals committed to their happiness, health, and holistic well-being.",
+    ],
+  },
+} as const;
+
+/** The six values, in the company's own words. */
+export const values = [
+  {
+    title: "Kindness and compassion",
+    body:
+      "Our friendly and dedicated carers will always meet you with warmth and a smile. With Moor & Coast Care, care doesn't have to feel clinical.",
+  },
+  {
+    title: "Respect",
+    body:
+      "By treating every client with dignity and sensitivity, no matter the circumstance, we maintain our service users' independence and pride.",
+  },
+  {
+    title: "Highest quality of care",
+    body:
+      "We always provide the highest standard of care, adapting and responding to our clients' changing needs for as long as you need us.",
+  },
+  {
+    title: "Reliability and punctuality",
+    body:
+      "We work as closely as possible to the client's own schedule. Let us work around you, so that life isn't all about appointments.",
+  },
+  {
+    title: "Embracing cultural differences",
+    body:
+      "We welcome all cultural differences and promise to be respectful regardless of religion, ethnicity, sexual orientation or any of the things that make you who you are.",
+  },
+  {
+    title: "That something extra",
+    body:
+      "We are diligent and mindful of changing health and care requirements, and go the extra mile to continually improve each client's quality of life.",
+  },
+] as const;
+
+/** Why families choose Moor & Coast — the four reasons, in their words. */
 export const whyChooseUs = [
   {
-    title: "Compassion first",
-    body: "We recruit for kindness. Our carers treat every client as they would their own family.",
+    title: "Positive recommendations",
+    body:
+      "We are evolving and gaining momentum through word of mouth, earning recommendations through consistent, quality service to our clients and carers.",
   },
   {
-    title: "Genuinely local",
-    body: "A Whitby team that knows the community, the coast and the people we care for.",
+    title: "A regulated service",
+    body:
+      "We are registered with the Care Quality Commission and work in unison with Social Services departments and health professionals.",
   },
   {
-    title: "Person-centred plans",
-    body: "Care built around the individual — their routine, preferences and independence, never a template.",
+    title: "Efficient response",
+    body:
+      "Our procedures work effectively on each client's behalf, with dependable support staff. We can commence work within 24 to 48 hours of a request.",
   },
   {
-    title: "Trained & trusted",
-    body: "Fully trained, DBS-checked and medication-competent carers you can rely on.",
+    title: "We care for our carers",
+    body:
+      "All new staff complete an induction training course and return for an annual update, with specialist training throughout. A dedicated support team offers advice and a listening ear whenever it is needed.",
   },
 ] as const;
 

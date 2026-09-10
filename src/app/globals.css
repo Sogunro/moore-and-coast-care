@@ -186,6 +186,26 @@
   }
 }
 
+/* ---- Tilted cards -------------------------------------------------------
+   The values on the About page sit at slight, uneven angles, set as an inline
+   transform (a Tailwind arbitrary value reading a CSS variable is not reliably
+   generated, and .reveal owns the transform on the parent element).
+
+   An inline style cannot be overridden by a utility class, so the hover
+   straightening lives here with !important. */
+.tilt-card {
+  transition: transform 300ms var(--ease-out);
+}
+.tilt-card:hover {
+  transform: rotate(0deg) !important;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .tilt-card {
+    transform: none !important;
+  }
+}
+
 /* ---- Scroll reveal ------------------------------------------------------
    Opt in with the `reveal` class; driven by an IntersectionObserver. */
 .reveal {

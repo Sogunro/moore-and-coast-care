@@ -1,14 +1,14 @@
 import type { Metadata } from "next";
-import Image from "next/image";
-import { whyChooseUs } from "@/lib/site";
+import { about, business, whyChooseUs } from "@/lib/site";
+import { ButtonLink } from "@/components/Button";
 import { Section, SectionHeader } from "@/components/Section";
 import { PageHero } from "@/components/PageHero";
-import { CTABanner } from "@/components/CTABanner";
+import { ValueCards } from "@/components/ValueCards";
 
 export const metadata: Metadata = {
   title: "About Us",
   description:
-    "Moore & Coast Care is a local, CQC-registered home care provider delivering compassionate, person-centred support across Whitby and North Yorkshire.",
+    "Moor & Coast Care is a local, CQC-registered home care provider delivering compassionate, person-centred support across Whitby and North Yorkshire.",
 };
 
 export default function AboutPage() {
@@ -17,64 +17,132 @@ export default function AboutPage() {
       <PageHero
         eyebrow="About us"
         title="Care that helps people flourish at home"
-        lead="We deliver outstanding, personalised support to clients and vulnerable adults, enabling them to maintain their independence within the community they love."
+        lead={about.privacy.body}
       />
 
+      <MissionSection />
+      <ValuesSection />
+      <WhyUsSection />
+      <ClosingSection />
+    </>
+  );
+}
+
+/**
+ * The mission, set apart on a tinted panel with its opening line pulled out
+ * as a serif lead and the handwritten mark beneath, as if signed.
+ *
+ * A sticky-note treatment was considered and rejected here: at ~250 words the
+ * paper metaphor breaks down, and a jotted note reads as provisional, which is
+ * the wrong register for the company's central promise. The panel gives it
+ * weight instead. The note idea lives on in the values below, where the copy
+ * is short enough to earn it.
+ */
+function MissionSection() {
+  return (
+    <Section>
+      <div className="reveal mx-auto max-w-3xl rounded-[var(--radius-card)] bg-surface px-7 py-12 sm:px-12 sm:py-16">
+        <p className="text-xs font-semibold uppercase tracking-[0.2em] text-teal-700">
+          Our mission
+        </p>
+
+        <p className="mt-5 font-[family-name:var(--font-display)] text-[26px] leading-[1.25] text-ink sm:text-[32px]">
+          {about.mission.lead}
+        </p>
+
+        <div className="mt-7 space-y-5">
+          {about.mission.paragraphs.map((paragraph) => (
+            <p
+              key={paragraph.slice(0, 40)}
+              className="text-[16px] leading-[1.7] text-ink-body"
+            >
+              {paragraph}
+            </p>
+          ))}
+        </div>
+
+        {/* The second and final use of the handwritten mark on the site. */}
+        <p
+          className="mt-9 font-[family-name:var(--font-hand)] text-[28px] leading-none text-brand"
+          aria-hidden
+        >
+          More life together
+        </p>
+      </div>
+    </Section>
+  );
+}
+
+function ValuesSection() {
+  return (
+    <div className="bg-white">
       <Section>
-        <div className="grid gap-12 lg:grid-cols-2 lg:items-center">
-          <div className="reveal relative aspect-[3/2] overflow-hidden rounded-[var(--radius-card)] shadow-[var(--shadow-lift)]">
-            <Image
-              src="/images/whitby.png"
-              alt="Whitby harbour and the North Yorkshire coast at golden hour"
-              fill
-              sizes="(max-width: 1024px) 100vw, 50vw"
-              className="object-cover"
-            />
-          </div>
-          <div className="reveal">
-            <SectionHeader eyebrow="Our promise" title="Dignity in every detail" align="left" />
-            <div className="mt-5 space-y-4 text-lg leading-relaxed text-ink-body">
-              <p>
-                At Moore &amp; Coast Care we are committed to fostering an
-                environment where individuals can flourish — knowing they are
-                cared for by professionals dedicated to their happiness, health
-                and holistic well-being.
-              </p>
-              <p>
-                We are proud to be genuinely local. Our team knows Whitby, the
-                surrounding villages and the coast, and we build lasting
-                relationships with the families we support.
-              </p>
-            </div>
-          </div>
+        <SectionHeader
+          eyebrow="What we believe"
+          title="The principles behind every visit"
+          lead="Our mission statement and aims are the foundation of everything we do, with these values underpinning every act of care our staff provide."
+        />
+        <div className="mt-14">
+          <ValueCards />
         </div>
       </Section>
+    </div>
+  );
+}
 
-      <div className="bg-surface">
-        <Section>
-          <SectionHeader
-            eyebrow="Our values"
-            title="What guides everything we do"
-          />
-          <div className="mt-14 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
-            {whyChooseUs.map((item) => (
-              <div
-                key={item.title}
-                className="reveal rounded-[var(--radius-card)] bg-white p-6 shadow-[var(--shadow-soft)]"
-              >
-                <h3 className="text-lg font-semibold">{item.title}</h3>
-                <p className="mt-2 text-sm leading-relaxed text-ink-body">
-                  {item.body}
-                </p>
-              </div>
-            ))}
-          </div>
-        </Section>
-      </div>
+function WhyUsSection() {
+  return (
+    <div className="bg-surface">
+      <Section>
+        <SectionHeader
+          eyebrow="Why choose us"
+          title="Quality home care, carefully matched"
+          lead="We specialise in providing quality home care to adults in need, carefully matching carers to the needs of each client."
+        />
+        <ul className="mt-14 grid gap-6 sm:grid-cols-2">
+          {whyChooseUs.map((item, i) => (
+            <li
+              key={item.title}
+              className="reveal rounded-[var(--radius-card)] bg-white p-7 shadow-[var(--shadow-soft)]"
+              style={{ transitionDelay: `${Math.min(i * 70, 280)}ms` }}
+            >
+              <h3 className="text-[21px] leading-snug">{item.title}</h3>
+              <p className="mt-3 text-[15px] leading-[1.6] text-ink-body">
+                {item.body}
+              </p>
+            </li>
+          ))}
+        </ul>
+      </Section>
+    </div>
+  );
+}
 
-      <div className="mt-24">
-        <CTABanner />
+/**
+ * The free care assessment is offered here and nowhere else on the site: it is
+ * the company's own wording on this page, but it was removed from the header
+ * and hero, where it had been invented during the redesign.
+ */
+function ClosingSection() {
+  return (
+    <Section>
+      <div className="reveal mx-auto max-w-2xl text-center">
+        <h2 className="text-[32px] leading-tight sm:text-[40px]">
+          Ready to get started?
+        </h2>
+        <p className="mt-5 text-[17px] leading-[1.6] text-ink-body sm:text-[19px]">
+          We are ready to help. Give us a call to arrange a free care
+          assessment for you or your loved one.
+        </p>
+        <div className="mt-9 flex flex-col items-center justify-center gap-3 sm:flex-row">
+          <ButtonLink href={business.phoneHref} variant="primary" size="lg">
+            Call {business.phone}
+          </ButtonLink>
+          <ButtonLink href="/contact" variant="outline" size="lg">
+            Contact us today
+          </ButtonLink>
+        </div>
       </div>
-    </>
+    </Section>
   );
 }
