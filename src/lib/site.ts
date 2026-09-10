@@ -80,14 +80,19 @@ export const heroSlides = [
   {
     src: "/images/hero-kitchen.png",
     alt: "A woman working at her laptop at home, laughing with her support worker over a cup of tea",
-    /* Portrait source in a wide frame shows only ~47% of its height, so the
-       band is pulled up to hold both faces rather than centring on the table. */
-    focus: "50% 35%",
+    /* Portrait source in a wide frame shows only ~35-47% of its height, so the
+       visible band is a horizontal slice and its position is critical: too low
+       and the standing support worker is decapitated, too high and the seated
+       client is cut off. Measured against the actual images — in this one the
+       worker's head starts at ~4% and the client's face ends at ~55%. */
+    focus: "50% 25%",
   },
   {
     src: "/images/hero-park.png",
     alt: "A young man and his support worker walking through a sunlit park, laughing together",
-    focus: "50% 35%",
+    /* Both men are standing, so their heads sit higher in frame than the
+       seated client above and the band starts nearer the top. */
+    focus: "50% 8%",
   },
   {
     src: "/images/hero-main.png",
