@@ -23,6 +23,7 @@ export function PageHero({
   image,
   imageAlt,
   imageFocus = "50% 32%",
+  scrim = "default",
 }: {
   eyebrow?: string;
   title: string;
@@ -33,6 +34,9 @@ export function PageHero({
       the subjects sit in the upper two-thirds, so a centred crop takes the
       tops of their heads before anything else. */
   imageFocus?: string;
+  /** "strong" for photographs whose left third is not open, where the default
+      ramp leaves the heading sitting on a subject rather than on background. */
+  scrim?: "default" | "strong";
 }) {
   if (!image) {
     return (
@@ -79,7 +83,11 @@ export function PageHero({
         {/* Vertical on small screens, where the text spans the full width;
             horizontal from lg, so subjects on the right stay lit. */}
         <div
-          className="absolute inset-0 bg-gradient-to-b from-[#172b3a]/85 via-[#172b3a]/60 to-[#172b3a]/40 lg:bg-gradient-to-r lg:from-[#172b3a]/80 lg:via-[#172b3a]/30 lg:via-40% lg:to-[#172b3a]/10"
+          className={
+            scrim === "strong"
+              ? "absolute inset-0 bg-gradient-to-b from-[#172b3a]/90 via-[#172b3a]/70 to-[#172b3a]/50 lg:bg-gradient-to-r lg:from-[#172b3a]/92 lg:via-[#172b3a]/55 lg:via-45% lg:to-[#172b3a]/15"
+              : "absolute inset-0 bg-gradient-to-b from-[#172b3a]/85 via-[#172b3a]/60 to-[#172b3a]/40 lg:bg-gradient-to-r lg:from-[#172b3a]/80 lg:via-[#172b3a]/30 lg:via-40% lg:to-[#172b3a]/10"
+          }
           aria-hidden
         />
         <div className="absolute inset-0 bg-[#172b3a]/12" aria-hidden />

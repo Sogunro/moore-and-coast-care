@@ -122,6 +122,8 @@ export type Service = {
   detail?: string[];
   /** What this service typically covers. Rendered as a ticked list. */
   includes?: string[];
+  /** "strong" where the photograph has no open left third for the heading. */
+  heroScrim?: "default" | "strong";
   summary: string;
   /** Optional — only the four services that have commissioned photography. */
   image?: string;
@@ -249,6 +251,7 @@ export const services: Service[] = [
     summary:
       "We recognise the particular challenges of sensory impairment, and are committed to offering comprehensive support.",
     image: "/images/sensory-impairments.png",
+    heroScrim: "strong",
     imageAlt: "A woman making tea confidently in her own kitchen, her support worker beside her",
     lead: "Confident support for people living with sight or hearing loss.",
     detail: [

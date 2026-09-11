@@ -55,6 +55,7 @@ export default async function ServicePage({
         lead={service.lead ?? service.summary}
         image={service.image}
         imageAlt={service.imageAlt}
+        scrim={service.heroScrim}
       />
 
       <Section>
