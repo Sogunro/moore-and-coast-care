@@ -190,6 +190,8 @@ export const services: Service[] = [
     title: "Caring for Adults Under 65",
     summary:
       "Exceptional care for people under 65, supporting you in maintaining an independent lifestyle.",
+    image: "/images/adults-under-65.png",
+    imageAlt: "A woman working at her laptop at home, laughing with her support worker over a cup of tea",
     lead: "Care built around working life, family and independence — at any age.",
     detail: [
       "Needing support under 65 is different. You may be working, raising children, studying, or simply intent on keeping a life that looks nothing like a care brochure.",
