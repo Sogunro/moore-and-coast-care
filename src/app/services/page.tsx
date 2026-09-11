@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { services, servicesIntro } from "@/lib/site";
+import Link from "next/link";
 import { Section } from "@/components/Section";
 import { PageHero } from "@/components/PageHero";
 import { ClosingCTA } from "@/components/ClosingCTA";
@@ -59,19 +60,39 @@ function ServicesGrid() {
           <li
             key={service.slug}
             id={service.slug}
-            className="reveal flex scroll-mt-28 flex-col overflow-hidden rounded-[var(--radius-card)] border border-line bg-white shadow-[var(--shadow-soft)]"
+            className="reveal scroll-mt-28"
             style={{ transitionDelay: `${Math.min(i * 50, 300)}ms` }}
           >
+            <Link
+              href={`/services/${service.slug}`}
+              className="group flex h-full flex-col overflow-hidden rounded-[var(--radius-card)] border border-line bg-white shadow-[var(--shadow-soft)] transition-all duration-200 ease-[var(--ease-out)] hover:border-brand-100 hover:shadow-[var(--shadow-lift)]"
+            >
             <div className="flex flex-1 flex-col p-7">
               <span
                 aria-hidden
                 className="mb-5 block h-1 w-10 rounded-full bg-teal"
               />
-              <h2 className="text-[22px] leading-snug">{service.title}</h2>
+              <h2 className="text-[22px] leading-snug transition-colors duration-200 ease-[var(--ease-out)] group-hover:text-brand">
+                {service.title}
+              </h2>
               <p className="mt-3 flex-1 text-[15px] leading-[1.6] text-ink-body">
                 {service.summary}
               </p>
+              <span className="mt-5 inline-flex items-center gap-1.5 text-[14px] font-semibold text-brand">
+                Read more
+                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" aria-hidden>
+                  <path
+                    d="M5 12h14m-6-6 6 6-6 6"
+                    stroke="currentColor"
+                    strokeWidth="2"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    className="transition-transform duration-200 ease-[var(--ease-out)] group-hover:translate-x-0.5"
+                  />
+                </svg>
+              </span>
             </div>
+            </Link>
           </li>
         ))}
       </ul>

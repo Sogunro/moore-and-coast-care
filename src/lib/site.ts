@@ -116,6 +116,12 @@ export const heroSlides = [
 export type Service = {
   slug: string;
   title: string;
+  /** One line under the page heading. Falls back to `summary` if unset. */
+  lead?: string;
+  /** Body copy for the service's own page, one string per paragraph. */
+  detail?: string[];
+  /** What this service typically covers. Rendered as a ticked list. */
+  includes?: string[];
   summary: string;
   /** Optional — only the four services that have commissioned photography. */
   image?: string;
@@ -143,18 +149,56 @@ export const services: Service[] = [
     image: "/images/personal-care.png",
     imageAlt:
       "A carer gently supporting an elderly man as he walks through his home",
+    lead: "Discreet, sensitive support with the everyday, so you can stay in your own home and keep doing things your way.",
+    detail: [
+      "Personal care covers the parts of the day that have become harder to manage alone. It is delivered quietly and respectfully, at the times that suit you, by a carer you know.",
+      "We take the time to learn how you like things done — the order you prefer, the products you use, what you would rather do yourself. Independence is the point; we help only where help is wanted.",
+    ],
+    includes: [
+      "Washing, bathing and showering",
+      "Dressing and undressing",
+      "Help with mobility around the home",
+      "Medication reminders and administration",
+      "Continence care, discreetly handled",
+      "Support getting up and settling at night",
+    ],
   },
   {
     slug: "adults-over-65",
     title: "Caring for Adults Over 65",
     summary:
       "Outstanding care for people over 65, supporting you in maintaining an independent lifestyle.",
+    lead: "Support that adapts as needs change, so later life is lived at home rather than somewhere else.",
+    detail: [
+      "Needs rarely arrive all at once. Most people start with a little help — a weekly shop, a hand in the morning — and add more only as it becomes useful.",
+      "We review your plan regularly and change it as circumstances do, so care always matches what is actually needed rather than what was agreed months ago.",
+    ],
+    includes: [
+      "Help with washing, dressing and mobility",
+      "Meals, shopping and household tasks",
+      "Medication support",
+      "Company and conversation",
+      "Trips out and appointments",
+      "Regular reviews as needs change",
+    ],
   },
   {
     slug: "adults-under-65",
     title: "Caring for Adults Under 65",
     summary:
       "Exceptional care for people under 65, supporting you in maintaining an independent lifestyle.",
+    lead: "Care built around working life, family and independence — at any age.",
+    detail: [
+      "Needing support under 65 is different. You may be working, raising children, studying, or simply intent on keeping a life that looks nothing like a care brochure.",
+      "We build care around your commitments rather than the other way round, with visit times that fit your week and carers matched to your interests as well as your needs.",
+    ],
+    includes: [
+      "Visit times built around work and family",
+      "Personal care and daily living support",
+      "Help getting out to work, study or social plans",
+      "Support with appointments and transport",
+      "Carers matched to your interests",
+    ],
   },
   {
     slug: "dementia-care",
@@ -164,18 +208,57 @@ export const services: Service[] = [
     image: "/images/dementia-care.png",
     imageAlt:
       "A carer and an older woman looking through a photo album together",
+    lead: "Patient, specialist support that brings routine, reassurance and moments of real connection.",
+    detail: [
+      "Every case of dementia is different, and what helps one person can unsettle another. Our dementia-trained carers build a plan around the individual — their history, their habits, the things that reassure them.",
+      "Familiarity matters enormously, so we keep the same carers visiting wherever we can. Staying at home, surrounded by familiar things, is often the single most settling factor of all.",
+    ],
+    includes: [
+      "Dementia-trained, consistent carers",
+      "Familiar routines maintained day to day",
+      "Gentle prompting and orientation",
+      "Support with eating, drinking and medication",
+      "Meaningful activity and conversation",
+      "Respite so family carers can rest",
+    ],
   },
   {
     slug: "physical-disabilities",
     title: "Physical Disabilities",
     summary:
       "Our carers support a range of conditions including physical disabilities, Alzheimer's, multiple sclerosis, strokes and cerebral palsy.",
+    lead: "Practical, respectful support with mobility, routine and daily living.",
+    detail: [
+      "Our carers support people living with a wide range of conditions, including physical disabilities, multiple sclerosis, the effects of a stroke, cerebral palsy and acquired brain injury.",
+      "The aim is always the same: remove the obstacles, keep the independence. We work to your routine and your equipment, and our carers are trained in safe moving and handling.",
+    ],
+    includes: [
+      "Safe moving, handling and transfers",
+      "Personal care and hygiene support",
+      "Help with equipment and adaptations",
+      "Meal preparation and household tasks",
+      "Getting out and about",
+      "Support with appointments and therapy",
+    ],
   },
   {
     slug: "sensory-impairments",
     title: "Sensory Impairments",
     summary:
       "We recognise the particular challenges of sensory impairment, and are committed to offering comprehensive support.",
+    lead: "Confident support for people living with sight or hearing loss.",
+    detail: [
+      "Sensory impairment changes how a home works and how support needs to be given. We recognise those particular challenges and train our carers to meet them properly.",
+      "That means clear, unhurried communication, keeping belongings where you expect to find them, and assistance that builds confidence rather than dependence.",
+    ],
+    includes: [
+      "Communication tailored to you",
+      "Keeping the home consistent and safe",
+      "Support with correspondence and admin",
+      "Help with appointments and travel",
+      "Assistance with technology and aids",
+      "Company and conversation",
+    ],
   },
   {
     slug: "supported-living",
@@ -185,12 +268,38 @@ export const services: Service[] = [
     image: "/images/supported-living.png",
     imageAlt:
       "A support worker and a younger adult cooking together in a kitchen",
+    lead: "Housing with personal support, for people who need help at home but want to stay independent.",
+    detail: [
+      "Supported living combines a place of your own with the support needed to live in it well. It can mean your own tenancy or a shared household, with support ranging from a few hours a week to a constant presence.",
+      "The emphasis is on building skills and confidence — cooking, budgeting, travel, work — so that support can step back as independence grows.",
+    ],
+    includes: [
+      "Support with daily living tasks",
+      "Building life skills and confidence",
+      "Personal care where needed",
+      "Help managing money and appointments",
+      "Getting involved in the community",
+      "Shared or individual living options",
+    ],
   },
   {
     slug: "learning-disability",
     title: "Learning Disability",
     summary:
       "Personalised support that helps people build independence, confidence and life skills, promoting dignity, inclusion and well-being.",
+    lead: "Personalised support that builds independence, confidence and life skills.",
+    detail: [
+      "We support people with learning disabilities to live the life they choose, with as much or as little help as that takes. Choice comes first, and support is offered rather than imposed.",
+      "Our care promotes dignity, inclusion and overall well-being, and our carers are chosen for patience and a genuine interest in the people they support.",
+    ],
+    includes: [
+      "Support with daily routines",
+      "Building independence and life skills",
+      "Help accessing work, study and activities",
+      "Personal care where needed",
+      "Support with appointments and health",
+      "Company and community involvement",
+    ],
   },
   {
     slug: "hospital-discharge",
@@ -199,12 +308,38 @@ export const services: Service[] = [
       "Personalised support for a safe, smooth transition from hospital to home, helping people recover confidently and avoid readmission.",
     image: "/images/hospital-discharge.png",
     imageAlt: "A carer helping an elderly person settle comfortably at home",
+    lead: "A calm, well-arranged return home, so recovery happens safely.",
+    detail: [
+      "Coming home after a hospital stay is the point at which things most often go wrong. We arrange the practical side — the house warm and stocked, medication understood, equipment in place — so that arriving home feels safe rather than daunting.",
+      "Support is usually most intensive in the first days and eases as confidence returns. Getting this period right is what prevents readmission.",
+    ],
+    includes: [
+      "Preparing the home before you arrive",
+      "Collecting prescriptions and shopping",
+      "Support with new medication",
+      "Help with mobility and equipment",
+      "Personal care during recovery",
+      "Gradually reducing support as you improve",
+    ],
   },
   {
     slug: "live-in-care",
     title: "Live-in Care",
     summary:
       "A carer who lives with you at home — round-the-clock support without moving.",
+    lead: "A carer who lives with you at home — round-the-clock support, without moving.",
+    detail: [
+      "Live-in care is the alternative to a care home for people who need support through the day and reassurance overnight. A carer moves in, and life carries on in the house you know.",
+      "For couples it means staying together. For everyone it means keeping your own routine, your own bed and your own front door.",
+    ],
+    includes: [
+      "A carer living in your home",
+      "Support available day and night",
+      "Personal care, meals and housekeeping",
+      "Medication management",
+      "Company and companionship",
+      "Couples supported together",
+    ],
   },
 ];
 
