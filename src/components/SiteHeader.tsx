@@ -19,6 +19,8 @@ export function SiteHeader() {
   const pathname = usePathname();
   const [open, setOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
+  // The services list inside the mobile menu, collapsed by default.
+  const [servicesOpen, setServicesOpen] = useState(false);
 
   // The border only appears once content has scrolled beneath the header, so
   // the hero meets the header as one uninterrupted white field.
@@ -30,6 +32,10 @@ export function SiteHeader() {
   }, []);
 
   useEffect(() => setOpen(false), [pathname]);
+
+  useEffect(() => {
+    if (!open) setServicesOpen(false);
+  }, [open]);
 
   // The mobile menu is a full-height overlay; lock the page behind it.
   useEffect(() => {
@@ -145,32 +151,72 @@ export function SiteHeader() {
               if (item.href === "/services") {
                 return (
                   <div key={item.href} className="border-b border-line-soft">
-                    <Link
-                      href={item.href}
-                      aria-current={active ? "page" : undefined}
-                      className={`flex items-center justify-between py-4 text-base font-semibold ${
-                        active ? "text-brand" : "text-ink"
-                      }`}
-                    >
-                      {item.label}
-                      {active && <Dot />}
-                    </Link>
-                    {/* The ten services, indented beneath. Always open rather
-                        than behind another tap: this menu is already a
-                        deliberate action, and burying the services one level
-                        deeper would defeat the point of listing them. */}
-                    <ul className="mb-3 space-y-0.5 border-l border-line pl-4">
-                      {services.map((service) => (
-                        <li key={service.slug}>
-                          <Link
-                            href={`/services/${service.slug}`}
-                            className="block py-2 text-[15px] font-medium text-ink-body"
-                          >
-                            {service.title}
-                          </Link>
-                        </li>
-                      ))}
-                    </ul>
+                    {/* The row is a link to the index and a disclosure at the
+                        same time: tapping the label goes to Care Services,
+                        tapping the chevron opens the ten services. Making the
+                        whole row a toggle would take away the index page;
+                        making it only a link would hide the services. */}
+                    <div className="flex items-center justify-between">
+                      <Link
+                        href={item.href}
+                        aria-current={active ? "page" : undefined}
+                        className={`flex flex-1 items-center gap-2 py-4 text-base font-semibold ${
+                          active ? "text-brand" : "text-ink"
+                        }`}
+                      >
+                        {item.label}
+                        {active && <Dot />}
+                      </Link>
+                      <button
+                        type="button"
+                        onClick={() => setServicesOpen((v) => !v)}
+                        aria-expanded={servicesOpen}
+                        aria-controls="mobile-services"
+                        aria-label={
+                          servicesOpen
+                            ? "Hide care services"
+                            : "Show care services"
+                        }
+                        className="-mr-2 flex h-11 w-11 items-center justify-center text-ink"
+                      >
+                        <svg
+                          width="18"
+                          height="18"
+                          viewBox="0 0 24 24"
+                          fill="none"
+                          aria-hidden
+                          className={`transition-transform duration-200 ease-[var(--ease-out)] ${
+                            servicesOpen ? "rotate-180" : ""
+                          }`}
+                        >
+                          <path
+                            d="m6 9 6 6 6-6"
+                            stroke="currentColor"
+                            strokeWidth="2.2"
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
+                          />
+                        </svg>
+                      </button>
+                    </div>
+
+                    {servicesOpen && (
+                      <ul
+                        id="mobile-services"
+                        className="mb-3 space-y-0.5 border-l border-line pl-4"
+                      >
+                        {services.map((service) => (
+                          <li key={service.slug}>
+                            <Link
+                              href={`/services/${service.slug}`}
+                              className="block py-2 text-[15px] font-medium text-ink-body"
+                            >
+                              {service.title}
+                            </Link>
+                          </li>
+                        ))}
+                      </ul>
+                    )}
                   </div>
                 );
               }
