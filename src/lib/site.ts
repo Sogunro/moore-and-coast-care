@@ -147,8 +147,7 @@ export const services: Service[] = [
     summary:
       "Discreet, sensitive support with day-to-day living, helping you maintain your independence at home.",
     image: "/images/personal-care.png",
-    imageAlt:
-      "A carer gently supporting an elderly man as he walks through his home",
+    imageAlt: "A man shaving at his own bathroom sink while his support worker waits in the doorway",
     lead: "Discreet, sensitive support with the everyday, so you can stay in your own home and keep doing things your way.",
     detail: [
       "Personal care covers the parts of the day that have become harder to manage alone. It is delivered quietly and respectfully, at the times that suit you, by a carer you know.",
@@ -168,6 +167,8 @@ export const services: Service[] = [
     title: "Caring for Adults Over 65",
     summary:
       "Outstanding care for people over 65, supporting you in maintaining an independent lifestyle.",
+    image: "/images/adults-over-65.png",
+    imageAlt: "An older woman walking along a sunlit street with her support worker, both laughing",
     lead: "Support that adapts as needs change, so later life is lived at home rather than somewhere else.",
     detail: [
       "Needs rarely arrive all at once. Most people start with a little help — a weekly shop, a hand in the morning — and add more only as it becomes useful.",
@@ -206,8 +207,7 @@ export const services: Service[] = [
     summary:
       "Every case of dementia is unique. Our specialist-supported carers create personalised plans built around your loved one.",
     image: "/images/dementia-care.png",
-    imageAlt:
-      "A carer and an older woman looking through a photo album together",
+    imageAlt: "A woman and her support worker looking through a photo album together on a sofa",
     lead: "Patient, specialist support that brings routine, reassurance and moments of real connection.",
     detail: [
       "Every case of dementia is different, and what helps one person can unsettle another. Our dementia-trained carers build a plan around the individual — their history, their habits, the things that reassure them.",
@@ -227,6 +227,8 @@ export const services: Service[] = [
     title: "Physical Disabilities",
     summary:
       "Our carers support a range of conditions including physical disabilities, Alzheimer's, multiple sclerosis, strokes and cerebral palsy.",
+    image: "/images/physical-disabilities.png",
+    imageAlt: "A man reaching for a mug at his kitchen worktop, his support worker nearby",
     lead: "Practical, respectful support with mobility, routine and daily living.",
     detail: [
       "Our carers support people living with a wide range of conditions, including physical disabilities, multiple sclerosis, the effects of a stroke, cerebral palsy and acquired brain injury.",
@@ -246,6 +248,8 @@ export const services: Service[] = [
     title: "Sensory Impairments",
     summary:
       "We recognise the particular challenges of sensory impairment, and are committed to offering comprehensive support.",
+    image: "/images/sensory-impairments.png",
+    imageAlt: "A woman making tea confidently in her own kitchen, her support worker beside her",
     lead: "Confident support for people living with sight or hearing loss.",
     detail: [
       "Sensory impairment changes how a home works and how support needs to be given. We recognise those particular challenges and train our carers to meet them properly.",
@@ -266,8 +270,7 @@ export const services: Service[] = [
     summary:
       "Housing with personal support for people who need help at home but wish to stay independent — daily tasks, personal care and shared living options.",
     image: "/images/supported-living.png",
-    imageAlt:
-      "A support worker and a younger adult cooking together in a kitchen",
+    imageAlt: "A young man loading his own washing machine while his support worker chats from the doorway",
     lead: "Housing with personal support, for people who need help at home but want to stay independent.",
     detail: [
       "Supported living combines a place of your own with the support needed to live in it well. It can mean your own tenancy or a shared household, with support ranging from a few hours a week to a constant presence.",
@@ -287,6 +290,8 @@ export const services: Service[] = [
     title: "Learning Disability",
     summary:
       "Personalised support that helps people build independence, confidence and life skills, promoting dignity, inclusion and well-being.",
+    image: "/images/learning-disability.png",
+    imageAlt: "A young woman painting at a table while her support worker looks on, delighted",
     lead: "Personalised support that builds independence, confidence and life skills.",
     detail: [
       "We support people with learning disabilities to live the life they choose, with as much or as little help as that takes. Choice comes first, and support is offered rather than imposed.",
@@ -307,7 +312,7 @@ export const services: Service[] = [
     summary:
       "Personalised support for a safe, smooth transition from hospital to home, helping people recover confidently and avoid readmission.",
     image: "/images/hospital-discharge.png",
-    imageAlt: "A carer helping an elderly person settle comfortably at home",
+    imageAlt: "A man settling back into his armchair at home while his support worker brings tea",
     lead: "A calm, well-arranged return home, so recovery happens safely.",
     detail: [
       "Coming home after a hospital stay is the point at which things most often go wrong. We arrange the practical side — the house warm and stocked, medication understood, equipment in place — so that arriving home feels safe rather than daunting.",
@@ -327,6 +332,8 @@ export const services: Service[] = [
     title: "Live-in Care",
     summary:
       "A carer who lives with you at home — round-the-clock support without moving.",
+    image: "/images/live-in-care.png",
+    imageAlt: "An elderly couple having breakfast together while their live-in carer makes toast",
     lead: "A carer who lives with you at home — round-the-clock support, without moving.",
     detail: [
       "Live-in care is the alternative to a care home for people who need support through the day and reassurance overnight. A carer moves in, and life carries on in the house you know.",
