@@ -4,8 +4,9 @@ import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
-import { business, nav } from "@/lib/site";
+import { business, nav, services } from "@/lib/site";
 import { ButtonLink } from "./Button";
+import { NavDropdown } from "./NavDropdown";
 
 /**
  * Fixed 88px header, white throughout.
@@ -80,6 +81,12 @@ export function SiteHeader() {
         >
           {nav.map((item) => {
             const active = isActive(item.href);
+
+            // Care Services carries the ten service pages beneath it.
+            if (item.href === "/services") {
+              return <NavDropdown key={item.href} active={active} />;
+            }
+
             return (
               <Link
                 key={item.href}
@@ -134,6 +141,40 @@ export function SiteHeader() {
           >
             {nav.map((item) => {
               const active = isActive(item.href);
+
+              if (item.href === "/services") {
+                return (
+                  <div key={item.href} className="border-b border-line-soft">
+                    <Link
+                      href={item.href}
+                      aria-current={active ? "page" : undefined}
+                      className={`flex items-center justify-between py-4 text-base font-semibold ${
+                        active ? "text-brand" : "text-ink"
+                      }`}
+                    >
+                      {item.label}
+                      {active && <Dot />}
+                    </Link>
+                    {/* The ten services, indented beneath. Always open rather
+                        than behind another tap: this menu is already a
+                        deliberate action, and burying the services one level
+                        deeper would defeat the point of listing them. */}
+                    <ul className="mb-3 space-y-0.5 border-l border-line pl-4">
+                      {services.map((service) => (
+                        <li key={service.slug}>
+                          <Link
+                            href={`/services/${service.slug}`}
+                            className="block py-2 text-[15px] font-medium text-ink-body"
+                          >
+                            {service.title}
+                          </Link>
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+                );
+              }
+
               return (
                 <Link
                   key={item.href}
