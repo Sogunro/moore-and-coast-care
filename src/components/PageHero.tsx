@@ -22,13 +22,16 @@ export function PageHero({
   lead,
   image,
   imageAlt,
-  imageFocus = "50% 50%",
+  imageFocus = "50% 32%",
 }: {
   eyebrow?: string;
   title: string;
   lead?: string;
   image?: string;
   imageAlt?: string;
+  /** Defaults to 32% rather than centre: in every one of these photographs
+      the subjects sit in the upper two-thirds, so a centred crop takes the
+      tops of their heads before anything else. */
   imageFocus?: string;
 }) {
   if (!image) {
@@ -53,8 +56,15 @@ export function PageHero({
     );
   }
 
+  /*
+   * The height follows the image's own 16:9 ratio rather than a fixed vh, with
+   * a floor so it never collapses on a short window and a ceiling so it never
+   * dominates the page. A fixed 60vh made the frame 3.56:1 on a 1920px screen
+   * against a 1.78:1 image, so half the height was cropped — and that took the
+   * subjects' heads with it.
+   */
   return (
-    <section className="relative isolate min-h-[420px] w-full sm:min-h-[460px] lg:min-h-[60vh]">
+    <section className="relative isolate min-h-[420px] w-full sm:min-h-[460px] lg:aspect-[1672/941] lg:max-h-[70vh] lg:min-h-[520px]">
       <div className="absolute inset-0 -z-10 overflow-hidden bg-surface">
         <Image
           src={image}
@@ -75,7 +85,7 @@ export function PageHero({
         <div className="absolute inset-0 bg-[#172b3a]/12" aria-hidden />
       </div>
 
-      <div className="mx-auto flex min-h-[420px] max-w-[1240px] flex-col justify-center px-5 py-14 sm:min-h-[460px] sm:px-8 lg:min-h-[60vh] lg:py-20">
+      <div className="mx-auto flex h-full min-h-[420px] max-w-[1240px] flex-col justify-center px-5 py-14 sm:min-h-[460px] sm:px-8 lg:min-h-[520px] lg:py-16">
         <div className="max-w-[620px]">
           <Eyebrow>{eyebrow}</Eyebrow>
           <Title>{title}</Title>

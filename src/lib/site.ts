@@ -549,31 +549,37 @@ export const carers = {
 export const values = [
   {
     title: "Kindness and compassion",
+    icon: "kindness",
     body:
       "Our friendly and dedicated carers will always meet you with warmth and a smile. With Moor & Coast Care, care doesn't have to feel clinical.",
   },
   {
     title: "Respect",
+    icon: "respect",
     body:
       "By treating every client with dignity and sensitivity, no matter the circumstance, we maintain our service users' independence and pride.",
   },
   {
     title: "Highest quality of care",
+    icon: "quality",
     body:
       "We always provide the highest standard of care, adapting and responding to our clients' changing needs for as long as you need us.",
   },
   {
     title: "Reliability and punctuality",
+    icon: "reliability",
     body:
       "We work as closely as possible to the client's own schedule. Let us work around you, so that life isn't all about appointments.",
   },
   {
     title: "Embracing cultural differences",
+    icon: "culture",
     body:
       "We welcome all cultural differences and promise to be respectful regardless of religion, ethnicity, sexual orientation or any of the things that make you who you are.",
   },
   {
     title: "That something extra",
+    icon: "extra",
     body:
       "We are diligent and mindful of changing health and care requirements, and go the extra mile to continually improve each client's quality of life.",
   },

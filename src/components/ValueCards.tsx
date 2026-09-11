@@ -1,4 +1,5 @@
 import { values } from "@/lib/site";
+import { ValueIcon, type ValueIconName } from "./ValueIcon";
 
 /**
  * The six values, as softly tinted cards set at slight angles.
@@ -47,6 +48,9 @@ export function ValueCards() {
             className={`tilt-card h-full rounded-[var(--radius-card)] p-7 shadow-[var(--shadow-soft)] ${TINTS[i]}`}
             style={{ transform: `rotate(${TILTS[i]}deg)` }}
           >
+            <span className="mb-4 inline-flex h-11 w-11 items-center justify-center rounded-full bg-white/70 text-brand">
+              <ValueIcon name={value.icon as ValueIconName} />
+            </span>
             <h3 className="text-[21px] leading-snug">{value.title}</h3>
             <p className="mt-3 text-[15px] leading-[1.6] text-ink-body">
               {value.body}
