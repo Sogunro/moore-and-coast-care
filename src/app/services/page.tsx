@@ -55,7 +55,19 @@ export default function ServicesPage() {
 function ServicesGrid() {
   return (
     <Section>
-      <ul className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+      {/* Two columns from the narrowest screen up.
+
+          One card per row put the grid at 2757px on a small phone and the
+          page at over six screens, which is a lot of scrolling to find a
+          service by name. Two columns halves that, and ten short names are
+          still scannable at this size \u2014 someone looking for "dementia"
+          finds it in a glance rather than a scroll.
+
+          The summary is hidden below sm: at two-up on a phone there is not
+          room for both a readable name and three lines of description, and
+          the name is what someone is scanning for. It returns as soon as
+          there is width for it. */}
+      <ul className="grid grid-cols-2 gap-3 sm:gap-6 lg:grid-cols-3">
         {services.map((service, i) => (
           <li
             key={service.slug}
@@ -65,22 +77,21 @@ function ServicesGrid() {
           >
             <Link
               href={`/services/${service.slug}`}
-              className="group flex h-full flex-col overflow-hidden rounded-[var(--radius-card)] border border-line bg-white shadow-[var(--shadow-soft)] transition-all duration-200 ease-[var(--ease-out)] hover:border-brand-100 hover:shadow-[var(--shadow-lift)]"
+              className="group flex h-full flex-col overflow-hidden rounded-[var(--radius-card)] border border-line bg-white p-5 shadow-[var(--shadow-soft)] transition-all duration-200 ease-[var(--ease-out)] hover:border-brand-100 hover:shadow-[var(--shadow-lift)] sm:p-7"
             >
-            <div className="flex flex-1 flex-col p-7">
               <span
                 aria-hidden
-                className="mb-5 block h-1 w-10 rounded-full bg-teal"
+                className="mb-3 block h-1 w-8 rounded-full bg-teal sm:mb-5 sm:w-10"
               />
-              <h2 className="text-[22px] leading-snug transition-colors duration-200 ease-[var(--ease-out)] group-hover:text-brand">
+              <h2 className="text-[16px] leading-snug transition-colors duration-200 ease-[var(--ease-out)] group-hover:text-brand sm:text-[22px]">
                 {service.title}
               </h2>
-              <p className="mt-3 flex-1 text-[15px] leading-[1.6] text-ink-body">
+              <p className="mt-2 hidden flex-1 text-[15px] leading-[1.6] text-ink-body sm:mt-3 sm:block">
                 {service.summary}
               </p>
-              <span className="mt-5 inline-flex items-center gap-1.5 text-[14px] font-semibold text-brand">
+              <span className="mt-3 inline-flex items-center gap-1.5 text-[13px] font-semibold text-brand sm:mt-5 sm:text-[14px]">
                 Read more
-                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" aria-hidden>
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" aria-hidden>
                   <path
                     d="M5 12h14m-6-6 6 6-6 6"
                     stroke="currentColor"
@@ -91,7 +102,6 @@ function ServicesGrid() {
                   />
                 </svg>
               </span>
-            </div>
             </Link>
           </li>
         ))}
@@ -99,3 +109,4 @@ function ServicesGrid() {
     </Section>
   );
 }
+
