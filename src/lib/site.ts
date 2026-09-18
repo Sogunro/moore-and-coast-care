@@ -186,12 +186,12 @@ export const services: Service[] = [
       {
         title: "Continence",
         body:
-          "We support continence needs discreetly and without fuss, including help getting to and from the bathroom, personal hygiene, and changing pads, bedding and clothing. Dignity comes first, always.",
+          "We support both urinary and faecal continence discreetly and without fuss: help getting to and from the bathroom, monitoring personal hygiene, and changing catheter and stoma bags, incontinence pads, bedding and clothing. Dignity comes first, always.",
       },
       {
         title: "Getting up and settling at night",
         body:
-          "We work to your routine rather than ours, with help getting in and out of bed at the times that suit you, and safe support with transfers where that is needed.",
+          "We work to your routine rather than ours, with help getting in and out of bed at the times that suit you. Where hoisting is needed, our carers are trained to do it safely.",
       },
       {
         title: "Meals",
