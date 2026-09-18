@@ -58,6 +58,10 @@ export default async function ServicePage({
         scrim={service.heroScrim}
       />
 
+      {/* Intro, with the "is this me?" list beside it. Someone arriving from
+          a search needs to recognise their own situation before they read
+          anything else; four short lines do that faster than two paragraphs
+          of description. */}
       <Section>
         <div className="grid gap-12 lg:grid-cols-[minmax(0,1fr)_minmax(0,380px)] lg:gap-16">
           <div className="reveal max-w-[640px]">
@@ -71,13 +75,13 @@ export default async function ServicePage({
             ))}
           </div>
 
-          {service.includes && (
+          {(service.forYouIf ?? service.includes) && (
             <div className="reveal rounded-[var(--radius-card)] border border-line bg-surface p-7">
               <h2 className="text-[20px] leading-snug">
-                What this usually includes
+                {service.forYouIf ? "This may be for you if" : "What this usually includes"}
               </h2>
               <ul className="mt-5 space-y-3">
-                {service.includes.map((item) => (
+                {(service.forYouIf ?? service.includes ?? []).map((item) => (
                   <li
                     key={item}
                     className="flex items-start gap-3 text-[15px] leading-[1.5] text-ink-body"
@@ -97,6 +101,8 @@ export default async function ServicePage({
         </div>
       </Section>
 
+      {service.helpWith && <HelpWith items={service.helpWith} />}
+
       <OtherServices services={others} />
 
       <ClosingCTA
@@ -104,6 +110,44 @@ export default async function ServicePage({
         body="Give us a call and we will talk it through — no obligation, and a fully costed package before you decide anything."
       />
     </>
+  );
+}
+
+/**
+ * The detailed breakdown of what a service covers.
+ *
+ * Two columns of headed paragraphs rather than a tick list: these are the
+ * specifics someone weighs up before ringing, and each needs a sentence or
+ * two of explanation that a list item cannot carry. The tick list stays for
+ * the shorter "is this me?" panel above.
+ */
+function HelpWith({ items }: { items: { title: string; body: string }[] }) {
+  return (
+    <div className="bg-surface">
+      <Section>
+        <h2 className="max-w-2xl text-[28px] leading-tight sm:text-[34px]">
+          What we can help with
+        </h2>
+        <ul className="mt-12 grid gap-x-12 gap-y-9 sm:grid-cols-2">
+          {items.map((item, i) => (
+            <li
+              key={item.title}
+              className="reveal"
+              style={{ transitionDelay: `${Math.min(i * 60, 320)}ms` }}
+            >
+              <span
+                aria-hidden
+                className="mb-3 block h-1 w-8 rounded-full bg-teal"
+              />
+              <h3 className="text-[19px] leading-snug">{item.title}</h3>
+              <p className="mt-2.5 text-[15px] leading-[1.65] text-ink-body">
+                {item.body}
+              </p>
+            </li>
+          ))}
+        </ul>
+      </Section>
+    </div>
   );
 }
 

@@ -120,8 +120,14 @@ export type Service = {
   lead?: string;
   /** Body copy for the service's own page, one string per paragraph. */
   detail?: string[];
-  /** What this service typically covers. Rendered as a ticked list. */
+  /** What this service typically covers. Rendered as a ticked list.
+      Superseded by `helpWith` on pages that have the fuller treatment. */
   includes?: string[];
+  /** Four short lines letting someone recognise whether the service is for
+      them, before they read anything else. */
+  forYouIf?: string[];
+  /** The detailed breakdown: each a heading and a short paragraph. */
+  helpWith?: { title: string; body: string }[];
   /** "strong" where the photograph has no open left third for the heading. */
   heroScrim?: "default" | "strong";
   summary: string;
@@ -152,16 +158,51 @@ export const services: Service[] = [
     imageAlt: "A man shaving at his own bathroom sink while his support worker waits in the doorway",
     lead: "Discreet, sensitive support with the everyday, so you can stay in your own home and keep doing things your way.",
     detail: [
-      "Personal care covers the parts of the day that have become harder to manage alone. It is delivered quietly and respectfully, at the times that suit you, by a carer you know.",
-      "We take the time to learn how you like things done — the order you prefer, the products you use, what you would rather do yourself. Independence is the point; we help only where help is wanted.",
+      "When illness or reduced mobility makes everyday things harder, personal care fills the gap. It covers washing, dressing, medication and the rest of the daily routine, delivered quietly and at the times that suit you.",
+      "We take time to learn how you like things done — the order you prefer, the products you use, what you would rather manage yourself. Independence is the point, so we help where help is wanted and step back where it is not.",
     ],
-    includes: [
-      "Washing, bathing and showering",
-      "Dressing and undressing",
-      "Help with mobility around the home",
-      "Medication reminders and administration",
-      "Continence care, discreetly handled",
-      "Support getting up and settling at night",
+    forYouIf: [
+      "Everyday tasks like washing or dressing have become harder to manage alone",
+      "You are managing medication and would like the reassurance of support",
+      "A recent change in health or mobility has altered your routine",
+      "Family are helping at present, and everyone would benefit from regular support",
+    ],
+    helpWith: [
+      {
+        title: "Medication",
+        body:
+          "It is easy to forget a dose, or to find the packaging itself difficult. We prompt and support you to take the right medication at the right time, and where there is a clear prescription to follow, our trained carers can administer it.",
+      },
+      {
+        title: "Bathing and washing",
+        body:
+          "We support you with bathing and showering — getting safely in and out, and help with washing and drying where it is wanted. If you prefer to wash independently, a carer can simply be nearby, so you have the reassurance without the intrusion.",
+      },
+      {
+        title: "Dressing",
+        body:
+          "Buttons, zips and laces are often the first things to become awkward. Our carers help with any part of getting dressed, so you can start the day as you mean to go on.",
+      },
+      {
+        title: "Continence",
+        body:
+          "We support continence needs discreetly and without fuss, including help getting to and from the bathroom, personal hygiene, and changing pads, bedding and clothing. Dignity comes first, always.",
+      },
+      {
+        title: "Getting up and settling at night",
+        body:
+          "We work to your routine rather than ours, with help getting in and out of bed at the times that suit you, and safe support with transfers where that is needed.",
+      },
+      {
+        title: "Meals",
+        body:
+          "From the weekly shop to planning and preparing meals, we help you eat well. That includes support at mealtimes themselves where it is useful.",
+      },
+      {
+        title: "Around the home",
+        body:
+          "Laundry, washing up, vacuuming and the general keeping-on-top-of-things. Small tasks, but they are often what makes staying at home feel manageable.",
+      },
     ],
   },
   {
