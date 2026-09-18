@@ -126,8 +126,8 @@ export type Service = {
   /** Four short lines letting someone recognise whether the service is for
       them, before they read anything else. */
   forYouIf?: string[];
-  /** The detailed breakdown: each a heading and a short paragraph. */
-  helpWith?: { title: string; body: string }[];
+  /** The detailed breakdown: each a heading, an icon and a short paragraph. */
+  helpWith?: { title: string; icon: string; body: string }[];
   /** "strong" where the photograph has no open left third for the heading. */
   heroScrim?: "default" | "strong";
   summary: string;
@@ -170,36 +170,43 @@ export const services: Service[] = [
     helpWith: [
       {
         title: "Medication",
+        icon: "pill",
         body:
           "It is easy to forget a dose, or to find the packaging itself difficult. We prompt and support you to take the right medication at the right time, and where there is a clear prescription to follow, our trained carers can administer it.",
       },
       {
         title: "Bathing and washing",
+        icon: "bath",
         body:
           "We support you with bathing and showering — getting safely in and out, and help with washing and drying where it is wanted. If you prefer to wash independently, a carer can simply be nearby, so you have the reassurance without the intrusion.",
       },
       {
         title: "Dressing",
+        icon: "shirt",
         body:
           "Buttons, zips and laces are often the first things to become awkward. Our carers help with any part of getting dressed, so you can start the day as you mean to go on.",
       },
       {
         title: "Continence",
+        icon: "heart",
         body:
           "We support both urinary and faecal continence discreetly and without fuss: help getting to and from the bathroom, monitoring personal hygiene, and changing catheter and stoma bags, incontinence pads, bedding and clothing. Dignity comes first, always.",
       },
       {
         title: "Getting up and settling at night",
+        icon: "bed",
         body:
           "We work to your routine rather than ours, with help getting in and out of bed at the times that suit you. Where hoisting is needed, our carers are trained to do it safely.",
       },
       {
         title: "Meals",
+        icon: "plate",
         body:
           "From the weekly shop to planning and preparing meals, we help you eat well. That includes support at mealtimes themselves where it is useful.",
       },
       {
         title: "Around the home",
+        icon: "home",
         body:
           "Laundry, washing up, vacuuming and the general keeping-on-top-of-things. Small tasks, but they are often what makes staying at home feel manageable.",
       },
@@ -217,13 +224,55 @@ export const services: Service[] = [
       "Needs rarely arrive all at once. Most people start with a little help — a weekly shop, a hand in the morning — and add more only as it becomes useful.",
       "We review your plan regularly and change it as circumstances do, so care always matches what is actually needed rather than what was agreed months ago.",
     ],
-    includes: [
-      "Help with washing, dressing and mobility",
-      "Meals, shopping and household tasks",
-      "Medication support",
-      "Company and conversation",
-      "Trips out and appointments",
-      "Regular reviews as needs change",
+    forYouIf: [
+      "Managing at home is getting harder, but moving out is not what you want",
+      "You would like help with a few things rather than everything",
+      "Family live too far away to help as often as they would like",
+      "Needs have changed recently and the old arrangements no longer fit",
+    ],
+    helpWith: [
+      {
+        title: "Personal care",
+        icon: "bath",
+        body:
+          "Help with washing, dressing and the morning routine, at the pace and in the order that suits you.",
+      },
+      {
+        title: "Medication",
+        icon: "pill",
+        body:
+          "Prompting, collecting prescriptions, and where there is a clear prescription to follow, administering medication safely.",
+      },
+      {
+        title: "Meals and shopping",
+        icon: "plate",
+        body:
+          "The weekly shop, meal preparation, and company at mealtimes if eating alone has stopped being enjoyable.",
+      },
+      {
+        title: "Around the house",
+        icon: "home",
+        body:
+          "Laundry, washing up, vacuuming and the small jobs that keep a home feeling like one rather than a chore.",
+      },
+      {
+        title: "Getting out",
+        icon: "sun",
+        body:
+          "To appointments, to the shops, to see people. Staying connected matters as much as anything we do indoors.",
+      },
+      {
+        title: "Company",
+        icon: "chat",
+        body:
+          "Someone to talk to who knows you. For many of our clients this turns out to be the part they value most.",
+      },
+      {
+        title: "Changing needs",
+        icon: "clipboard",
+        body:
+          "We review your plan regularly, so care keeps pace with your circumstances instead of lagging behind them.",
+      },
     ],
   },
   {
@@ -238,12 +287,49 @@ export const services: Service[] = [
       "Needing support under 65 is different. You may be working, raising children, studying, or simply intent on keeping a life that looks nothing like a care brochure.",
       "We build care around your commitments rather than the other way round, with visit times that fit your week and carers matched to your interests as well as your needs.",
     ],
-    includes: [
-      "Visit times built around work and family",
-      "Personal care and daily living support",
-      "Help getting out to work, study or social plans",
-      "Support with appointments and transport",
-      "Carers matched to your interests",
+    forYouIf: [
+      "You are working, studying or raising a family alongside a care need",
+      "You want support that fits your week rather than a fixed visit slot",
+      "A condition or injury has changed what you need help with",
+      "You would rather direct your own care than have it arranged for you",
+    ],
+    helpWith: [
+      {
+        title: "Visits around your week",
+        icon: "clipboard",
+        body:
+          "Early, late or in between. We build the rota around work, family and everything else you have on.",
+      },
+      {
+        title: "Personal care",
+        icon: "bath",
+        body:
+          "Discreet help with washing, dressing and daily routine, given the way you want it given.",
+      },
+      {
+        title: "Getting to work and study",
+        icon: "car",
+        body:
+          "Support with transport and getting out of the house, so a care need does not become a reason to stay in.",
+      },
+      {
+        title: "Around the home",
+        icon: "home",
+        body:
+          "Laundry, cleaning and the practical running of a household, so your energy goes where you want it.",
+      },
+      {
+        title: "Appointments",
+        icon: "phone",
+        body:
+          "Help arranging and getting to appointments, and keeping track of what was said afterwards.",
+      },
+      {
+        title: "A carer matched to you",
+        icon: "people",
+        body:
+          "We match on interests and temperament as well as skills. You will be spending real time with this person.",
+      },
     ],
   },
   {
@@ -258,13 +344,55 @@ export const services: Service[] = [
       "Every case of dementia is different, and what helps one person can unsettle another. Our dementia-trained carers build a plan around the individual — their history, their habits, the things that reassure them.",
       "Familiarity matters enormously, so we keep the same carers visiting wherever we can. Staying at home, surrounded by familiar things, is often the single most settling factor of all.",
     ],
-    includes: [
-      "Dementia-trained, consistent carers",
-      "Familiar routines maintained day to day",
-      "Gentle prompting and orientation",
-      "Support with eating, drinking and medication",
-      "Meaningful activity and conversation",
-      "Respite so family carers can rest",
+    forYouIf: [
+      "A diagnosis is recent and you are not sure what support is available",
+      "Familiar routines are becoming harder to keep to",
+      "A family carer needs regular breaks to keep going",
+      "Staying at home matters, and you want to make that possible for longer",
+    ],
+    helpWith: [
+      {
+        title: "Familiar faces",
+        icon: "people",
+        body:
+          "We keep the same carers visiting wherever we can. Consistency does more for someone with dementia than almost anything else.",
+      },
+      {
+        title: "Keeping the routine",
+        icon: "clipboard",
+        body:
+          "The same things at the same time in the same order. Routine is reassuring, and we work hard to protect it.",
+      },
+      {
+        title: "Gentle prompting",
+        icon: "chat",
+        body:
+          "Support with washing, dressing and eating offered as a prompt rather than a takeover, so skills are kept as long as possible.",
+      },
+      {
+        title: "Medication",
+        icon: "pill",
+        body:
+          "Careful support with medication, which becomes harder to manage and more important to get right.",
+      },
+      {
+        title: "Life history",
+        icon: "book",
+        body:
+          "We learn about the person: their work, their music, their people. It gives our carers something real to talk about.",
+      },
+      {
+        title: "Meaningful days",
+        icon: "sun",
+        body:
+          "Activity that suits the person now, not who they were five years ago. A walk, a photo album, a hand with the garden.",
+      },
+      {
+        title: "Respite for family",
+        icon: "heart",
+        body:
+          "Regular breaks for the family carer. Looking after someone with dementia is relentless, and rest is not a luxury.",
+      },
     ],
   },
   {
@@ -279,13 +407,49 @@ export const services: Service[] = [
       "Our carers support people living with a wide range of conditions, including physical disabilities, multiple sclerosis, the effects of a stroke, cerebral palsy and acquired brain injury.",
       "The aim is always the same: remove the obstacles, keep the independence. We work to your routine and your equipment, and our carers are trained in safe moving and handling.",
     ],
-    includes: [
-      "Safe moving, handling and transfers",
-      "Personal care and hygiene support",
-      "Help with equipment and adaptations",
-      "Meal preparation and household tasks",
-      "Getting out and about",
-      "Support with appointments and therapy",
+    forYouIf: [
+      "Mobility has changed and your home routine needs to change with it",
+      "You need support with transfers or equipment",
+      "You are managing a condition such as MS, stroke or cerebral palsy",
+      "You want practical help without losing control of your own day",
+    ],
+    helpWith: [
+      {
+        title: "Moving and handling",
+        icon: "hands",
+        body:
+          "Safe transfers, including hoisting where it is needed. Our carers are trained and refreshed in this regularly.",
+      },
+      {
+        title: "Personal care",
+        icon: "bath",
+        body:
+          "Washing, dressing and hygiene support, given with dignity and at your direction.",
+      },
+      {
+        title: "Equipment",
+        icon: "wheelchair",
+        body:
+          "Help using the equipment and adaptations in your home, and flagging when something is no longer working for you.",
+      },
+      {
+        title: "Meals and household",
+        icon: "plate",
+        body:
+          "Cooking, shopping and keeping on top of the house, so daily life takes less out of you.",
+      },
+      {
+        title: "Getting out",
+        icon: "car",
+        body:
+          "Support with transport and access, so appointments and plans stay possible.",
+      },
+      {
+        title: "Therapy and appointments",
+        icon: "clipboard",
+        body:
+          "Support with exercises set by your physiotherapist and getting to the appointments that matter.",
+      },
     ],
   },
   {
@@ -301,13 +465,49 @@ export const services: Service[] = [
       "Sensory impairment changes how a home works and how support needs to be given. We recognise those particular challenges and train our carers to meet them properly.",
       "That means clear, unhurried communication, keeping belongings where you expect to find them, and assistance that builds confidence rather than dependence.",
     ],
-    includes: [
-      "Communication tailored to you",
-      "Keeping the home consistent and safe",
-      "Support with correspondence and admin",
-      "Help with appointments and travel",
-      "Assistance with technology and aids",
-      "Company and conversation",
+    forYouIf: [
+      "Sight or hearing loss has made daily routines harder",
+      "You want support that builds confidence rather than replacing it",
+      "Correspondence, appointments or technology are becoming difficult",
+      "A recent change in sight or hearing has knocked your confidence",
+    ],
+    helpWith: [
+      {
+        title: "Communication that works for you",
+        icon: "ear",
+        body:
+          "We learn how you prefer to communicate and our carers adapt to it, unhurried and without raising their voice unnecessarily.",
+      },
+      {
+        title: "A consistent home",
+        icon: "home",
+        body:
+          "Things stay where you expect to find them. Nothing gets tidied into a new place without telling you.",
+      },
+      {
+        title: "Reading and correspondence",
+        icon: "eye",
+        body:
+          "Help with post, forms and anything else that arrives in print and needs dealing with.",
+      },
+      {
+        title: "Technology and aids",
+        icon: "clipboard",
+        body:
+          "Support using hearing aids, magnifiers, screen readers and the equipment that makes life easier.",
+      },
+      {
+        title: "Getting out",
+        icon: "car",
+        body:
+          "Confident support with travel and appointments, guided the way you want to be guided.",
+      },
+      {
+        title: "Company",
+        icon: "chat",
+        body:
+          "Conversation and company, which matter more when a sensory impairment has made the world feel smaller.",
+      },
     ],
   },
   {
@@ -322,13 +522,49 @@ export const services: Service[] = [
       "Supported living combines a place of your own with the support needed to live in it well. It can mean your own tenancy or a shared household, with support ranging from a few hours a week to a constant presence.",
       "The emphasis is on building skills and confidence — cooking, budgeting, travel, work — so that support can step back as independence grows.",
     ],
-    includes: [
-      "Support with daily living tasks",
-      "Building life skills and confidence",
-      "Personal care where needed",
-      "Help managing money and appointments",
-      "Getting involved in the community",
-      "Shared or individual living options",
+    forYouIf: [
+      "You want your own place, with support to make that work",
+      "You are moving out of family or residential care for the first time",
+      "You would like to build skills rather than have things done for you",
+      "A shared household with support would suit you better than living alone",
+    ],
+    helpWith: [
+      {
+        title: "Your own tenancy",
+        icon: "key",
+        body:
+          "Your home, your rules, your front door. Support comes to you rather than you fitting into a service.",
+      },
+      {
+        title: "Daily living",
+        icon: "home",
+        body:
+          "Cooking, cleaning, laundry and shopping, done alongside you so the skills build over time.",
+      },
+      {
+        title: "Money and admin",
+        icon: "clipboard",
+        body:
+          "Budgeting, bills, benefits and appointments. The paperwork side of independence is often the hardest part.",
+      },
+      {
+        title: "Personal care",
+        icon: "bath",
+        body:
+          "Where it is needed, given discreetly and only to the extent it is wanted.",
+      },
+      {
+        title: "Getting out and involved",
+        icon: "sun",
+        body:
+          "Work, college, clubs, friends. Support to build a life outside the front door as well as behind it.",
+      },
+      {
+        title: "Support that steps back",
+        icon: "people",
+        body:
+          "As confidence grows, support reduces. That is the aim from the first day, and we review it regularly.",
+      },
     ],
   },
   {
@@ -343,13 +579,49 @@ export const services: Service[] = [
       "We support people with learning disabilities to live the life they choose, with as much or as little help as that takes. Choice comes first, and support is offered rather than imposed.",
       "Our care promotes dignity, inclusion and overall well-being, and our carers are chosen for patience and a genuine interest in the people they support.",
     ],
-    includes: [
-      "Support with daily routines",
-      "Building independence and life skills",
-      "Help accessing work, study and activities",
-      "Personal care where needed",
-      "Support with appointments and health",
-      "Company and community involvement",
+    forYouIf: [
+      "You want support that offers choices rather than making them for you",
+      "Building independence and confidence is the goal",
+      "You need help accessing work, college or activities",
+      "Family are looking for support that treats you as an adult",
+    ],
+    helpWith: [
+      {
+        title: "Choice first",
+        icon: "chat",
+        body:
+          "Support is offered, not imposed. Everything starts from what you want your day to look like.",
+      },
+      {
+        title: "Daily routines",
+        icon: "clipboard",
+        body:
+          "Help with getting up, meals, medication and the shape of the day, in a way that builds habits rather than dependence.",
+      },
+      {
+        title: "Life skills",
+        icon: "key",
+        body:
+          "Cooking, shopping, travel, money. Practical skills practised together until they are yours.",
+      },
+      {
+        title: "Work and learning",
+        icon: "sun",
+        body:
+          "Support getting to college, work or training, and staying there once you have started.",
+      },
+      {
+        title: "Personal care",
+        icon: "bath",
+        body:
+          "Where it is needed, given respectfully and with as much privacy as possible.",
+      },
+      {
+        title: "Being part of things",
+        icon: "people",
+        body:
+          "Clubs, groups, friendships and community. Inclusion is not an add-on to the care plan.",
+      },
     ],
   },
   {
@@ -364,13 +636,49 @@ export const services: Service[] = [
       "Coming home after a hospital stay is the point at which things most often go wrong. We arrange the practical side — the house warm and stocked, medication understood, equipment in place — so that arriving home feels safe rather than daunting.",
       "Support is usually most intensive in the first days and eases as confidence returns. Getting this period right is what prevents readmission.",
     ],
-    includes: [
-      "Preparing the home before you arrive",
-      "Collecting prescriptions and shopping",
-      "Support with new medication",
-      "Help with mobility and equipment",
-      "Personal care during recovery",
-      "Gradually reducing support as you improve",
+    forYouIf: [
+      "You are in hospital now and planning to go home",
+      "An admission is coming up and you want support arranged in advance",
+      "You are home already but struggling more than expected",
+      "Family are worried about how the first weeks at home will go",
+    ],
+    helpWith: [
+      {
+        title: "Before you come home",
+        icon: "home",
+        body:
+          "The heating on, the fridge stocked, the bed made and the route to the bathroom clear. Small things that change how arriving feels.",
+      },
+      {
+        title: "Prescriptions and shopping",
+        icon: "basket",
+        body:
+          "Collecting what you need so it is waiting rather than something to sort out on day one.",
+      },
+      {
+        title: "New medication",
+        icon: "pill",
+        body:
+          "Hospital often changes a prescription. We help you understand what has changed and keep to it.",
+      },
+      {
+        title: "Mobility and equipment",
+        icon: "wheelchair",
+        body:
+          "Support with any new equipment, and with moving safely around your home while you are recovering.",
+      },
+      {
+        title: "Personal care while you recover",
+        icon: "bath",
+        body:
+          "More help at first, easing off as you get stronger. The plan is meant to shrink.",
+      },
+      {
+        title: "Keeping family informed",
+        icon: "phone",
+        body:
+          "We keep the people who care about you in the loop, which is often what lets them stop worrying.",
+      },
     ],
   },
   {
@@ -385,13 +693,55 @@ export const services: Service[] = [
       "Live-in care is the alternative to a care home for people who need support through the day and reassurance overnight. A carer moves in, and life carries on in the house you know.",
       "For couples it means staying together. For everyone it means keeping your own routine, your own bed and your own front door.",
     ],
-    includes: [
-      "A carer living in your home",
-      "Support available day and night",
-      "Personal care, meals and housekeeping",
-      "Medication management",
-      "Company and companionship",
-      "Couples supported together",
+    forYouIf: [
+      "Round-the-clock support is needed, and a care home is not what you want",
+      "You are a couple and want to stay together",
+      "Overnight reassurance matters as much as daytime help",
+      "Familiar surroundings are important to you or your relative",
+    ],
+    helpWith: [
+      {
+        title: "Someone there",
+        icon: "people",
+        body:
+          "A carer lives in your home, so support is available through the day and reassurance is there overnight.",
+      },
+      {
+        title: "Your routine, kept",
+        icon: "clipboard",
+        body:
+          "You decide when to get up, what to eat and how the day runs. That is the difference between home and an institution.",
+      },
+      {
+        title: "Personal care",
+        icon: "bath",
+        body:
+          "Washing, dressing and the daily routine, given by someone who knows exactly how you like it done.",
+      },
+      {
+        title: "Meals and household",
+        icon: "plate",
+        body:
+          "Cooking, shopping, laundry and keeping the house running as it always has.",
+      },
+      {
+        title: "Medication",
+        icon: "pill",
+        body:
+          "Full support with medication, including collecting prescriptions and keeping track of changes.",
+      },
+      {
+        title: "Couples together",
+        icon: "heart",
+        body:
+          "Live-in care often lets couples stay in their own home together when other options would separate them.",
+      },
+      {
+        title: "Company",
+        icon: "chat",
+        body:
+          "Someone in the house to talk to, which for many people is the single biggest change.",
+      },
     ],
   },
 ];

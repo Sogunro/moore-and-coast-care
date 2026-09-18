@@ -3,6 +3,7 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import { services } from "@/lib/site";
 import { Section } from "@/components/Section";
+import { HelpIcon, type HelpIconName } from "@/components/HelpIcon";
 import { PageHero } from "@/components/PageHero";
 import { ClosingCTA } from "@/components/ClosingCTA";
 
@@ -121,7 +122,11 @@ export default async function ServicePage({
  * two of explanation that a list item cannot carry. The tick list stays for
  * the shorter "is this me?" panel above.
  */
-function HelpWith({ items }: { items: { title: string; body: string }[] }) {
+function HelpWith({
+  items,
+}: {
+  items: { title: string; icon: string; body: string }[];
+}) {
   return (
     <div className="bg-surface">
       <Section>
@@ -135,10 +140,9 @@ function HelpWith({ items }: { items: { title: string; body: string }[] }) {
               className="reveal"
               style={{ transitionDelay: `${Math.min(i * 60, 320)}ms` }}
             >
-              <span
-                aria-hidden
-                className="mb-3 block h-1 w-8 rounded-full bg-teal"
-              />
+              <span className="mb-4 inline-flex h-11 w-11 items-center justify-center rounded-full bg-teal-50 text-teal-700">
+                <HelpIcon name={item.icon as HelpIconName} />
+              </span>
               <h3 className="text-[19px] leading-snug">{item.title}</h3>
               <p className="mt-2.5 text-[15px] leading-[1.65] text-ink-body">
                 {item.body}
