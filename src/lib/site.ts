@@ -130,9 +130,9 @@ export type Service = {
   helpWith?: { title: string; icon: string; body: string }[];
   /** "strong" where the photograph has no open left third for the heading. */
   heroScrim?: "default" | "strong";
-  /** A row of photographs showing the service in practice, beneath the intro.
-      Only rendered once at least one exists, so a service can be filled in
-      without leaving gaps on the others. */
+  /** Photographs of the service in practice, distributed through the page:
+      the first under the intro, the second partway down the detail, the third
+      as a full-width band. Rendered only where they exist. */
   gallery?: { src: string; alt: string }[];
   summary: string;
   /** Optional — only the four services that have commissioned photography. */

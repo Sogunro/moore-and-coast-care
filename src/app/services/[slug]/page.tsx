@@ -49,6 +49,12 @@ export default async function ServicePage({
 
   const others = services.filter((s) => s.slug !== slug);
 
+  /* The photographs are distributed through the page rather than sat in one
+     row: the first under the intro, the second partway down the detail, the
+     third as a full-width band before the page turns to other services.
+     Three in a line is the least each one can do. */
+  const gallery = service.gallery ?? [];
+
   return (
     <>
       <PageHero
@@ -75,10 +81,24 @@ export default async function ServicePage({
                 {paragraph}
               </p>
             ))}
+
+            {/* The first photograph sits under the intro rather than in a row
+                of three: it belongs to the words above it. */}
+            {gallery[0] && (
+              <div className="relative mt-8 aspect-[16/10] overflow-hidden rounded-[var(--radius-image)]">
+                <Image
+                  src={gallery[0].src}
+                  alt={gallery[0].alt}
+                  fill
+                  sizes="(max-width: 1024px) 100vw, 640px"
+                  className="object-cover"
+                />
+              </div>
+            )}
           </div>
 
           {(service.forYouIf ?? service.includes) && (
-            <div className="reveal rounded-[var(--radius-card)] border border-line bg-surface p-7">
+            <div className="reveal rounded-[var(--radius-card)] border border-line bg-surface p-7 lg:sticky lg:top-[128px] lg:self-start">
               <h2 className="text-[20px] leading-snug">
                 {service.forYouIf ? "This may be for you if" : "What this usually includes"}
               </h2>
@@ -103,9 +123,11 @@ export default async function ServicePage({
         </div>
       </Section>
 
-      {service.gallery && <Gallery items={service.gallery} />}
+      {service.helpWith && (
+        <HelpWith items={service.helpWith} interleave={gallery[1]} />
+      )}
 
-      {service.helpWith && <HelpWith items={service.helpWith} />}
+      {gallery[2] && <FullBleedImage item={gallery[2]} />}
 
       <OtherServices services={others} />
 
@@ -114,43 +136,6 @@ export default async function ServicePage({
         body="Give us a call and we will talk it through — no obligation, and a fully costed package before you decide anything."
       />
     </>
-  );
-}
-
-/**
- * A row of photographs showing the service in practice.
- *
- * Sits between the intro and the written detail, where it answers "what does
- * this actually look like?" before someone reads the specifics. Three images
- * across on desktop; on a phone they scroll sideways rather than stacking,
- * which would add three screens of height to a page the owner already found
- * too long.
- */
-function Gallery({ items }: { items: { src: string; alt: string }[] }) {
-  return (
-    <Section className="pt-0">
-      {/* Negative margins let the row reach the screen edge on mobile, so a
-          part-visible third image signals that it scrolls. */}
-      <ul className="-mx-5 flex snap-x snap-mandatory gap-4 overflow-x-auto px-5 pb-2 sm:mx-0 sm:grid sm:grid-cols-3 sm:gap-5 sm:overflow-visible sm:px-0">
-        {items.map((item, i) => (
-          <li
-            key={item.src}
-            className="reveal w-[78%] shrink-0 snap-start sm:w-auto"
-            style={{ transitionDelay: `${Math.min(i * 80, 240)}ms` }}
-          >
-            <div className="relative aspect-[4/3] overflow-hidden rounded-[var(--radius-image)]">
-              <Image
-                src={item.src}
-                alt={item.alt}
-                fill
-                sizes="(max-width: 640px) 78vw, 33vw"
-                className="object-cover"
-              />
-            </div>
-          </li>
-        ))}
-      </ul>
-    </Section>
   );
 }
 
@@ -164,9 +149,15 @@ function Gallery({ items }: { items: { src: string; alt: string }[] }) {
  */
 function HelpWith({
   items,
+  interleave,
 }: {
   items: { title: string; icon: string; body: string }[];
+  /** Dropped into the middle of the grid, so the blocks are broken up rather
+      than running as one long list. */
+  interleave?: { src: string; alt: string };
 }) {
+  /* After the first four blocks on a two-column grid — two full rows. */
+  const at = Math.min(4, items.length);
   return (
     <div className="bg-surface">
       <Section>
@@ -174,7 +165,7 @@ function HelpWith({
           What we can help with
         </h2>
         <ul className="mt-12 grid gap-x-12 gap-y-9 sm:grid-cols-2">
-          {items.map((item, i) => (
+          {items.slice(0, at).map((item, i) => (
             <li
               key={item.title}
               className="reveal"
@@ -190,7 +181,58 @@ function HelpWith({
             </li>
           ))}
         </ul>
+
+        {interleave && (
+          <div className="reveal relative mt-12 aspect-[21/9] overflow-hidden rounded-[var(--radius-image)]">
+            <Image
+              src={interleave.src}
+              alt={interleave.alt}
+              fill
+              sizes="(max-width: 1024px) 100vw, 1180px"
+              className="object-cover"
+            />
+          </div>
+        )}
+
+        {items.length > at && (
+          <ul className="mt-12 grid gap-x-12 gap-y-9 sm:grid-cols-2">
+            {items.slice(at).map((item, i) => (
+              <li
+                key={item.title}
+                className="reveal"
+                style={{ transitionDelay: `${Math.min(i * 60, 320)}ms` }}
+              >
+                <span className="mb-4 inline-flex h-11 w-11 items-center justify-center rounded-full bg-teal-50 text-teal-700">
+                  <HelpIcon name={item.icon as HelpIconName} />
+                </span>
+                <h3 className="text-[19px] leading-snug">{item.title}</h3>
+                <p className="mt-2.5 text-[15px] leading-[1.65] text-ink-body">
+                  {item.body}
+                </p>
+              </li>
+            ))}
+          </ul>
+        )}
       </Section>
+    </div>
+  );
+}
+
+/**
+ * The third photograph, full width, where the page turns from this service to
+ * the others. It gives the eye somewhere to rest before a wall of links.
+ */
+function FullBleedImage({ item }: { item: { src: string; alt: string } }) {
+  return (
+    <div className="relative mt-4 h-[280px] w-full overflow-hidden sm:h-[360px] lg:h-[420px]">
+      <Image
+        src={item.src}
+        alt={item.alt}
+        fill
+        sizes="100vw"
+        className="object-cover"
+        style={{ objectPosition: "50% 40%" }}
+      />
     </div>
   );
 }
