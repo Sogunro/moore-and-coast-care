@@ -166,7 +166,7 @@ function HelpWith({
 }: {
   items: { title: string; icon: string; body: string }[];
   centre?: { src: string; alt: string };
-  layout?: "radial" | "alternating" | "columns";
+  layout?: "radial" | "arc" | "columns";
 }) {
   /* Radial needs a photograph at its hub; without one it falls back. */
   const mode = layout === "radial" && !centre ? "columns" : layout;
@@ -193,9 +193,7 @@ function HelpWith({
           </>
         )}
 
-        {mode === "alternating" && (
-          <HelpAlternating items={items} centre={centre} />
-        )}
+        {mode === "arc" && <HelpArc items={items} centre={centre} />}
 
         {mode === "columns" && <HelpColumns items={items} centre={centre} />}
       </Section>
@@ -307,77 +305,132 @@ function HelpRadial({
 }
 
 /**
- * Full-width rows, the icon alternating left and right of its text.
+ * The photograph anchored on the left, items sweeping around its right edge
+ * on an arc.
  *
- * Slower and more deliberate than a grid: one thing at a time, with the
- * zig-zag giving the eye a reason to keep moving down the page.
+ * A crescent rather than a full ring: the picture is large and off-centre, and
+ * the items follow the curve of its edge so the eye travels around it. The
+ * earlier version of this slot put the photograph between two lists, which
+ * made it a divider rather than the thing the section is built around.
+ *
+ * A single arc line runs behind the items, drawn to the same radius they sit
+ * on, so the curve is stated rather than merely implied.
  */
-function HelpAlternating({
+function HelpArc({
   items,
   centre,
 }: {
   items: { title: string; icon: string; body: string }[];
   centre?: { src: string; alt: string };
 }) {
-  const mid = Math.ceil(items.length / 2);
+  if (!centre) return <HelpStack items={items} />;
+
+  const n = items.length;
+  /* A wide, shallow arc whose centre sits off the left of the frame, so the
+     curve bows gently outward past the photograph rather than wrapping back
+     around it. A tighter sweep put the top and bottom items on top of the
+     picture. Coordinates are in the 140x100 viewBox below. */
+  const CX = 0;
+  const CY = 50;
+  const R = 80;
+  const FROM = -32;
+  const TO = 32;
+
+  const angle = (i: number) =>
+    ((n === 1 ? 0 : FROM + ((TO - FROM) / (n - 1)) * i) * Math.PI) / 180;
 
   return (
     <>
-      <ul className="mt-12 space-y-6">
-        {items.slice(0, mid).map((item, i) => (
-          <AlternatingRow key={item.title} item={item} index={i} />
-        ))}
-      </ul>
-
-      {centre && (
-        <div className="reveal relative mt-10 aspect-[21/9] overflow-hidden rounded-[var(--radius-image)]">
-          <Image
-            src={centre.src}
-            alt={centre.alt}
-            fill
-            sizes="(max-width: 1240px) 100vw, 1180px"
-            className="object-cover"
-            style={{ objectPosition: "50% 35%" }}
+      {/* Desktop: the arc. */}
+      <div className="relative mx-auto mt-14 hidden aspect-[7/5] w-full max-w-[1200px] lg:block">
+        {/* The curve the items sit on. */}
+        <svg
+          viewBox="0 0 140 100"
+          className="absolute inset-0 h-full w-full"
+          aria-hidden
+        >
+          <path
+            d={describeArc(CX, CY, R, FROM, TO)}
+            fill="none"
+            stroke="var(--color-teal)"
+            strokeWidth="0.22"
+            strokeOpacity="0.4"
+            strokeDasharray="1.4 1.6"
           />
-        </div>
-      )}
+        </svg>
 
-      <ul className="mt-10 space-y-6">
-        {items.slice(mid).map((item, i) => (
-          <AlternatingRow key={item.title} item={item} index={i + mid} />
-        ))}
-      </ul>
+        {/* The photograph, anchored left and large. */}
+        <div className="absolute left-0 top-1/2 h-[70%] w-[46%] -translate-y-1/2">
+          <div
+            aria-hidden
+            className="absolute -inset-5 rounded-[var(--radius-image)] bg-teal/[0.07] blur-2xl"
+          />
+          <div className="relative h-full w-full overflow-hidden rounded-[var(--radius-image)] shadow-[var(--shadow-lift)]">
+            <Image
+              src={centre.src}
+              alt={centre.alt}
+              fill
+              sizes="580px"
+              className="object-cover"
+            />
+          </div>
+        </div>
+
+        {/* The items, following the curve. */}
+        {items.map((item, i) => {
+          const a = angle(i);
+          const x = CX + Math.cos(a) * R;
+          const y = CY + Math.sin(a) * R;
+
+          return (
+            <div
+              key={item.title}
+              className="reveal absolute w-[27%] -translate-y-1/2"
+              style={{
+                left: `${(x / 140) * 100}%`,
+                top: `${y}%`,
+                transitionDelay: `${Math.min(i * 70, 420)}ms`,
+              }}
+            >
+              <div className="flex items-start gap-3">
+                <span className="inline-flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-white text-teal-700 shadow-[var(--shadow-soft)] ring-1 ring-teal/20">
+                  <HelpIcon name={item.icon as HelpIconName} />
+                </span>
+                <div className="min-w-0 pt-1">
+                  <h3 className="text-[17px] leading-snug">{item.title}</h3>
+                  <p className="mt-1.5 text-[13.5px] leading-[1.5] text-ink-body">
+                    {item.body}
+                  </p>
+                </div>
+              </div>
+            </div>
+          );
+        })}
+      </div>
+
+      {/* Below lg the arc has nowhere to curve. */}
+      <div className="lg:hidden">
+        <HelpStack items={items} centre={centre} />
+      </div>
     </>
   );
 }
 
-function AlternatingRow({
-  item,
-  index,
-}: {
-  item: { title: string; icon: string; body: string };
-  index: number;
-}) {
-  const flip = index % 2 === 1;
-
-  return (
-    <li
-      className={`reveal flex items-start gap-5 rounded-[var(--radius-card)] bg-white p-6 shadow-[var(--shadow-soft)] sm:gap-7 sm:p-7 ${
-        flip ? "sm:flex-row-reverse sm:text-right" : ""
-      }`}
-      style={{ transitionDelay: `${Math.min(index * 60, 320)}ms` }}
-    >
-      <span className="inline-flex h-12 w-12 shrink-0 items-center justify-center rounded-full bg-teal-50 text-teal-700">
-        <HelpIcon name={item.icon as HelpIconName} />
-      </span>
-      <div className="min-w-0">
-        <h3 className="text-[20px] leading-snug">{item.title}</h3>
-        <p className="mt-2 text-[15px] leading-[1.65] text-ink-body">
-          {item.body}
-        </p>
-      </div>
-    </li>
-  );
+/** An SVG arc path, so the curve behind the items matches the radius they
+    are placed on rather than being eyeballed. */
+function describeArc(
+  cx: number,
+  cy: number,
+  r: number,
+  fromDeg: number,
+  toDeg: number
+) {
+  const pt = (deg: number) => {
+    const a = (deg * Math.PI) / 180;
+    return `${cx + Math.cos(a) * r} ${cy + Math.sin(a) * r}`;
+  };
+  const large = Math.abs(toDeg - fromDeg) > 180 ? 1 : 0;
+  return `M ${pt(fromDeg)} A ${r} ${r} 0 ${large} 1 ${pt(toDeg)}`;
 }
 
 /**

@@ -135,7 +135,7 @@ export type Service = {
   /** How "what we can help with" is arranged. Ten pages in one template read
       as a form letter, so the arrangement varies while the ingredients —
       type, colour, spacing, icons — stay identical. Defaults to "radial". */
-  layout?: "radial" | "alternating" | "columns";
+  layout?: "radial" | "arc" | "columns";
   /** Photographs of the service in practice, distributed through the page:
       the first under the intro, the second partway down the detail, the third
       as a full-width band. Rendered only where they exist. */
@@ -322,7 +322,7 @@ export const services: Service[] = [
           "A carer helping an older woman out of the car outside her home",
       },
     ],
-    layout: "alternating",
+    layout: "arc",
   },
   {
     slug: "adults-under-65",
@@ -543,7 +543,7 @@ export const services: Service[] = [
           "An older man doing seated exercises with a resistance band, his carer counting with him",
       },
     ],
-    layout: "alternating",
+    layout: "arc",
   },
   {
     slug: "sensory-impairments",
@@ -679,7 +679,7 @@ export const services: Service[] = [
           "A young man cooking pasta in his own flat while his support worker chats from the doorway",
       },
     ],
-    layout: "alternating",
+    layout: "arc",
   },
   {
     slug: "learning-disability",
@@ -795,7 +795,7 @@ export const services: Service[] = [
           "We keep the people who care about you in the loop, which is often what lets them stop worrying.",
       },
     ],
-    layout: "alternating",
+    layout: "arc",
   },
   {
     slug: "live-in-care",
