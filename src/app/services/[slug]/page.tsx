@@ -152,107 +152,188 @@ function HelpWith({
   centre,
 }: {
   items: { title: string; icon: string; body: string }[];
-  /** The photograph at the centre of the ring. */
+  /** The photograph at the hub. */
   centre?: { src: string; alt: string };
 }) {
-  /* Split evenly, left column first. With 6 or 7 blocks that gives 3 either
-     side, or 4 and 3 — close enough that the ring reads as balanced. */
-  const half = Math.ceil(items.length / 2);
-  const left = items.slice(0, half);
-  const right = items.slice(half);
-
   return (
     <div className="bg-surface">
       <Section>
-        <h2 className="max-w-2xl text-[28px] leading-tight sm:text-[34px]">
+        <h2 className="mx-auto max-w-2xl text-center text-[28px] leading-tight sm:text-[34px]">
           What we can help with
         </h2>
 
-        {/* Three columns on desktop, with the photograph in the middle and the
-            blocks ringed around it. Below lg it collapses to a single column
-            with the image after the first half, because a circle flanked by
-            text needs width to work and a narrow screen has none. */}
-        <div className="mt-12 lg:grid lg:grid-cols-[minmax(0,1fr)_auto_minmax(0,1fr)] lg:items-center lg:gap-x-12 xl:gap-x-16">
-          <ul className="space-y-9">
-            {left.map((item, i) => (
-              <HelpBlock key={item.title} item={item} index={i} align="right" />
-            ))}
-          </ul>
-
-          {centre && (
-            <div className="reveal my-12 flex justify-center lg:my-0">
-              <div className="relative">
-                {/* A soft teal ring, so the photograph sits in something
-                    rather than floating between two columns. */}
-                <div
-                  aria-hidden
-                  className="absolute -inset-3 rounded-full border border-teal/25"
-                />
-                <div
-                  aria-hidden
-                  className="absolute -inset-8 rounded-full bg-teal/[0.06] blur-xl"
-                />
-                <div className="relative h-[240px] w-[240px] overflow-hidden rounded-full shadow-[var(--shadow-lift)] sm:h-[300px] sm:w-[300px] lg:h-[320px] lg:w-[320px] xl:h-[360px] xl:w-[360px]">
-                  <Image
-                    src={centre.src}
-                    alt={centre.alt}
-                    fill
-                    sizes="(max-width: 1024px) 300px, 360px"
-                    className="object-cover"
-                  />
-                </div>
-              </div>
+        {centre ? (
+          <>
+            <div className="hidden lg:block">
+              <HelpRadial items={items} centre={centre} />
             </div>
-          )}
-
-          <ul className="space-y-9">
-            {right.map((item, i) => (
-              <HelpBlock
-                key={item.title}
-                item={item}
-                index={i + half}
-                align="left"
-              />
-            ))}
-          </ul>
-        </div>
+            {/* Below lg the ring cannot hold: the items stack, with the
+                photograph at the head of the list rather than lost inside
+                it. */}
+            <div className="lg:hidden">
+              <HelpStack items={items} centre={centre} />
+            </div>
+          </>
+        ) : (
+          <HelpStack items={items} />
+        )}
       </Section>
     </div>
   );
 }
 
 /**
- * One block in the ring.
+ * The hub and its spokes.
  *
- * The left column is right-aligned and the right column left-aligned, so both
- * read as pointing inward at the photograph between them. Below lg everything
- * goes left-aligned: mirrored text is harder to read and there is no centre to
- * point at.
+ * Items are placed at even angles around the photograph — the first at twelve
+ * o'clock, the rest clockwise — so they sit above, beside and below it rather
+ * than stacking in two columns. A thin line runs from the hub to each one, so
+ * the arrangement reads as connected rather than merely scattered.
+ *
+ * Absolute positioning inside a square: every item is placed by the cosine and
+ * sine of its angle, and the whole thing is sized in vw so the ring scales
+ * with the viewport instead of colliding at narrower widths.
  */
-function HelpBlock({
-  item,
-  index,
-  align,
+function HelpRadial({
+  items,
+  centre,
 }: {
-  item: { title: string; icon: string; body: string };
-  index: number;
-  align: "left" | "right";
+  items: { title: string; icon: string; body: string }[];
+  centre: { src: string; alt: string };
 }) {
-  const inward = align === "right" ? "lg:text-right lg:items-end" : "";
+  const n = items.length;
+  /* Fraction of the square's half-width at which labels sit. */
+  const ORBIT = 0.84;
 
   return (
-    <li
-      className={`reveal flex flex-col items-start ${inward}`}
-      style={{ transitionDelay: `${Math.min(index * 60, 320)}ms` }}
-    >
-      <span className="mb-3 inline-flex h-11 w-11 items-center justify-center rounded-full bg-teal-50 text-teal-700">
-        <HelpIcon name={item.icon as HelpIconName} />
-      </span>
-      <h3 className="text-[19px] leading-snug">{item.title}</h3>
-      <p className="mt-2 max-w-[42ch] text-[15px] leading-[1.65] text-ink-body">
-        {item.body}
-      </p>
-    </li>
+    <div className="relative mx-auto mt-10 aspect-square w-full max-w-[980px]">
+      {/* The spokes, drawn under everything else. */}
+      <svg
+        viewBox="0 0 100 100"
+        className="absolute inset-0 h-full w-full"
+        aria-hidden
+      >
+        {items.map((item, i) => {
+          const a = (-90 + (360 / n) * i) * (Math.PI / 180);
+          /* From the edge of the circle to just short of the label. */
+          const from = 19;
+          const to = ORBIT * 50 - 9;
+          return (
+            <line
+              key={item.title}
+              x1={50 + Math.cos(a) * from}
+              y1={50 + Math.sin(a) * from}
+              x2={50 + Math.cos(a) * to}
+              y2={50 + Math.sin(a) * to}
+              stroke="var(--color-teal)"
+              strokeWidth="0.18"
+              strokeOpacity="0.45"
+              strokeDasharray="1.2 1.2"
+            />
+          );
+        })}
+      </svg>
+
+      {/* The hub. */}
+      <div className="absolute left-1/2 top-1/2 h-[34%] w-[34%] -translate-x-1/2 -translate-y-1/2">
+        <div
+          aria-hidden
+          className="absolute -inset-4 rounded-full border border-teal/30"
+        />
+        <div
+          aria-hidden
+          className="absolute -inset-10 rounded-full bg-teal/[0.07] blur-2xl"
+        />
+        <div className="relative h-full w-full overflow-hidden rounded-full shadow-[var(--shadow-lift)]">
+          <Image
+            src={centre.src}
+            alt={centre.alt}
+            fill
+            sizes="400px"
+            className="object-cover"
+          />
+        </div>
+      </div>
+
+      {/* The spokes' labels. */}
+      {items.map((item, i) => {
+        const a = (-90 + (360 / n) * i) * (Math.PI / 180);
+        const x = 50 + Math.cos(a) * ORBIT * 50;
+        const y = 50 + Math.sin(a) * ORBIT * 50;
+
+        return (
+          <div
+            key={item.title}
+            className="reveal absolute w-[24%] -translate-x-1/2 -translate-y-1/2 text-center"
+            style={{
+              left: `${x}%`,
+              top: `${y}%`,
+              transitionDelay: `${Math.min(i * 70, 420)}ms`,
+            }}
+          >
+            <span className="mx-auto mb-2 inline-flex h-10 w-10 items-center justify-center rounded-full bg-white text-teal-700 shadow-[var(--shadow-soft)] ring-1 ring-teal/20">
+              <HelpIcon name={item.icon as HelpIconName} />
+            </span>
+            <h3 className="text-[17px] leading-snug">{item.title}</h3>
+            <p className="mt-1.5 text-[13.5px] leading-[1.5] text-ink-body">
+              {item.body}
+            </p>
+          </div>
+        );
+      })}
+    </div>
+  );
+}
+
+/** The same content as a plain list, for narrow screens and for services with
+    no second photograph. */
+function HelpStack({
+  items,
+  centre,
+}: {
+  items: { title: string; icon: string; body: string }[];
+  centre?: { src: string; alt: string };
+}) {
+  return (
+    <>
+      {centre && (
+        <div className="reveal mx-auto mt-10 flex justify-center">
+          <div className="relative">
+            <div
+              aria-hidden
+              className="absolute -inset-3 rounded-full border border-teal/25"
+            />
+            <div className="relative h-[260px] w-[260px] overflow-hidden rounded-full shadow-[var(--shadow-lift)] sm:h-[320px] sm:w-[320px]">
+              <Image
+                src={centre.src}
+                alt={centre.alt}
+                fill
+                sizes="320px"
+                className="object-cover"
+              />
+            </div>
+          </div>
+        </div>
+      )}
+
+      <ul className="mt-12 grid gap-x-12 gap-y-9 sm:grid-cols-2">
+        {items.map((item, i) => (
+          <li
+            key={item.title}
+            className="reveal"
+            style={{ transitionDelay: `${Math.min(i * 60, 320)}ms` }}
+          >
+            <span className="mb-4 inline-flex h-11 w-11 items-center justify-center rounded-full bg-teal-50 text-teal-700">
+              <HelpIcon name={item.icon as HelpIconName} />
+            </span>
+            <h3 className="text-[19px] leading-snug">{item.title}</h3>
+            <p className="mt-2.5 text-[15px] leading-[1.65] text-ink-body">
+              {item.body}
+            </p>
+          </li>
+        ))}
+      </ul>
+    </>
   );
 }
 
