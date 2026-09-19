@@ -75,9 +75,10 @@ export default async function ServicePage({
         <div className="grid gap-12 lg:grid-cols-[minmax(0,1fr)_minmax(0,380px)] lg:gap-16">
           <div className="reveal max-w-[640px]">
             {/* The service named again above its own write-up, in the brand
-                teal — the hero heading is a long way up the page by the time
-                someone is reading this. */}
-            <p className="mb-4 text-xs font-semibold uppercase tracking-[0.2em] text-teal-700">
+                teal. Set as a heading rather than a small-caps eyebrow: by
+                the time someone reaches this text the hero title is a long
+                way up the page, and this has to stand in for it. */}
+            <p className="mb-5 font-[family-name:var(--font-display)] text-[30px] leading-tight text-teal-700 sm:text-[36px]">
               {service.title}
             </p>
             {(service.detail ?? [service.summary]).map((paragraph) => (
