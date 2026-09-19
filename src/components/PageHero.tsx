@@ -66,9 +66,14 @@ export function PageHero({
    * dominates the page. A fixed 60vh made the frame 3.56:1 on a 1920px screen
    * against a 1.78:1 image, so half the height was cropped — and that took the
    * subjects' heads with it.
+   *
+   * The 52vh ceiling is down from 70vh: at 70vh the banner ran to 630px on a
+   * 1440x900 laptop, so a visitor scrolled past most of a screen before
+   * reaching any content. Around half the viewport is enough to establish the
+   * page without delaying it.
    */
   return (
-    <section className="relative isolate min-h-[420px] w-full sm:min-h-[460px] lg:aspect-[1672/941] lg:max-h-[70vh] lg:min-h-[520px]">
+    <section className="relative isolate min-h-[340px] w-full sm:min-h-[380px] lg:aspect-[1672/941] lg:max-h-[52vh] lg:min-h-[420px]">
       <div className="absolute inset-0 -z-10 overflow-hidden bg-surface">
         <Image
           src={image}
@@ -93,7 +98,7 @@ export function PageHero({
         <div className="absolute inset-0 bg-[#172b3a]/12" aria-hidden />
       </div>
 
-      <div className="mx-auto flex h-full min-h-[420px] max-w-[1240px] flex-col justify-center px-5 py-14 sm:min-h-[460px] sm:px-8 lg:min-h-[520px] lg:py-16">
+      <div className="mx-auto flex h-full min-h-[340px] max-w-[1240px] flex-col justify-center px-5 py-10 sm:min-h-[380px] sm:px-8 lg:min-h-[420px] lg:py-12">
         <div className="max-w-[620px]">
           <Eyebrow>{eyebrow}</Eyebrow>
           <Title>{title}</Title>
