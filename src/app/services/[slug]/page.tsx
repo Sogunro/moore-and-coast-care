@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { services } from "@/lib/site";
+import Image from "next/image";
 import { Section } from "@/components/Section";
 import { HelpIcon, type HelpIconName } from "@/components/HelpIcon";
 import { PageHero } from "@/components/PageHero";
@@ -102,6 +103,8 @@ export default async function ServicePage({
         </div>
       </Section>
 
+      {service.gallery && <Gallery items={service.gallery} />}
+
       {service.helpWith && <HelpWith items={service.helpWith} />}
 
       <OtherServices services={others} />
@@ -111,6 +114,43 @@ export default async function ServicePage({
         body="Give us a call and we will talk it through — no obligation, and a fully costed package before you decide anything."
       />
     </>
+  );
+}
+
+/**
+ * A row of photographs showing the service in practice.
+ *
+ * Sits between the intro and the written detail, where it answers "what does
+ * this actually look like?" before someone reads the specifics. Three images
+ * across on desktop; on a phone they scroll sideways rather than stacking,
+ * which would add three screens of height to a page the owner already found
+ * too long.
+ */
+function Gallery({ items }: { items: { src: string; alt: string }[] }) {
+  return (
+    <Section className="pt-0">
+      {/* Negative margins let the row reach the screen edge on mobile, so a
+          part-visible third image signals that it scrolls. */}
+      <ul className="-mx-5 flex snap-x snap-mandatory gap-4 overflow-x-auto px-5 pb-2 sm:mx-0 sm:grid sm:grid-cols-3 sm:gap-5 sm:overflow-visible sm:px-0">
+        {items.map((item, i) => (
+          <li
+            key={item.src}
+            className="reveal w-[78%] shrink-0 snap-start sm:w-auto"
+            style={{ transitionDelay: `${Math.min(i * 80, 240)}ms` }}
+          >
+            <div className="relative aspect-[4/3] overflow-hidden rounded-[var(--radius-image)]">
+              <Image
+                src={item.src}
+                alt={item.alt}
+                fill
+                sizes="(max-width: 640px) 78vw, 33vw"
+                className="object-cover"
+              />
+            </div>
+          </li>
+        ))}
+      </ul>
+    </Section>
   );
 }
 

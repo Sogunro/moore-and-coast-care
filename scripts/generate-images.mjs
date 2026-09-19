@@ -25,12 +25,14 @@ const ENV = resolve(ROOT, "..", ".env");
 
 /* ---- The shared brief -------------------------------------------------- */
 
-const STYLE = `Bright natural daylight photography, sunny British autumn afternoon. Shot on a Canon EOS R5 with an 85mm f/1.4 lens, shallow depth of field, subjects sharp against a softly blurred background. Warm golden natural light, no flash, no studio lighting. Bright, airy, optimistic colour grade with true-to-life skin tones. Photorealistic, hyperrealistic skin texture with visible pores and natural fine lines. Candid documentary photography, unposed, caught mid-moment, subjects looking at each other and never at the camera. Genuine natural laughter, not a posed smile. The support worker wears a burgundy red tunic with white piping at the collar and cuffs. Real British home setting. Absolutely no text, no lettering, no signage, no watermark, no logos anywhere in the image.`;
+const STYLE = `LIGHT AND COLOUR, get this right: a flood of clean cool-white daylight from large windows, the room bright enough that nothing is in shadow. High key. Crisp, airy, modern. Colours are true and fresh — white walls read white, not cream. Absolutely no warm amber cast, no golden-hour glow, no sepia or vintage tone, no nostalgic filter, no soft haze, no dimness.
 
-const AVOID = `Avoid entirely: posed shots, anyone looking at the camera, fake smiles, plastic or airbrushed skin, oversaturated or HDR grading, hospital wards, scrubs, stethoscopes, medical equipment, a carer standing behind someone with hands on their shoulders, anything patronising, dark or grey or overcast light, American settings, malformed hands, and any text or writing.`;
+Shot on a Canon EOS R5 with an 85mm f/1.4 lens at f/2.8, sharp subjects against a softly blurred background. Photorealistic, hyperrealistic skin texture with visible pores and natural fine lines. Candid documentary photography, unposed, caught mid-moment, subjects looking at each other and never at the camera. Genuine natural laughter, not a posed smile. The support worker wears a burgundy red tunic with white piping at the collar and cuffs and a small embroidered heart logo on the left chest. A real, bright, contemporary British home. No signage, no wall text, no watermark, no captions.`;
+
+const AVOID = `Avoid entirely: posed shots, anyone looking at the camera, fake smiles, plastic or airbrushed skin, oversaturated or HDR grading, hospital wards, scrubs, stethoscopes, medical equipment, a carer standing behind someone with hands on their shoulders, anything patronising, dark, dim, brown, sepia, amber, golden-hour or candlelit light, vintage or faded film looks, American settings, malformed hands, and any text or writing.`;
 
 /* Where the subjects sit, so the heading has somewhere to go. */
-const WIDE = `Composed as a wide 16:9 frame. Both people in the RIGHT HALF of the image with clear headroom above their heads — never crop the top of a head. The left third is open background with no people and no important detail.`;
+const WIDE = `COMPOSITION, which matters more than anything else in this brief: a wide cinematic 16:9 frame in which the LEFT THIRD IS COMPLETELY EMPTY of people — nothing there but plain wall, a sunlit window, or soft out-of-focus background. Every person sits in the right two-thirds, shot from far enough back that there is clear headroom above the tallest head and no head is ever cropped. Think of a magazine spread where a headline will be laid over the empty left side.`;
 
 const SQUARE = `Composed as a square frame with the subjects centred and generous margin on all sides.`;
 
@@ -113,22 +115,53 @@ async function exists(path) {
   }
 }
 
-async function generate(job, key) {
-  const prompt = `${job.scene}\n\n${job.frame}\n\n${STYLE}\n\n${AVOID}`;
+/**
+ * Reference images.
+ *
+ * The key to consistency. A text prompt alone drifts between calls: three
+ * attempts produced a sepia shot, a second sepia shot, and a clinical
+ * white-walled one, none of which sat beside the existing photography.
+ * /v1/images/edits accepts several images as style references, so every
+ * generation is anchored to photographs that already have the look: the
+ * burgundy tunic with its logo, lived-in British rooms, bright daylight.
+ */
+const REFERENCES = [
+  "live-in-care.png",
+  "hospital-discharge.png",
+  "about-garden.png",
+];
 
-  const res = await fetch("https://api.openai.com/v1/images/generations", {
+async function generate(job, key, refs) {
+  const prompt = `${job.frame}
+
+${job.scene}
+
+${STYLE}
+
+${AVOID}
+
+Match the uniform, lighting and overall look of the reference images exactly. Same burgundy tunic with white piping and the embroidered logo, same bright natural daylight, same lived-in British home with real furniture, rugs, plants and framed photographs. This is a new scene in the same shoot.`;
+
+  const form = new FormData();
+  form.append("model", "gpt-image-1");
+  form.append("prompt", prompt);
+  form.append("n", "1");
+  form.append("size", job.size);
+  form.append("quality", "high");
+  form.append("input_fidelity", "low");
+
+  for (const ref of refs) {
+    form.append(
+      "image[]",
+      new Blob([ref.bytes], { type: "image/png" }),
+      ref.name
+    );
+  }
+
+  const res = await fetch("https://api.openai.com/v1/images/edits", {
     method: "POST",
-    headers: {
-      Authorization: `Bearer ${key}`,
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify({
-      model: "gpt-image-1",
-      prompt,
-      n: 1,
-      size: job.size,
-      quality: "high",
-    }),
+    headers: { Authorization: `Bearer ${key}` },
+    body: form,
   });
 
   if (!res.ok) {
@@ -141,6 +174,20 @@ async function generate(job, key) {
 
   await mkdir(OUT, { recursive: true });
   await writeFile(join(OUT, `${job.name}.png`), Buffer.from(b64, "base64"));
+}
+
+/** Load the reference photographs once, not per job. */
+async function loadReferences(excludeName) {
+  const picked = REFERENCES.filter((f) => f !== `${excludeName}.png`);
+  const out = [];
+  for (const name of picked) {
+    try {
+      out.push({ name, bytes: await readFile(join(OUT, name)) });
+    } catch {
+      /* A missing reference is not fatal; the others still anchor the look. */
+    }
+  }
+  return out;
 }
 
 async function main() {
@@ -178,7 +225,9 @@ async function main() {
 
     process.stdout.write(`${label} … `);
     try {
-      await generate(job, key);
+      const refs = await loadReferences(job.name);
+      if (!refs.length) throw new Error("No reference images available");
+      await generate(job, key, refs);
       console.log("done");
       done++;
     } catch (err) {
