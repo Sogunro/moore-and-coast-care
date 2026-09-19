@@ -130,6 +130,8 @@ export type Service = {
   helpWith?: { title: string; icon: string; body: string }[];
   /** "strong" where the photograph has no open left third for the heading. */
   heroScrim?: "default" | "strong";
+  /** Overrides the hero crop where the subjects sit unusually high or low. */
+  heroFocus?: string;
   /** Photographs of the service in practice, distributed through the page:
       the first under the intro, the second partway down the detail, the third
       as a full-width band. Rendered only where they exist. */
@@ -160,6 +162,9 @@ export const services: Service[] = [
       "Discreet, sensitive support with day-to-day living, helping you maintain your independence at home.",
     image: "/images/personal-care.png",
     imageAlt: "A man shaving at his own bathroom sink while his support worker waits in the doorway",
+    /* Both faces sit in the upper fifth of this photograph, higher than the
+       32% default, which was cutting the carer's head at the doorway. */
+    heroFocus: "50% 18%",
     lead: "Discreet, sensitive support with the everyday, so you can stay in your own home and keep doing things your way.",
     detail: [
       "When illness or reduced mobility makes everyday things harder, personal care fills the gap. It covers washing, dressing, medication and the rest of the daily routine, delivered quietly and at the times that suit you.",

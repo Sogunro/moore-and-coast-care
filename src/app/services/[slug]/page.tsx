@@ -64,6 +64,7 @@ export default async function ServicePage({
         image={service.image}
         imageAlt={service.imageAlt}
         scrim={service.heroScrim}
+        imageFocus={service.heroFocus}
       />
 
       {/* Intro, with the "is this me?" list beside it. Someone arriving from
@@ -73,6 +74,12 @@ export default async function ServicePage({
       <Section>
         <div className="grid gap-12 lg:grid-cols-[minmax(0,1fr)_minmax(0,380px)] lg:gap-16">
           <div className="reveal max-w-[640px]">
+            {/* The service named again above its own write-up, in the brand
+                teal — the hero heading is a long way up the page by the time
+                someone is reading this. */}
+            <p className="mb-4 text-xs font-semibold uppercase tracking-[0.2em] text-teal-700">
+              {service.title}
+            </p>
             {(service.detail ?? [service.summary]).map((paragraph) => (
               <p
                 key={paragraph.slice(0, 40)}
@@ -343,16 +350,20 @@ function HelpStack({
  */
 function FullBleedImage({ item }: { item: { src: string; alt: string } }) {
   return (
-    <div className="relative mt-4 h-[280px] w-full overflow-hidden sm:h-[360px] lg:h-[420px]">
-      <Image
-        src={item.src}
-        alt={item.alt}
-        fill
-        sizes="100vw"
-        className="object-cover"
-        style={{ objectPosition: "50% 40%" }}
-      />
-    </div>
+    <Section className="py-0">
+      {/* Inside the content width, not edge to edge: a full-bleed band was
+          wider than anything else on the page and broke its rhythm. */}
+      <div className="reveal relative aspect-[21/9] w-full overflow-hidden rounded-[var(--radius-image)]">
+        <Image
+          src={item.src}
+          alt={item.alt}
+          fill
+          sizes="(max-width: 1240px) 100vw, 1180px"
+          className="object-cover"
+          style={{ objectPosition: "50% 35%" }}
+        />
+      </div>
+    </Section>
   );
 }
 
