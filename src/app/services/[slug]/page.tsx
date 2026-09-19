@@ -132,7 +132,11 @@ export default async function ServicePage({
       </Section>
 
       {service.helpWith && (
-        <HelpWith items={service.helpWith} centre={gallery[1]} />
+        <HelpWith
+          items={service.helpWith}
+          centre={gallery[1]}
+          layout={service.layout}
+        />
       )}
 
       {gallery[2] && <FullBleedImage item={gallery[2]} />}
@@ -158,33 +162,42 @@ export default async function ServicePage({
 function HelpWith({
   items,
   centre,
+  layout = "radial",
 }: {
   items: { title: string; icon: string; body: string }[];
-  /** The photograph at the hub. */
   centre?: { src: string; alt: string };
+  layout?: "radial" | "alternating" | "columns";
 }) {
+  /* Radial needs a photograph at its hub; without one it falls back. */
+  const mode = layout === "radial" && !centre ? "columns" : layout;
+
   return (
     <div className="bg-surface">
       <Section>
-        <h2 className="mx-auto max-w-2xl text-center text-[28px] leading-tight sm:text-[34px]">
+        <h2
+          className={`text-[28px] leading-tight sm:text-[34px] ${
+            mode === "radial" ? "mx-auto max-w-2xl text-center" : "max-w-2xl"
+          }`}
+        >
           What we can help with
         </h2>
 
-        {centre ? (
+        {mode === "radial" && centre && (
           <>
             <div className="hidden lg:block">
               <HelpRadial items={items} centre={centre} />
             </div>
-            {/* Below lg the ring cannot hold: the items stack, with the
-                photograph at the head of the list rather than lost inside
-                it. */}
             <div className="lg:hidden">
               <HelpStack items={items} centre={centre} />
             </div>
           </>
-        ) : (
-          <HelpStack items={items} />
         )}
+
+        {mode === "alternating" && (
+          <HelpAlternating items={items} centre={centre} />
+        )}
+
+        {mode === "columns" && <HelpColumns items={items} centre={centre} />}
       </Section>
     </div>
   );
@@ -289,6 +302,134 @@ function HelpRadial({
           </div>
         );
       })}
+    </div>
+  );
+}
+
+/**
+ * Full-width rows, the icon alternating left and right of its text.
+ *
+ * Slower and more deliberate than a grid: one thing at a time, with the
+ * zig-zag giving the eye a reason to keep moving down the page.
+ */
+function HelpAlternating({
+  items,
+  centre,
+}: {
+  items: { title: string; icon: string; body: string }[];
+  centre?: { src: string; alt: string };
+}) {
+  const mid = Math.ceil(items.length / 2);
+
+  return (
+    <>
+      <ul className="mt-12 space-y-6">
+        {items.slice(0, mid).map((item, i) => (
+          <AlternatingRow key={item.title} item={item} index={i} />
+        ))}
+      </ul>
+
+      {centre && (
+        <div className="reveal relative mt-10 aspect-[21/9] overflow-hidden rounded-[var(--radius-image)]">
+          <Image
+            src={centre.src}
+            alt={centre.alt}
+            fill
+            sizes="(max-width: 1240px) 100vw, 1180px"
+            className="object-cover"
+            style={{ objectPosition: "50% 35%" }}
+          />
+        </div>
+      )}
+
+      <ul className="mt-10 space-y-6">
+        {items.slice(mid).map((item, i) => (
+          <AlternatingRow key={item.title} item={item} index={i + mid} />
+        ))}
+      </ul>
+    </>
+  );
+}
+
+function AlternatingRow({
+  item,
+  index,
+}: {
+  item: { title: string; icon: string; body: string };
+  index: number;
+}) {
+  const flip = index % 2 === 1;
+
+  return (
+    <li
+      className={`reveal flex items-start gap-5 rounded-[var(--radius-card)] bg-white p-6 shadow-[var(--shadow-soft)] sm:gap-7 sm:p-7 ${
+        flip ? "sm:flex-row-reverse sm:text-right" : ""
+      }`}
+      style={{ transitionDelay: `${Math.min(index * 60, 320)}ms` }}
+    >
+      <span className="inline-flex h-12 w-12 shrink-0 items-center justify-center rounded-full bg-teal-50 text-teal-700">
+        <HelpIcon name={item.icon as HelpIconName} />
+      </span>
+      <div className="min-w-0">
+        <h3 className="text-[20px] leading-snug">{item.title}</h3>
+        <p className="mt-2 text-[15px] leading-[1.65] text-ink-body">
+          {item.body}
+        </p>
+      </div>
+    </li>
+  );
+}
+
+/**
+ * A sticky photograph beside one scrolling column of items.
+ *
+ * The image stays in view while the list moves past it, so the picture is
+ * present for every item rather than belonging to one of them.
+ */
+function HelpColumns({
+  items,
+  centre,
+}: {
+  items: { title: string; icon: string; body: string }[];
+  centre?: { src: string; alt: string };
+}) {
+  if (!centre) return <HelpStack items={items} />;
+
+  return (
+    <div className="mt-12 grid gap-10 lg:grid-cols-[minmax(0,420px)_minmax(0,1fr)] lg:gap-16">
+      <div className="lg:sticky lg:top-[120px] lg:self-start">
+        <div className="reveal relative aspect-[4/5] overflow-hidden rounded-[var(--radius-image)]">
+          <Image
+            src={centre.src}
+            alt={centre.alt}
+            fill
+            sizes="(max-width: 1024px) 100vw, 420px"
+            className="object-cover"
+          />
+        </div>
+      </div>
+
+      <ul>
+        {items.map((item, i) => (
+          <li
+            key={item.title}
+            className="reveal border-b border-line py-7 first:pt-0 last:border-b-0 last:pb-0"
+            style={{ transitionDelay: `${Math.min(i * 60, 320)}ms` }}
+          >
+            <div className="flex items-start gap-4">
+              <span className="inline-flex h-11 w-11 shrink-0 items-center justify-center rounded-full bg-teal-50 text-teal-700">
+                <HelpIcon name={item.icon as HelpIconName} />
+              </span>
+              <div className="min-w-0">
+                <h3 className="text-[19px] leading-snug">{item.title}</h3>
+                <p className="mt-2 text-[15px] leading-[1.65] text-ink-body">
+                  {item.body}
+                </p>
+              </div>
+            </div>
+          </li>
+        ))}
+      </ul>
     </div>
   );
 }

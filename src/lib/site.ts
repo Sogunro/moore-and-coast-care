@@ -132,6 +132,10 @@ export type Service = {
   heroScrim?: "default" | "strong";
   /** Overrides the hero crop where the subjects sit unusually high or low. */
   heroFocus?: string;
+  /** How "what we can help with" is arranged. Ten pages in one template read
+      as a form letter, so the arrangement varies while the ingredients —
+      type, colour, spacing, icons — stay identical. Defaults to "radial". */
+  layout?: "radial" | "alternating" | "columns";
   /** Photographs of the service in practice, distributed through the page:
       the first under the intro, the second partway down the detail, the third
       as a full-width band. Rendered only where they exist. */
@@ -237,6 +241,7 @@ export const services: Service[] = [
           "A carer and an older woman making lunch together at the kitchen worktop",
       },
     ],
+    layout: "radial",
   },
   {
     slug: "adults-over-65",
@@ -317,6 +322,7 @@ export const services: Service[] = [
           "A carer helping an older woman out of the car outside her home",
       },
     ],
+    layout: "alternating",
   },
   {
     slug: "adults-under-65",
@@ -386,6 +392,7 @@ export const services: Service[] = [
           "A man showing his carer something on a tablet on the sofa",
       },
     ],
+    layout: "columns",
   },
   {
     slug: "dementia-care",
@@ -466,6 +473,7 @@ export const services: Service[] = [
           "A carer helping an older woman into her cardigan in her bedroom",
       },
     ],
+    layout: "radial",
   },
   {
     slug: "physical-disabilities",
@@ -535,6 +543,7 @@ export const services: Service[] = [
           "An older man doing seated exercises with a resistance band, his carer counting with him",
       },
     ],
+    layout: "alternating",
   },
   {
     slug: "sensory-impairments",
@@ -605,6 +614,7 @@ export const services: Service[] = [
           "An older man adjusting his hearing aid while his carer speaks clearly to him",
       },
     ],
+    layout: "columns",
   },
   {
     slug: "supported-living",
@@ -669,6 +679,7 @@ export const services: Service[] = [
           "A young man cooking pasta in his own flat while his support worker chats from the doorway",
       },
     ],
+    layout: "alternating",
   },
   {
     slug: "learning-disability",
@@ -726,6 +737,7 @@ export const services: Service[] = [
           "Clubs, groups, friendships and community. Inclusion is not an add-on to the care plan.",
       },
     ],
+    layout: "columns",
   },
   {
     slug: "hospital-discharge",
@@ -783,6 +795,7 @@ export const services: Service[] = [
           "We keep the people who care about you in the loop, which is often what lets them stop worrying.",
       },
     ],
+    layout: "alternating",
   },
   {
     slug: "live-in-care",
@@ -846,6 +859,7 @@ export const services: Service[] = [
           "Someone in the house to talk to, which for many people is the single biggest change.",
       },
     ],
+    layout: "columns",
   },
 ];
 
