@@ -124,7 +124,7 @@ export default async function ServicePage({
       </Section>
 
       {service.helpWith && (
-        <HelpWith items={service.helpWith} interleave={gallery[1]} />
+        <HelpWith items={service.helpWith} centre={gallery[1]} />
       )}
 
       {gallery[2] && <FullBleedImage item={gallery[2]} />}
@@ -149,72 +149,110 @@ export default async function ServicePage({
  */
 function HelpWith({
   items,
-  interleave,
+  centre,
 }: {
   items: { title: string; icon: string; body: string }[];
-  /** Dropped into the middle of the grid, so the blocks are broken up rather
-      than running as one long list. */
-  interleave?: { src: string; alt: string };
+  /** The photograph at the centre of the ring. */
+  centre?: { src: string; alt: string };
 }) {
-  /* After the first four blocks on a two-column grid — two full rows. */
-  const at = Math.min(4, items.length);
+  /* Split evenly, left column first. With 6 or 7 blocks that gives 3 either
+     side, or 4 and 3 — close enough that the ring reads as balanced. */
+  const half = Math.ceil(items.length / 2);
+  const left = items.slice(0, half);
+  const right = items.slice(half);
+
   return (
     <div className="bg-surface">
       <Section>
         <h2 className="max-w-2xl text-[28px] leading-tight sm:text-[34px]">
           What we can help with
         </h2>
-        <ul className="mt-12 grid gap-x-12 gap-y-9 sm:grid-cols-2">
-          {items.slice(0, at).map((item, i) => (
-            <li
-              key={item.title}
-              className="reveal"
-              style={{ transitionDelay: `${Math.min(i * 60, 320)}ms` }}
-            >
-              <span className="mb-4 inline-flex h-11 w-11 items-center justify-center rounded-full bg-teal-50 text-teal-700">
-                <HelpIcon name={item.icon as HelpIconName} />
-              </span>
-              <h3 className="text-[19px] leading-snug">{item.title}</h3>
-              <p className="mt-2.5 text-[15px] leading-[1.65] text-ink-body">
-                {item.body}
-              </p>
-            </li>
-          ))}
-        </ul>
 
-        {interleave && (
-          <div className="reveal relative mt-12 aspect-[21/9] overflow-hidden rounded-[var(--radius-image)]">
-            <Image
-              src={interleave.src}
-              alt={interleave.alt}
-              fill
-              sizes="(max-width: 1024px) 100vw, 1180px"
-              className="object-cover"
-            />
-          </div>
-        )}
-
-        {items.length > at && (
-          <ul className="mt-12 grid gap-x-12 gap-y-9 sm:grid-cols-2">
-            {items.slice(at).map((item, i) => (
-              <li
-                key={item.title}
-                className="reveal"
-                style={{ transitionDelay: `${Math.min(i * 60, 320)}ms` }}
-              >
-                <span className="mb-4 inline-flex h-11 w-11 items-center justify-center rounded-full bg-teal-50 text-teal-700">
-                  <HelpIcon name={item.icon as HelpIconName} />
-                </span>
-                <h3 className="text-[19px] leading-snug">{item.title}</h3>
-                <p className="mt-2.5 text-[15px] leading-[1.65] text-ink-body">
-                  {item.body}
-                </p>
-              </li>
+        {/* Three columns on desktop, with the photograph in the middle and the
+            blocks ringed around it. Below lg it collapses to a single column
+            with the image after the first half, because a circle flanked by
+            text needs width to work and a narrow screen has none. */}
+        <div className="mt-12 lg:grid lg:grid-cols-[minmax(0,1fr)_auto_minmax(0,1fr)] lg:items-center lg:gap-x-12 xl:gap-x-16">
+          <ul className="space-y-9">
+            {left.map((item, i) => (
+              <HelpBlock key={item.title} item={item} index={i} align="right" />
             ))}
           </ul>
-        )}
+
+          {centre && (
+            <div className="reveal my-12 flex justify-center lg:my-0">
+              <div className="relative">
+                {/* A soft teal ring, so the photograph sits in something
+                    rather than floating between two columns. */}
+                <div
+                  aria-hidden
+                  className="absolute -inset-3 rounded-full border border-teal/25"
+                />
+                <div
+                  aria-hidden
+                  className="absolute -inset-8 rounded-full bg-teal/[0.06] blur-xl"
+                />
+                <div className="relative h-[240px] w-[240px] overflow-hidden rounded-full shadow-[var(--shadow-lift)] sm:h-[300px] sm:w-[300px] lg:h-[320px] lg:w-[320px] xl:h-[360px] xl:w-[360px]">
+                  <Image
+                    src={centre.src}
+                    alt={centre.alt}
+                    fill
+                    sizes="(max-width: 1024px) 300px, 360px"
+                    className="object-cover"
+                  />
+                </div>
+              </div>
+            </div>
+          )}
+
+          <ul className="space-y-9">
+            {right.map((item, i) => (
+              <HelpBlock
+                key={item.title}
+                item={item}
+                index={i + half}
+                align="left"
+              />
+            ))}
+          </ul>
+        </div>
       </Section>
     </div>
+  );
+}
+
+/**
+ * One block in the ring.
+ *
+ * The left column is right-aligned and the right column left-aligned, so both
+ * read as pointing inward at the photograph between them. Below lg everything
+ * goes left-aligned: mirrored text is harder to read and there is no centre to
+ * point at.
+ */
+function HelpBlock({
+  item,
+  index,
+  align,
+}: {
+  item: { title: string; icon: string; body: string };
+  index: number;
+  align: "left" | "right";
+}) {
+  const inward = align === "right" ? "lg:text-right lg:items-end" : "";
+
+  return (
+    <li
+      className={`reveal flex flex-col items-start ${inward}`}
+      style={{ transitionDelay: `${Math.min(index * 60, 320)}ms` }}
+    >
+      <span className="mb-3 inline-flex h-11 w-11 items-center justify-center rounded-full bg-teal-50 text-teal-700">
+        <HelpIcon name={item.icon as HelpIconName} />
+      </span>
+      <h3 className="text-[19px] leading-snug">{item.title}</h3>
+      <p className="mt-2 max-w-[42ch] text-[15px] leading-[1.65] text-ink-body">
+        {item.body}
+      </p>
+    </li>
   );
 }
 
