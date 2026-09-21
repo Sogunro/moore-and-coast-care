@@ -224,6 +224,7 @@ export const services: Service[] = [
           "Laundry, washing up, vacuuming and the general keeping-on-top-of-things. Small tasks, but they are often what makes staying at home feel manageable.",
       },
     ],
+    layout: "radial",
     gallery: [
       {
         src: "/images/personal-care-1.png",
@@ -241,7 +242,6 @@ export const services: Service[] = [
           "A carer and an older woman making lunch together at the kitchen worktop",
       },
     ],
-    layout: "radial",
   },
   {
     slug: "adults-over-65",
@@ -305,6 +305,7 @@ export const services: Service[] = [
           "We review your plan regularly, so care keeps pace with your circumstances instead of lagging behind them.",
       },
     ],
+    layout: "arc",
     gallery: [
       {
         src: "/images/adults-over-65-1.png",
@@ -322,7 +323,6 @@ export const services: Service[] = [
           "A carer helping an older woman out of the car outside her home",
       },
     ],
-    layout: "arc",
   },
   {
     slug: "adults-under-65",
@@ -380,6 +380,7 @@ export const services: Service[] = [
           "We match on interests and temperament as well as skills. You will be spending real time with this person.",
       },
     ],
+    layout: "columns",
     gallery: [
       {
         src: "/images/adults-under-65-1.png",
@@ -391,8 +392,12 @@ export const services: Service[] = [
         alt:
           "A man showing his carer something on a tablet on the sofa",
       },
+      {
+        src: "/images/adults-under-65-3.png",
+        alt:
+          "A woman and her carer planning the week over a diary and a cup of tea",
+      },
     ],
-    layout: "columns",
   },
   {
     slug: "dementia-care",
@@ -456,6 +461,7 @@ export const services: Service[] = [
           "Regular breaks for the family carer. Looking after someone with dementia is relentless, and rest is not a luxury.",
       },
     ],
+    layout: "radial",
     gallery: [
       {
         src: "/images/dementia-care-1.png",
@@ -473,7 +479,6 @@ export const services: Service[] = [
           "A carer helping an older woman into her cardigan in her bedroom",
       },
     ],
-    layout: "radial",
   },
   {
     slug: "physical-disabilities",
@@ -531,6 +536,7 @@ export const services: Service[] = [
           "Support with exercises set by your physiotherapist and getting to the appointments that matter.",
       },
     ],
+    layout: "arc",
     gallery: [
       {
         src: "/images/physical-disabilities-1.png",
@@ -538,12 +544,16 @@ export const services: Service[] = [
           "A man in a wheelchair chopping vegetables at his kitchen worktop, his carer beside him",
       },
       {
+        src: "/images/physical-disabilities-2.png",
+        alt:
+          "A woman using a walking frame in her hallway, her carer walking alongside",
+      },
+      {
         src: "/images/physical-disabilities-3.png",
         alt:
           "An older man doing seated exercises with a resistance band, his carer counting with him",
       },
     ],
-    layout: "arc",
   },
   {
     slug: "sensory-impairments",
@@ -602,6 +612,7 @@ export const services: Service[] = [
           "Conversation and company, which matter more when a sensory impairment has made the world feel smaller.",
       },
     ],
+    layout: "columns",
     gallery: [
       {
         src: "/images/sensory-impairments-1.png",
@@ -613,8 +624,12 @@ export const services: Service[] = [
         alt:
           "An older man adjusting his hearing aid while his carer speaks clearly to him",
       },
+      {
+        src: "/images/sensory-impairments-3.png",
+        alt:
+          "A woman walking arm-in-arm with her carer along a sunlit pavement",
+      },
     ],
-    layout: "columns",
   },
   {
     slug: "supported-living",
@@ -672,14 +687,19 @@ export const services: Service[] = [
           "As confidence grows, support reduces. That is the aim from the first day, and we review it regularly.",
       },
     ],
+    layout: "arc",
     gallery: [
       {
         src: "/images/supported-living-1.png",
         alt:
           "A young man cooking pasta in his own flat while his support worker chats from the doorway",
       },
+      {
+        src: "/images/supported-living-2.png",
+        alt:
+          "A young woman sorting post at her desk with her support worker beside her",
+      },
     ],
-    layout: "arc",
   },
   {
     slug: "learning-disability",
@@ -738,6 +758,18 @@ export const services: Service[] = [
       },
     ],
     layout: "columns",
+    gallery: [
+      {
+        src: "/images/learning-disability-1.png",
+        alt:
+          "A young woman putting shopping into a basket, checking her list, her support worker beside her",
+      },
+      {
+        src: "/images/learning-disability-2.png",
+        alt:
+          "A young man playing cards at a community centre with his support worker alongside",
+      },
+    ],
   },
   {
     slug: "hospital-discharge",
@@ -796,6 +828,23 @@ export const services: Service[] = [
       },
     ],
     layout: "arc",
+    gallery: [
+      {
+        src: "/images/hospital-discharge-1.png",
+        alt:
+          "A carer stocking the kitchen before a client comes home from hospital",
+      },
+      {
+        src: "/images/hospital-discharge-2.png",
+        alt:
+          "A carer explaining a new prescription to an older woman at her kitchen table",
+      },
+      {
+        src: "/images/hospital-discharge-3.png",
+        alt:
+          "An older man using a walking frame across his living room, his carer close by",
+      },
+    ],
   },
   {
     slug: "live-in-care",
@@ -860,6 +909,13 @@ export const services: Service[] = [
       },
     ],
     layout: "columns",
+    gallery: [
+      {
+        src: "/images/live-in-care-1.png",
+        alt:
+          "A live-in carer hanging washing while the woman she supports sits nearby with tea",
+      },
+    ],
   },
 ];
 
