@@ -979,21 +979,33 @@ export const howWeWork = {
   steps: [
     {
       title: "Outline your needs",
+      image: "/images/how-we-work-1.png",
+      imageAlt:
+        "A care coordinator taking an enquiry on the phone at her desk",
       body:
         "Our specialist domiciliary care team receives your enquiry. We review and discuss your requirements, explain the services on offer, and give you an outline of anticipated costs.",
     },
     {
       title: "Assessed home visit",
+      image: "/images/how-we-work-2.png",
+      imageAlt:
+        "An assessor listening and taking notes while a client explains her needs at home",
       body:
         "We arrange for an assessor to visit you at home and carry out a care and risk assessment. Once that visit is complete, we offer you a fully costed care package.",
     },
     {
       title: "Finalise your care package",
+      image: "/images/how-we-work-3.png",
+      imageAlt:
+        "A client shaking hands with his matched carer for the first time, his daughter beside him",
       body:
         "We finalise your package with you and your family, and together identify the most suitable carer. You will meet them to say hello before deciding. If further training is needed, we arrange it.",
     },
     {
       title: "Your service begins",
+      image: "/images/how-we-work-4.png",
+      imageAlt:
+        "A carer arriving at a client's front door on the first morning",
       body:
         "Once everyone is satisfied, we are delighted to begin your care service and improve your quality of life.",
     },
