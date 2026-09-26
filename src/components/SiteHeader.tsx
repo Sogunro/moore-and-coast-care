@@ -135,11 +135,51 @@ export function SiteHeader() {
         </button>
       </div>
 
+      {/* A visible nav strip on phones, so the sections can be reached without
+          opening the menu first. Five items need about 480px on one line and a
+          390px phone has 350 usable, so the strip scrolls sideways rather than
+          wrapping to two rows or shrinking the type. The fade at the right
+          edge is the cue that there is more.
+
+          The menu button stays: it still holds the care services list, the
+          phone number and Feedback. */}
+      <div className="relative border-t border-line-soft lg:hidden">
+        <nav
+          aria-label="Sections"
+          className="flex gap-6 overflow-x-auto px-5 py-2.5 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
+        >
+          {nav.map((item) => {
+            const active = isActive(item.href);
+            return (
+              <Link
+                key={item.href}
+                href={item.href}
+                aria-current={active ? "page" : undefined}
+                className={`relative shrink-0 whitespace-nowrap py-1 text-[14px] font-semibold ${
+                  active ? "text-brand" : "text-ink"
+                }`}
+              >
+                {item.label}
+                {active && (
+                  <span className="absolute -bottom-0.5 left-0 h-[2px] w-full rounded-full bg-brand" />
+                )}
+              </Link>
+            );
+          })}
+          {/* A trailing spacer, so the last item clears the fade. */}
+          <span aria-hidden className="w-2 shrink-0" />
+        </nav>
+        <div
+          aria-hidden
+          className="pointer-events-none absolute inset-y-0 right-0 w-10 bg-gradient-to-l from-white to-transparent"
+        />
+      </div>
+
       {/* Mobile menu — full-height sheet below the bar. */}
       {open && (
         <div
           id="mobile-menu"
-          className="fixed inset-x-0 bottom-0 top-[72px] z-50 overflow-y-auto border-t border-line-soft bg-white lg:hidden"
+          className="fixed inset-x-0 bottom-0 top-[117px] z-50 overflow-y-auto border-t border-line-soft bg-white lg:hidden"
         >
           <nav
             className="mx-auto flex max-w-[1240px] flex-col px-5 py-2"
