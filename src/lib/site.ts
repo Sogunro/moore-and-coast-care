@@ -699,6 +699,11 @@ export const services: Service[] = [
         alt:
           "A young woman sorting post at her desk with her support worker beside her",
       },
+      {
+        src: "/images/supported-living-3.png",
+        alt:
+          "A young man unlocking his own front door, his support worker a step behind",
+      },
     ],
   },
   {
@@ -768,6 +773,11 @@ export const services: Service[] = [
         src: "/images/learning-disability-2.png",
         alt:
           "A young man playing cards at a community centre with his support worker alongside",
+      },
+      {
+        src: "/images/learning-disability-3.png",
+        alt:
+          "A young woman making toast in her own kitchen while her support worker stands back",
       },
     ],
   },
@@ -914,6 +924,16 @@ export const services: Service[] = [
         src: "/images/live-in-care-1.png",
         alt:
           "A live-in carer hanging washing while the woman she supports sits nearby with tea",
+      },
+      {
+        src: "/images/live-in-care-2.png",
+        alt:
+          "An older man and his live-in carer reading in armchairs in the evening",
+      },
+      {
+        src: "/images/live-in-care-3.png",
+        alt:
+          "A live-in carer bringing a teapot to an elderly couple at their kitchen table",
       },
     ],
   },
