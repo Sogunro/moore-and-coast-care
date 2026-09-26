@@ -4,7 +4,7 @@ import { about, whyChooseUs } from "@/lib/site";
 import { ClosingCTA } from "@/components/ClosingCTA";
 import { Section, SectionHeader } from "@/components/Section";
 import { PageHero } from "@/components/PageHero";
-import { ValuePuzzle } from "@/components/ValuePuzzle";
+import { ValueBoard } from "@/components/ValueBoard";
 
 export const metadata: Metadata = {
   title: "About Us",
@@ -114,8 +114,8 @@ function ValuesSection() {
           lead="Our mission statement and aims are the foundation of everything we do, with these values underpinning every act of care our staff provide."
         />
         <div className="mt-14">
-          <ValuePuzzle
-            centre={{
+          <ValueBoard
+            photo={{
               src: "/images/about-values-centre.png",
               alt: "A Moor & Coast carer laughing with a group of clients of different ages around a table",
             }}

@@ -273,6 +273,27 @@
   }
 }
 
+/* ---- Pinned notes -------------------------------------------------------
+   Each note hangs at a slight angle from its pin. The angle is set per note
+   as a CSS variable rather than a Tailwind arbitrary value, which is not
+   reliably generated when it reads a variable, and it sits on the note rather
+   than the wrapper because .reveal animates the wrapper's transform and ends
+   at `transform: none`. */
+.note-tilt {
+  transform: rotate(var(--tilt, 0deg));
+  transition: transform 300ms var(--ease-out);
+}
+
+.note-tilt:hover {
+  transform: rotate(0deg);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .note-tilt {
+    transform: none;
+  }
+}
+
 /* ---- Scroll reveal ------------------------------------------------------
    Opt in with the `reveal` class; driven by an IntersectionObserver. */
 .reveal {
