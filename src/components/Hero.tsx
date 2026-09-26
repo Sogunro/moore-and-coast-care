@@ -38,7 +38,7 @@ export function Hero() {
             strongest where the words are. From lg it becomes the horizontal
             ramp again, leaving the subjects on the right fully lit. */}
         <div
-          className="absolute inset-0 bg-gradient-to-b from-[#172b3a]/85 via-[#172b3a]/55 to-[#172b3a]/35 lg:bg-gradient-to-r lg:from-[#172b3a]/75 lg:via-[#172b3a]/20 lg:via-35% lg:to-transparent"
+          className="absolute inset-0 bg-gradient-to-b from-[#0d1b26]/92 via-[#0d1b26]/70 to-[#0d1b26]/45 lg:bg-gradient-to-r lg:from-[#0d1b26]/88 lg:via-[#0d1b26]/45 lg:via-42% lg:to-transparent"
           aria-hidden
         />
         <div className="absolute inset-0 bg-[#172b3a]/12" aria-hidden />
@@ -47,19 +47,29 @@ export function Hero() {
       {/* Content — padded to line up with the 1240px grid used site-wide. */}
       <div className="mx-auto flex min-h-[600px] max-w-[1240px] flex-col justify-center px-5 py-14 sm:min-h-[660px] sm:px-8 lg:min-h-[calc(100vh-88px)] lg:py-24">
         <div className="max-w-[560px]">
-          <h1 className="text-[44px] leading-[0.98] text-white sm:text-[56px] lg:text-[64px] xl:text-[72px]">
+          {/* DM Serif Display ships a single weight (400), so there is no
+              bolder cut available: at 72px on a photograph the strokes read as
+              thin. A soft drop shadow separates the letterforms from whatever
+              is behind them, which does more for legibility than size. */}
+          <h1
+            className="text-[46px] leading-[0.98] text-white sm:text-[58px] lg:text-[66px] xl:text-[76px]"
+            style={{ textShadow: "0 2px 18px rgba(8,18,26,0.55), 0 1px 3px rgba(8,18,26,0.45)" }}
+          >
             Care that
             <br />
             {/* Not brand blue here: on a dark scrim it loses contrast, and the
                 emphasis reads better as a lighter tone than a darker one. */}
-            <span className="text-[#9ec2f0]">feels like life.</span>
+            <span className="text-[#bcd8f7]">feels like life.</span>
           </h1>
 
           {/* Leads with what and where. The previous line opened on feeling
               ("Compassionate, professional care that helps people...") and a
               visitor had to read 22 words before learning this is home care in
               Whitby. The goal is that they know at a glance. */}
-          <p className="mt-6 max-w-[500px] text-[17px] leading-[1.55] text-white/90 sm:text-[20px]">
+          <p
+            className="mt-6 max-w-[500px] text-[17px] leading-[1.55] text-white sm:text-[20px]"
+            style={{ textShadow: "0 1px 12px rgba(8,18,26,0.5)" }}
+          >
             <span className="font-semibold text-white">
               Home care across Whitby &amp; North Yorkshire.
             </span>{" "}
