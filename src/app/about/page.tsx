@@ -115,10 +115,6 @@ function ValuesSection() {
         />
         <div className="mt-14">
           <ValuePuzzle
-            /* The hub of the jigsaw: a group rather than a pair, because six
-               values about kindness, respect, inclusion and going further are
-               not carried by one relationship. Mixed ages, backgrounds and
-               abilities, everyone at the same table, nobody being tended to. */
             centre={{
               src: "/images/about-values-centre.png",
               alt: "A Moor & Coast carer laughing with a group of clients of different ages around a table",
