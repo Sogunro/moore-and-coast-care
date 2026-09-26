@@ -22,14 +22,15 @@ import { ValueIcon, type ValueIconName } from "./ValueIcon";
  */
 
 /* Tab size as a percentage of the card, and how far along the edge it sits. */
-const TAB = 7;
+const TAB = 9;
 const MID = 50;
 
 /* A clip-path cannot paint outside its own element, so a protruding tab needs
-   room to protrude into. Each piece is given this much overflow on every side
-   and the shape is drawn inset within it; negative margins pull the pieces
-   back together so the visible edges still meet. */
-const PAD = 9;
+   room to protrude into. Each piece is inset by this much on every side, and
+   a matching negative margin on the grid pulls the cells back together so the
+   inset shapes touch rather than floating apart. Without the negative margin
+   the pieces sit PAD*2 apart and never lock. */
+const PAD = 10;
 
 type Edges = { top?: Dir; right?: Dir; bottom?: Dir; left?: Dir };
 type Dir = "out" | "in";
@@ -166,27 +167,56 @@ export function ValuePuzzle({
           </defs>
         </svg>
 
-        <div className="mx-auto grid max-w-[1120px] grid-cols-3 grid-rows-3 gap-0">
+        {/* Each cell is pulled in by the inset amount on every side, so the
+            clipped shapes meet edge to edge and a tab lands inside the socket
+            opposite it. */}
+        <div className="mx-auto grid max-w-[1180px] grid-cols-3 grid-rows-3">
           {values.slice(0, 6).map((value, i) => (
             <div
               key={value.title}
               className={`reveal ${PLACEMENT[i]}`}
               style={{ transitionDelay: `${Math.min(i * 80, 400)}ms` }}
             >
+              {/* The shape is drawn inset by PAD so its tabs have room, which
+                  would leave neighbours floating apart. Scaling the piece out
+                  by that same inset pushes the drawn edge to the cell
+                  boundary, so adjacent pieces meet and a tab lands in the
+                  socket facing it. A grid gap cannot do this: CSS clamps a
+                  negative gap to zero. */}
               <div
-                className="flex h-full flex-col justify-center px-12 py-12"
+                className="relative h-full"
                 style={{
-                  background: TINTS[i],
-                  clipPath: `url(#puzzle-${i})`,
+                  margin: `${-PAD}%`,
+                  padding: `${PAD}%`,
                 }}
               >
+                {/* The outline is a second copy of the same path, stroked.
+                    A clipped element has no border — the clip removes it — so
+                    the edge has to be drawn back on top. */}
+                <svg
+                  viewBox="0 0 100 100"
+                  preserveAspectRatio="none"
+                  aria-hidden
+                  className="pointer-events-none absolute inset-0 h-full w-full"
+                >
+                  <path
+                    d={piecePath(EDGES[i])}
+                    fill={TINTS[i]}
+                    stroke="var(--color-brand)"
+                    strokeOpacity="0.45"
+                    strokeWidth="1.2"
+                    vectorEffect="non-scaling-stroke"
+                  />
+                </svg>
+                <div className="relative flex h-full flex-col justify-center px-12 py-12">
                 <span className="mb-3 inline-flex h-10 w-10 items-center justify-center rounded-full bg-white/70 text-brand">
                   <ValueIcon name={value.icon as ValueIconName} />
                 </span>
                 <h3 className="text-[19px] leading-snug">{value.title}</h3>
-                <p className="mt-2 text-[14px] leading-[1.55] text-ink-body">
-                  {value.body}
-                </p>
+                  <p className="mt-2 text-[14px] leading-[1.55] text-ink-body">
+                    {value.body}
+                  </p>
+                </div>
               </div>
             </div>
           ))}
@@ -196,8 +226,11 @@ export function ValuePuzzle({
               a seventh piece, while a circle reads as the thing the pieces
               gather around. */}
           {centre && (
-            <div className="col-start-2 row-start-2 flex items-center justify-center p-4">
-              <div className="relative aspect-square w-full max-w-[280px] overflow-hidden rounded-full shadow-[var(--shadow-lift)] ring-8 ring-white">
+            <div className="pointer-events-none relative z-10 col-start-2 row-start-2 flex items-center justify-center">
+              {/* Scaled past its cell so it sits into the sockets the
+                  surrounding pieces point at, rather than floating in the
+                  hole between them. */}
+              <div className="relative aspect-square w-[118%] overflow-hidden rounded-full shadow-[var(--shadow-lift)] ring-[6px] ring-white">
                 <Image
                   src={centre.src}
                   alt={centre.alt}
