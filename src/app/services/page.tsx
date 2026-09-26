@@ -74,38 +74,40 @@ function ServicesGrid() {
           >
             <Link
               href={`/services/${service.slug}`}
-              className="group flex h-full flex-col items-center rounded-[var(--radius-card)] border border-line bg-white p-5 text-center shadow-[var(--shadow-soft)] transition-all duration-200 ease-[var(--ease-out)] hover:border-brand-100 hover:shadow-[var(--shadow-lift)] sm:p-7"
+              className="group flex h-full flex-col overflow-hidden rounded-[var(--radius-card)] border border-line bg-white p-3 shadow-[var(--shadow-soft)] transition-all duration-200 ease-[var(--ease-out)] hover:border-brand-100 hover:shadow-[var(--shadow-lift)] sm:p-4"
             >
               {service.image && (
-                <div className="relative aspect-square w-[76%] max-w-[168px] overflow-hidden rounded-full ring-4 ring-surface transition-transform duration-300 ease-[var(--ease-out)] group-hover:scale-[1.03]">
+                /* A 4:3 frame, not a circle.
+                   A square keeps only 56% of a 16:9 photograph's width, and
+                   the circular mask then removed the corners of that, which
+                   cut faces off whenever two people stood side by side. 4:3
+                   keeps 75% and loses nothing to a mask, so both people stay
+                   in frame. The rounded corners keep the softness the circle
+                   was there for. */
+                <div className="relative aspect-[4/3] w-full overflow-hidden rounded-[var(--radius-image)] transition-transform duration-300 ease-[var(--ease-out)] group-hover:scale-[1.02]">
                   <Image
                     src={service.image}
                     alt=""
                     fill
-                    sizes="(max-width: 640px) 40vw, 180px"
-                    /* A 16:9 photograph in a square frame keeps only 56% of
-                       its width and all of its height, so the crop is
-                       horizontal: the vertical part of heroFocus does nothing
-                       here. These images put their subjects right of centre,
-                       so the window is pulled that way. */
-                    style={{ objectPosition: "62% 50%" }}
+                    sizes="(max-width: 640px) 45vw, 340px"
+                    style={{ objectPosition: "58% 42%" }}
                     className="object-cover"
                   />
                 </div>
               )}
 
-              <h2 className="mt-4 text-[16px] leading-snug transition-colors duration-200 ease-[var(--ease-out)] group-hover:text-brand sm:mt-6 sm:text-[21px]">
+              <h2 className="mt-4 px-2 text-[16px] leading-snug transition-colors duration-200 ease-[var(--ease-out)] group-hover:text-brand sm:mt-5 sm:text-[21px]">
                 {service.title}
               </h2>
 
               {/* Hidden below sm: at two-up on a phone there is not room for a
                   photograph, a readable name and three lines of description,
                   and the name is what someone is scanning for. */}
-              <p className="mt-2 hidden flex-1 text-[15px] leading-[1.6] text-ink-body sm:mt-3 sm:block">
+              <p className="mt-2 hidden flex-1 px-2 text-[15px] leading-[1.6] text-ink-body sm:mt-3 sm:block">
                 {service.summary}
               </p>
 
-              <span className="mt-3 inline-flex items-center gap-1.5 text-[13px] font-semibold text-brand sm:mt-5 sm:text-[14px]">
+              <span className="mt-3 inline-flex items-center gap-1.5 px-2 pb-1 text-[13px] font-semibold text-brand sm:mt-4 sm:text-[14px]">
                 Read more
                 <svg width="14" height="14" viewBox="0 0 24 24" fill="none" aria-hidden>
                   <path
