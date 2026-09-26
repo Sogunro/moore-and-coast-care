@@ -18,6 +18,13 @@ export default function TestimonialsPage() {
         eyebrow="Testimonials"
         title="The families we're proud to serve"
         lead="Nothing means more to us than the trust of the families we support. Here's what some of them have shared."
+        /* Deliberately no people. A photograph of someone beside a quote
+           implies they said it, and these testimonials are illustrative
+           until real consented ones replace them. The harbour gives the page
+           warmth without making a claim. */
+        image="/images/testimonials-hero.png"
+        imageAlt="Whitby harbour on a bright autumn morning, the abbey on the headland beyond"
+        imageFocus="62% 45%"
       />
 
       <Section>

@@ -37,6 +37,12 @@ export default function CareersPage() {
         eyebrow="Careers"
         title="Do work that truly matters"
         lead="We're always looking for kind, dependable people to join our Whitby team. If you care, we'd love to hear from you."
+        /* Colleagues rather than a carer with a client: a recruitment page
+           has to say this is a place worth working, and three people who
+           visibly like each other does that faster than a paragraph. */
+        image="/images/careers-hero.png"
+        imageAlt="Three Moor & Coast carers laughing together outside the office at the start of a shift"
+        imageFocus="58% 38%"
       />
 
       <Section>
